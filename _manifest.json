@@ -1,0 +1,85 @@
+{
+  "active_context": [
+    {
+      "order": 3,
+      "path": "_index.md",
+      "tokens": 682,
+      "type": "summary"
+    },
+    {
+      "order": 2,
+      "path": "company/_index.md",
+      "tokens": 738,
+      "type": "summary"
+    },
+    {
+      "order": 2,
+      "path": "memory/_index.md",
+      "tokens": 219,
+      "type": "summary"
+    },
+    {
+      "order": 1,
+      "path": "memory/overview/_index.md",
+      "tokens": 164,
+      "type": "summary"
+    },
+    {
+      "importance": 50,
+      "path": "company/abzum/context.md",
+      "tokens": 198,
+      "type": "context"
+    },
+    {
+      "importance": 50,
+      "path": "company/abzum/identity.md",
+      "tokens": 294,
+      "type": "context"
+    },
+    {
+      "importance": 50,
+      "path": "company/abzum/team/felix_stanley.md",
+      "tokens": 442,
+      "type": "context"
+    },
+    {
+      "importance": 50,
+      "path": "company/abzum/team/vijay_tilak.md",
+      "tokens": 339,
+      "type": "context"
+    },
+    {
+      "importance": 50,
+      "path": "company/abzum/vision.md",
+      "tokens": 441,
+      "type": "context"
+    },
+    {
+      "importance": 50,
+      "path": "infrastructure/azure_architecture.md",
+      "tokens": 739,
+      "type": "context"
+    },
+    {
+      "importance": 50,
+      "path": "infrastructure/bimemorybank_git_sync.md",
+      "tokens": 641,
+      "type": "context"
+    },
+    {
+      "importance": 50,
+      "path": "infrastructure/compliance_roadmap.md",
+      "tokens": 772,
+      "type": "context"
+    }
+  ],
+  "generated_at": "2026-04-02T11:05:04.005Z",
+  "lane_tokens": {
+    "contexts": 3866,
+    "stubs": 0,
+    "summaries": 1803
+  },
+  "source_fingerprint": "271b681888bbb5ef900cf9ddaad4e351f4f9e321a1ca489f7d9c02780517099c",
+  "total_tokens": 5669,
+  "version": 1
+}

@@ -106,3 +106,4 @@ When any of these happen → add an entry to this log immediately:
 
 | O38 | 2026-04-03 | BIMemoryBank Git Sync set up | Felix | Context tree synced to GitHub: git@github.com:vijaytilak/Abzum-MemoryBank-BusinessIntelligence.git. SSH deploy key used. 51 files committed on main branch. Auto-sync script at /home/node/.openclaw/git/auto-sync.sh (SSH-based). |
 | O39 | 2026-04-03 | Email setup completed | Vijay | Abzum email configured: felix@abzum.com via Brevo SMTP + Cloudflare Email Routing. Gmail "Send As" set up. Full guide saved to memory/abzum-email-setup-brevo-cloudflare-2026-04-03.md + context tree infrastructure/email_setup_brevo_cloudflare.md. |
+| O40 | 2026-04-04 | Hermes Local Dev Environment task added | Vijay | Action A66 added: Set up Hermes local dev/test environment. AMD Ryzen 5 3600, 32GB RAM, RTX 2080, WSL2 Ubuntu, LMStudio, Docker. GPU-accelerated local model API. GitHub CI/CD pipeline. |

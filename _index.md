@@ -1,67 +1,59 @@
 ---
-children_hash: 10a186c1eb6b6adcb19a1a8be0bed30df8bf1f0697d5406ffd7bfe461b807962
-compression_ratio: 0.1899192425508215
+children_hash: aca0cb5519ce49bec4f52f07a2f36a2383f51f7df7655371778eed943068394a
+compression_ratio: 0.07788856304985338
 condensation_order: 3
 covers: [company/_index.md, infrastructure/_index.md, memory/_index.md, process/_index.md, research/_index.md, strategy/_index.md, work/_index.md]
-covers_token_total: 3591
+covers_token_total: 8525
 summary_level: d3
-token_count: 682
+token_count: 664
 type: summary
 ---
 <think>
-The user wants me to create a d2 structural summary from the child entries under `work/operations/`. Let me synthesize the key information from the three entries into a concise overview while preserving the structure guidelines.
+The user wants me to create a d2-level structural summary from the child entries under `work/operations/`. I need to synthesize the three child entries into a cohesive domain-level overview.
+
+Let me distill the key information:
+
+**Child entries:**
+1. `gateway_boot_conflict_resolution.md` — Boot conflict resolution between BOOT.md and cron wake-up
+2. `gateway_stop_procedure.md` — SIGTERM mandatory rule
+3. `log.md` — Operations log with decisions D01-D11 and actions A42-A57
+
+**Key facts to preserve:**
+- SIGTERM mandatory (kill -15), never kill -9
+- Boot conflict: BOOT.md vs cron on restart
+- Resolution: remove BOOT.md, use RESTART_WAKE.md + cron
+
+
+- Operations log spans 2026-04-01 with 10 strategic decisions (D01-D11) and 16 agent actions (A42-A57), covering infrastructure like BIMemoryBank and context tree, plus platform, cloud, AI ops, workflow, CRM, and communications strategy decisions
+- Agent team actions A42-A48 focus on operational systems (CMS, CMDB, logging, review hooks, continuous improvement, intelligence taxonomy, process maker)
+- Agent team actions A49-A57 cover team optimization, project management, feedback systems, internal AI mapping, evaluation, cost tracking, estimation, and variance BI
+
+**Relationships:**
+- gateway_stop_procedure.md cross-references log.md
+- gateway_boot_conflict_resolution.md connects to gateway_stop_procedure.md
+- All three are operations procedures
+
+I need to compress this to roughly 20% of the 1000 tokens, which means aiming for around 200 tokens while keeping the essential decisions and relationships intact.
 </think>
 
-# Work Operations — Overview
+# Work Operations — Domain Summary
 
-## Gateway Lifecycle Management
+## Overview
 
-Two procedures govern the OpenClaw gateway:
+Domain covering operational procedures for the OpenClaw gateway and Abzum business/agent operations.
 
-**gateway_boot_conflict_resolution.md** — BOOT.md conflicts with one-time cron wake-up on restart. Resolution: remove BOOT.md entirely. Restart recovery uses RESTART_WAKE.md + cron only.
+## Gateway Lifecycle Procedures
 
-**gateway_stop_procedure.md** — Always use `kill -15` (SIGTERM). Never use `kill -9` (SIGKILL) — breaks the cron scheduler, disrupting all scheduled tasks. Find PID via `pgrep -f openclaw`.
+**gateway_boot_conflict_resolution** — Resolves startup conflict between BOOT.md (runs on every boot) and one-time cron wake-up on restart. Resolution: remove BOOT.md entirely; rely on RESTART_WAKE.md + cron scheduler.
 
-**Key Rule:** `kill -15` is mandatory for gateway stops.
+**gateway_stop_procedure** — Mandatory rule: always use `kill -15` (SIGTERM). Never `kill -9` (SIGKILL) — breaks cron scheduler, disrupting all scheduled tasks. Find PID via `pgrep -f openclaw`.
 
-## Operations Log (Decisions D01–D11)
+## Operations Log Reference
 
-| ID | Decision | Resolution |
-|---|---|---|
-| D01 | Platform Stack | OpenClaw + MiniMax M2.7 (default) / Claude Sonnet (complex), 80/20 cost split |
-| D02 | Cloud Provider | Azure AU East Sydney — Entra Agent ID, compliance inheritance |
-| D03 | AI Ops Framework | MCRA (Govern/Map/Measure/Manage) |
-| D04 | Agent Workflow | Superpowers TDD workflow |
-| D05 | Source of Truth | ByteRover context tree as canonical |
-| D06 | CRM Strategy | Build (Next.js + PostgreSQL) over Buy for native agent integration |
-| D07 | Customer Comms | Gatekeeper model via Comms Pipeline Agent until 10+ customers |
-| D08 | MemoryBank Architecture | Adopted BIMemoryBank v2 |
-| D09 | Context Organization | ByteRover context tree, single canonical source |
-| D10 | CRM Ownership | Vijay owns CRM data; Felix owns processes |
-| D11 | Comms Inheritance | Agent-to-agent inherits parent intent |
-
-## Agent Team Actions (A42–A57)
-
-Key systems created:
-- **A42:** Change Management System
-- **A43:** CMDB — centralized asset registry
-- **A44:** Agent Logging Architecture
-- **A45:** Sub-Agent Review Hook — mandatory parent review before delivery
-- **A46:** Continuous Improvement System
-- **A47:** BI & WorkIQ Intelligence Taxonomy — 9-type taxonomy
-- **A48:** Process Maker Agent — centralized workflow creation
-- **A49:** Agent Team Size Optimization
-- **A50:** Project Planning & Management
-- **A51:** Reinforced Learning Feedback Cascade
-- **A52:** AI Model Internals → Company Logic
-- **A53:** Agent Evaluation Methodology
-- **A54:** Token Usage Tracking
-- **A55:** Project Estimation & Job Costing
-- **A56:** Estimation Variance BI Signals
-- **A57:** AI-Native Org Structure — 5-tier enterprise model
+- **log.md** — Canonical record of all strategic decisions (D01–D11) and agent team actions (A42–A57), including infrastructure, platform stack, AI ops framework, CRM strategy, and agent team systems
 
 ## Key Relationships
 
-- Logging cross-references: `gateway_stop_procedure.md` → `log.md`
-- Gateway lifecycle: boot and stop procedures governing restarts
-- Intelligence feedback loop: A47 → A51 → A49 → A50 → A56
+- `gateway_stop_procedure.md` cross-references `log.md` for decision provenance
+- Boot and stop procedures are co-dependent (restart cycle)
+- All decisions and actions carry unique identifiers for traceability

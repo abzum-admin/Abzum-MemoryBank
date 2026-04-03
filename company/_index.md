@@ -1,90 +1,109 @@
 ---
-children_hash: 91fef700d358341a238ba8ec83577946b5a27ee8f87a980152d74643cff73b1a
-compression_ratio: 0.9044117647058824
+children_hash: 63001053f016bd5817b974573ee29c2933caa2638fe70d1e78e34c620456d5b6
+compression_ratio: 0.9748358862144421
 condensation_order: 2
 covers: [abzum/_index.md]
-covers_token_total: 816
+covers_token_total: 914
 summary_level: d2
-token_count: 738
+token_count: 891
 type: summary
 ---
 <think>
-The user wants me to create a structural summary from the provided knowledge entries about Abzum. I have all the information I need from the context that was provided. Let me synthesize this into a clean, condensed summary following the guidelines.
+The user has provided a child_entries section with detailed information about Abzum, and they want me to create a structural summary at the domain level (d1). They want me to output ONLY the summary text, not use any tools.
 
-Key information from the context:
-1. Company: Abzum New Zealand Limited
-2. Key personnel: Vijay (Founder/MD - CONFIDENTIAL), Felix Stanley (COO)
-3. AI-First company model with AI agent teams
-4. Context tree structure (v1.0 restructured on 2026-04-01)
-5. Team structure with specific AI agent roles
-6. Vision: Build primarily with AI agent teams
-7. First product: AI-First CRM/ERP Platform for SMBs
+Looking at the child entries provided:
+- `context.md` - Main company info
+- `identity.md` - Company identity details
+- `vision.md` - Vision and positioning
+- `top_5_priority_use_cases.md` - Priority use cases
+- `team/felix_stanley.md` - Felix's background
+- `team/vijay_tilak.md` - Vijay's info (CONFIDENTIAL)
+- `team/_index.md` - Team summary
 
-I need to:
-- Keep entity names, key relationships
-- Reference entry names (identity.md, vision.md, team/_index.md, context.md, context_tree_restructure_2026_03.md)
-- Discard verbose examples and conversational filler
-- Target ~20-30% compression
-- Output clean markdown
+I need to synthesize this into a concise domain-level summary that:
+1. Is ~20-30% of the input
+2. Preserves entity names, relationships, key facts
+3. Captures the essence without detail dumps
+4. Uses a compact markdown format
 
-Let me create the summary:
+Let me create a summary that captures:
+- What Abzum is (IT services startup)
+- Key people (Vijay - CONFIDENTIAL, Felix Stanley - COO)
+- AI-first vision
+- Agent team structure
+- Top priority use cases (especially UC-01 Custom CRM)
+- Key relationships and operational notes
 </think>
 
-# Abzum — Company Domain Summary
+# Abzum — Company Domain
 
 ## Overview
 
-Abzum New Zealand Limited is an IT services startup operating an **AI-first business model** where self-evolving AI agent teams perform primary execution, with humans providing strategic direction and approval.
-
-**Key Personnel:**
-- Founder & Managing Director: [CONFIDENTIAL - Vijay]
-- COO: Felix Stanley (felix.stanley@abzum.com)
+Abzum New Zealand Limited is an IT services startup building an intelligent business operating system for NZ/AU SMBs (5-50 staff). Core differentiator: **AI agents as primary workforce** executing design, build, test, and deployment with humans providing direction and approval.
 
 ---
 
-## Core Domain Structure
+## Key Personnel
+
+| Role | Name | Contact |
+|------|------|---------|
+| Founder & Managing Director | **[CONFIDENTIAL]** | [CONFIDENTIAL] |
+| Chief Operating Officer | Felix Stanley | felix.stanley@abzum.com |
+
+**Vijay's identity is CONFIDENTIAL** — never exposed without explicit consent.
+
+---
+
+## AI Agent Team Structure
 
 ```
-company/abzum/
-├── identity.md        — Legal entity, personnel, operational rules
-├── vision.md          — AI-first principles, first product strategy
-├── team/_index.md     — Team hierarchy, AI agent roles and models
-├── context.md         — Context tree v1.0 structure (2026-04-01)
-└── context_tree_restructure_2026_03.md  — Restructure completion record
+Vijay (Product Owner)
+  └── Felix Stanley (COO — Orchestrator)
+        └── AI Agent Team
+              ├── Architect Agent (Claude Sonnet) — System design, SPEC.md
+              ├── Coder Agent(s) (MiniMax/DeepSeek R1) — TDD implementation
+              ├── Tester Agent (MiniMax) — Integration tests
+              ├── Spec Reviewer Agent (Claude Sonnet) — Spec compliance
+              ├── Quality Reviewer Agent (Claude Sonnet) — Code quality
+              └── DevOps Agent (MiniMax) — CI/CD, deployment
 ```
 
 ---
 
-## Key Architectural Decisions
+## AI-First Principles
 
-**AI-First Workforce Model:**
-- Agents handle: Architect → Coder → Tester → Reviewer → DevOps pipeline
-- Humans (Vijay) = Product Owner; Felix = Orchestrator
-- ByteRover context tree serves as persistent memory infrastructure
-
-**AI Agent Team (per team/_index.md):**
-| Agent | Model | Function |
-|-------|-------|----------|
-| Architect | Claude Sonnet | System design, SPEC.md |
-| Coder | MiniMax/DeepSeek R1 | TDD implementation |
-| Tester | MiniMax | Integration tests |
-| Spec Reviewer | Claude Sonnet | Spec compliance |
-| Quality Reviewer | Claude Sonnet | Code quality, security |
-| DevOps | MiniMax | CI/CD, deployment |
-
-**Core Process Principles:**
-- TDD is mandatory — prevents AI hallucination
-- Two-stage review gates: Spec compliance → Quality review
-- Context persistence is infrastructure, not optional
+- **AI as primary workforce** — agents execute; humans approve direction
+- **Self-evolving** — skill authoring, pattern capture via ByteRover memory
+- **Systematic over ad-hoc** — process gates prevent chaos
+- **TDD mandatory** — prevents confident hallucinations, forces verification
 
 ---
 
-## First Product
+## First Product: Custom CRM (UC-01)
 
-**AI-First CRM/ERP Platform** targeting SMBs as an intelligent business operating system. Status: In development with docs pending from Vijay.
+- **Target:** NZ/AU SMB (5-50 staff)
+- **Price point:** ~$15K
+- **Delivery:** 2-4 weeks
+- **Positioning:** Intelligent business operating system — not just automation
+- **Advantage:** 3-5x faster, 60-80% cheaper than traditional IT
+
+**Priority use cases** (ranked by urgency/market gap):
+1. **UC-01 Custom CRM Build** — anchor product
+2. **UC-02 CRM Migration** — natural urgency, hard deadlines
+3. **UC-06/07/09 Business Process Automation** — near-universal SMB pain point
+4. **UC-16 System Integration** — addresses data silos (5-15 tools)
+5. **UC-20 AI Chatbot/Assistant** — visible/demoable, demonstrates AI-first differentiation
 
 ---
 
-## Context Tree
+## Operational Notes
 
-Abzum context tree v1.0 restructured on 2026-04-01, organized under `company/abzum/` domain with vision, identity, and team subtopics using ByteRover memory system.
+- All agent skills managed/assigned by Felix
+- External communications require Vijay's approval
+- Working style: brainstorm → propose → execute
+- Context tree (ByteRover) used for persistent AI memory and knowledge organization
+
+---
+
+*Prepared by: Felix Stanley, COO*
+*Last updated: 2026-04-01*

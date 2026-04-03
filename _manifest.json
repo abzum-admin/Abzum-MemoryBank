@@ -3,13 +3,13 @@
     {
       "order": 3,
       "path": "_index.md",
-      "tokens": 682,
+      "tokens": 664,
       "type": "summary"
     },
     {
       "order": 2,
       "path": "company/_index.md",
-      "tokens": 738,
+      "tokens": 891,
       "type": "summary"
     },
     {
@@ -23,6 +23,12 @@
       "path": "memory/overview/_index.md",
       "tokens": 164,
       "type": "summary"
+    },
+    {
+      "importance": 75,
+      "path": "strategy/ai_native_org/ai_native_5_tier_org_model.md",
+      "tokens": 438,
+      "type": "context"
     },
     {
       "importance": 50,
@@ -50,6 +56,12 @@
     },
     {
       "importance": 50,
+      "path": "company/abzum/top_5_priority_use_cases.md",
+      "tokens": 462,
+      "type": "context"
+    },
+    {
+      "importance": 50,
       "path": "company/abzum/vision.md",
       "tokens": 441,
       "type": "context"
@@ -65,21 +77,15 @@
       "path": "infrastructure/bimemorybank_git_sync.md",
       "tokens": 641,
       "type": "context"
-    },
-    {
-      "importance": 50,
-      "path": "infrastructure/compliance_roadmap.md",
-      "tokens": 772,
-      "type": "context"
     }
   ],
-  "generated_at": "2026-04-02T11:05:04.005Z",
+  "generated_at": "2026-04-03T11:19:41.511Z",
   "lane_tokens": {
-    "contexts": 3866,
+    "contexts": 3994,
     "stubs": 0,
-    "summaries": 1803
+    "summaries": 1938
   },
-  "source_fingerprint": "271b681888bbb5ef900cf9ddaad4e351f4f9e321a1ca489f7d9c02780517099c",
-  "total_tokens": 5669,
+  "source_fingerprint": "50f0411d2364bf5308e9d6a18d1badc81464da880e8e4cf0f06fa90d0a6ef648",
+  "total_tokens": 5932,
   "version": 1
 }

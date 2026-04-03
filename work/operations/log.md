@@ -103,3 +103,5 @@ When any of these happen → add an entry to this log immediately:
 - A significant error or failure occurs and is resolved
 
 **Felix's reminder:** After completing any major action, update this log before reporting completion to Vijay. Make it a habit — like writing to MEMORY.md.
+
+| O38 | 2026-04-03 | BIMemoryBank Git Sync set up | Felix | Context tree synced to GitHub: git@github.com:vijaytilak/Abzum-MemoryBank-BusinessIntelligence.git. SSH deploy key used. 51 files committed on main branch. Auto-sync script at /home/node/.openclaw/git/auto-sync.sh (SSH-based). HTTPS+PAT git push not working in this environment (git-remote-https credential issue). SSH is working reliably. |

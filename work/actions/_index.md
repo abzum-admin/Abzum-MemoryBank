@@ -49,7 +49,7 @@
 | A22 | Configure ByteRover cloud sync | P2 | ⬜ Pending | Felix |
 | A23 | Set up backup (GitHub private repos) | P2 | ⬜ Pending | Vijay |
 | A24 | Set up backup (Azure Blob cold storage) | P2 | ⬜ Pending | Vijay |
-| A41 | Deploy BIMemoryBank Git Sync Architecture | P1 | 2 | ⬜ Pending | Vijay+Felix | Deploy using `memory/bimemorybank-deployment-guide-2026-04-01.md`. Vijay creates GitHub repo, Felix sets up scripts + GitHub Actions + webhook. |
+| A41 | Deploy BIMemoryBank Git Sync Architecture | P1 | 2 | 🔵 In Progress | Vijay+Felix | Deploy using `memory/bimemorybank-deployment-guide-2026-04-01.md`. Vijay creates GitHub repo, Felix sets up scripts + GitHub Actions + webhook. |
 | A42 | Deploy Centralised Change Management System | P1 | 2 | ⬜ Pending | Felix | Track dependencies for production changes — what changes require what other changes, what blocks what, rollout sequencing, rollback plans. Integrate with BIMemoryBank Git Sync. |
 | A43 | Deploy Configuration Management Database (CMDB) | P1 | 2 | ⬜ Pending | Felix | Single source of truth for all IT assets: hardware, software, services, APIs, agents, cloud resources. Tracks relationships and dependencies between CIs. Integrates with Change Management (A42). |
 | A44 | Design and Deploy Agent Logging Architecture | P1 | 2 | ⬜ Pending | Felix | Centralised logging for all agent activity: session logs, decision logs, tool call logs, error logs, audit trails. Logs must be queryable, structured, and stored in BIMemoryBank-adjacent store. Used for both operations (debugging, security) and BI (patterns, productivity, decision analysis). Integrate with Change Management (A42) and CMDB (A43). |

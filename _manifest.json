@@ -3,19 +3,13 @@
     {
       "order": 3,
       "path": "_index.md",
-      "tokens": 664,
+      "tokens": 918,
       "type": "summary"
     },
     {
       "order": 2,
       "path": "company/_index.md",
       "tokens": 891,
-      "type": "summary"
-    },
-    {
-      "order": 2,
-      "path": "memory/_index.md",
-      "tokens": 219,
       "type": "summary"
     },
     {
@@ -28,6 +22,12 @@
       "importance": 75,
       "path": "strategy/ai_native_org/ai_native_5_tier_org_model.md",
       "tokens": 438,
+      "type": "context"
+    },
+    {
+      "importance": 55,
+      "path": "strategy/ai_native_org/agent_kubernetes.md",
+      "tokens": 300,
       "type": "context"
     },
     {
@@ -74,18 +74,24 @@
     },
     {
       "importance": 50,
-      "path": "infrastructure/bimemorybank_git_sync.md",
-      "tokens": 641,
+      "path": "infrastructure/email_setup_brevo_cloudflare.md",
+      "tokens": 264,
+      "type": "context"
+    },
+    {
+      "importance": 50,
+      "path": "strategy/ai_native_org/context.md",
+      "tokens": 81,
       "type": "context"
     }
   ],
-  "generated_at": "2026-04-03T11:19:41.511Z",
+  "generated_at": "2026-04-04T11:11:18.660Z",
   "lane_tokens": {
-    "contexts": 3994,
+    "contexts": 3998,
     "stubs": 0,
-    "summaries": 1938
+    "summaries": 1973
   },
-  "source_fingerprint": "50f0411d2364bf5308e9d6a18d1badc81464da880e8e4cf0f06fa90d0a6ef648",
-  "total_tokens": 5932,
+  "source_fingerprint": "28d91963d3e24115ac0dca7c7a3154e39a8d74ddead1754aa2c5f056ab59a17a",
+  "total_tokens": 5971,
   "version": 1
 }

@@ -1,59 +1,87 @@
 ---
-children_hash: aca0cb5519ce49bec4f52f07a2f36a2383f51f7df7655371778eed943068394a
-compression_ratio: 0.07788856304985338
+children_hash: 26a5af9c427de790c338dc35bfa8fd0defe170ab3b8080a7027e463984cbf6fb
+compression_ratio: 0.1074438202247191
 condensation_order: 3
 covers: [company/_index.md, infrastructure/_index.md, memory/_index.md, process/_index.md, research/_index.md, strategy/_index.md, work/_index.md]
-covers_token_total: 8525
+covers_token_total: 8544
 summary_level: d3
-token_count: 664
+token_count: 918
 type: summary
 ---
 <think>
-The user wants me to create a d2-level structural summary from the child entries under `work/operations/`. I need to synthesize the three child entries into a cohesive domain-level overview.
+The user wants me to create a structural summary at the domain level (d1) from the child entries about company/abzum. I need to synthesize the key information into a concise domain summary while preserving entity names, key facts, relationships, and the overall essence.
 
-Let me distill the key information:
+Let me distill the key information from the child entries:
 
-**Child entries:**
-1. `gateway_boot_conflict_resolution.md` — Boot conflict resolution between BOOT.md and cron wake-up
-2. `gateway_stop_procedure.md` — SIGTERM mandatory rule
-3. `log.md` — Operations log with decisions D01-D11 and actions A42-A57
+1. **context.md** - Company overview: IT services startup in NZ, building intelligent business operating system for SMBs, AI-first approach, revenue model ($5K-50K per engagement, AI + managed services)
 
-**Key facts to preserve:**
-- SIGTERM mandatory (kill -15), never kill -9
-- Boot conflict: BOOT.md vs cron on restart
-- Resolution: remove BOOT.md, use RESTART_WAKE.md + cron
+2. **identity.md** - Company identity: "Abzum" (ab-zum), Ab Zūm (Latin: "from everything"), tagline "We build. AI does the work."
 
+3. **vision.md** - Vision and positioning: AI agents as workforce, humans provide direction/approval, positioned as IT services company (not software vendor), differentiation through AI-first execution
 
-- Operations log spans 2026-04-01 with 10 strategic decisions (D01-D11) and 16 agent actions (A42-A57), covering infrastructure like BIMemoryBank and context tree, plus platform, cloud, AI ops, workflow, CRM, and communications strategy decisions
-- Agent team actions A42-A48 focus on operational systems (CMS, CMDB, logging, review hooks, continuous improvement, intelligence taxonomy, process maker)
-- Agent team actions A49-A57 cover team optimization, project management, feedback systems, internal AI mapping, evaluation, cost tracking, estimation, and variance BI
+4. **top_5_priority_use_cases.md** - Top use cases with UC-01 Custom CRM Build as anchor product (~$15K, 2-4 weeks), followed by UC-02 CRM Migration, UC-06/07/09 Business Process Automation, UC-16 System Integration, UC-20 AI Chatbot/Assistant
 
-**Relationships:**
-- gateway_stop_procedure.md cross-references log.md
-- gateway_boot_conflict_resolution.md connects to gateway_stop_procedure.md
-- All three are operations procedures
+5. **team/felix_stanley.md** - COO, contact info, background, role at Abzum
 
-I need to compress this to roughly 20% of the 1000 tokens, which means aiming for around 200 tokens while keeping the essential decisions and relationships intact.
+6. **team/vijay_tilak.md** - CONFIDENTIAL - Managing Director, should not be exposed
+
+7. **team/_index.md** - Team summary
+
+I need to create a concise d1 summary that:
+- Covers all child entries
+- Preserves key facts and relationships
+- References entity names
+- Is ~20-30% of the original token count
+- Uses compact markdown format
 </think>
 
-# Work Operations — Domain Summary
+# Company — Abzum
 
-## Overview
+Abzum New Zealand Limited is an IT services startup building an **intelligent business operating system** for NZ/AU SMBs (5-50 staff). Core positioning: AI agents as primary workforce, humans provide direction and approval.
 
-Domain covering operational procedures for the OpenClaw gateway and Abzum business/agent operations.
+**Tagline:** "We build. AI does the work."
 
-## Gateway Lifecycle Procedures
+## Revenue Model
 
-**gateway_boot_conflict_resolution** — Resolves startup conflict between BOOT.md (runs on every boot) and one-time cron wake-up on restart. Resolution: remove BOOT.md entirely; rely on RESTART_WAKE.md + cron scheduler.
+- **Build engagements:** $5K–$50K per project
+- **Managed services:** 10–15% of build cost annually
+- **Positioning:** IT services company, not software vendor
 
-**gateway_stop_procedure** — Mandatory rule: always use `kill -15` (SIGTERM). Never `kill -9` (SIGKILL) — breaks cron scheduler, disrupting all scheduled tasks. Find PID via `pgrep -f openclaw`.
+## AI-First Principles
 
-## Operations Log Reference
+AI agents execute all work; humans direct and approve. Agents are self-evolving via skill authoring and pattern capture using ByteRover memory.
 
-- **log.md** — Canonical record of all strategic decisions (D01–D11) and agent team actions (A42–A57), including infrastructure, platform stack, AI ops framework, CRM strategy, and agent team systems
+## Product Strategy
 
-## Key Relationships
+**Anchor product:** Custom CRM Build (UC-01) — $15K, 2–4 week delivery, positions Abzum as "intelligent business operating system."
 
-- `gateway_stop_procedure.md` cross-references `log.md` for decision provenance
-- Boot and stop procedures are co-dependent (restart cycle)
-- All decisions and actions carry unique identifiers for traceability
+**Top 5 priority use cases:** Custom CRM Build → CRM Migration → Business Process Automation → System Integration → AI Chatbot/Assistant
+
+## Team
+
+| Role | Name | Status |
+|------|------|--------|
+| Managing Director | **[CONFIDENTIAL]** | Confidential — never exposed without explicit consent |
+| Chief Operating Officer | Felix Stanley | felix.stanley@abzum.com |
+
+**Key operational rule:** External communications require Vijay's approval. All agent skills managed/assigned by Felix.
+
+## Agent Team Structure
+
+Vijay (Product Owner) → Felix Stanley (COO/Orchestrator) → AI Agent Team:
+- Architect Agent (Claude Sonnet) — system design, SPEC.md
+- Coder Agent(s) (MiniMax/DeepSeek R1) — TDD implementation
+- Tester Agent (MiniMax) — integration tests
+- Spec Reviewer Agent (Claude Sonnet) — spec compliance
+- Quality Reviewer Agent (Claude Sonnet) — code quality
+- DevOps Agent (MiniMax) — CI/CD, deployment
+
+**Working style:** Brainstorm → Propose → Execute (Vijay provides direction, Felix coordinates agents).
+
+## Related Context
+
+- `company/abzum/context.md` — Full company overview
+- `company/abzum/vision.md` — Positioning and differentiation
+- `company/abzum/top_5_priority_use_cases.md` — Use case priorities
+- `company/abzum/team/felix_stanley.md` — Felix's background
+- `strategy/ai_company_framework.md` — Operational framework

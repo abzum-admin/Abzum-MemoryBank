@@ -3,6 +3,15 @@
 
 ---
 
+## Completed Today
+
+| Task | Status | Doc |
+|---|---|---|
+| BI Memory Architecture Research (Hermes + Hindsight) | ✅ Done | [README.md](README.md) · [SUMMARY.md](SUMMARY.md) · [IMPLEMENTATION_GUIDE.md](IMPLEMENTATION_GUIDE.md) · [TECHNICAL_REFERENCE.md](TECHNICAL_REFERENCE.md) |
+| Structured Plan of Action created (all tasks linked to docs) | ✅ Done | [PLAN_OF_ACTION.md](PLAN_OF_ACTION.md) |
+
+---
+
 ## Active Priorities
 
 | ID | Action | Owner | Status |
@@ -12,6 +21,7 @@
 | A03 | Open business bank account | Vijay | ⬜ Not started |
 | A19 | Configure OpenClaw production settings | Felix | ⏳ Blocked — needs Azure (B02) |
 | A25 | Document agent spawning procedure | Felix | ⏳ Blocked — needs Phase 1 decisions |
+| — | Deploy Hermes Phase 1 (BI Memory quick start) | Felix | ⬜ Ready to start |
 
 ---
 
@@ -28,7 +38,7 @@ These 6 decisions block all downstream work. All owned by Vijay.
 | P05 | First human hire — when, who, what role? | 🟡 MEDIUM |
 | P06 | CRM build vs buy — can we delay? | 🟡 MEDIUM |
 
-→ Full context: `work/decisions/pending.md`
+→ Full context: [`work/decisions/pending.md`](work/decisions/pending.md)
 
 ---
 
@@ -41,7 +51,7 @@ These 6 decisions block all downstream work. All owned by Vijay.
 | B03 | @abzum.com email not configured | External comms, CRM |
 | B04 | First customer not identified | Phase 4 GTM, Phase 5 revenue |
 
-→ Full context: `work/blockers/_index.md`
+→ Full context: [`work/blockers/_index.md`](work/blockers/_index.md)
 
 ---
 
@@ -49,8 +59,8 @@ These 6 decisions block all downstream work. All owned by Vijay.
 
 1. **Vijay:** Answer P01–P06 in `work/decisions/pending.md` → record in `work/decisions/decided.md`
 2. **Vijay:** Confirm company registration + open bank account (A02, A03)
-3. **Felix:** Once P03 answered — set up Azure account and unblock B02
-4. **Felix:** Once B02 resolved — configure OpenClaw (A19) + ByteRover cloud sync (A22)
+3. **Felix:** Deploy Hermes Phase 1 — BI Memory quick start (no Azure needed) → [`IMPLEMENTATION_GUIDE.md`](IMPLEMENTATION_GUIDE.md)
+4. **Felix:** Once P03 answered — set up Azure account and unblock B02
 5. **Both:** Decide on first customer (P02) to enable Go-To-Market planning
 
 ---
@@ -63,4 +73,5 @@ These 6 decisions block all downstream work. All owned by Vijay.
 Phase 0 [BLOCKED] → Phase 1 → Phase 2 → Phase 3 → Phase 4 → Phase 5 (First Revenue)
 ```
 
-→ Full roadmap: `work/plan/phases.md`
+→ Full roadmap: [`work/plan/phases.md`](work/plan/phases.md)
+→ Full structured plan: [`PLAN_OF_ACTION.md`](PLAN_OF_ACTION.md)

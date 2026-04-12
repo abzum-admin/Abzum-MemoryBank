@@ -1,5 +1,6 @@
 # Context Persistence — Abzum
-**Memory Layers + ByteRover Usage**
+**Memory Stack: Hermes + Hindsight + LLM Wiki**
+**Updated: 2026-04-13**
 
 ---
 
@@ -9,140 +10,173 @@ AI agents are ephemeral — each new subagent starts fresh. Memory is the infras
 
 ---
 
-## The Five Memory Layers
+## Memory Architecture (Updated)
 
-| Layer | Mechanism | Purpose | Lifespan | Example |
-|---|---|---|---|---|
-| **Layer 1** | Project files | Long-term project truth | Permanent | SPEC.md, ARCHITECTURE.md |
-| **Layer 2** | TASK_TRACKER.md | Live task status | Feature lifecycle | Task completion tracking |
-| **Layer 3** | Inline dispatch context | Per-task agent input | Task duration | Full task text + scene |
-| **Layer 4** | ByteRover context tree | Cross-project patterns | Permanent | .brv/context-tree/ |
-| **Layer 5** | MEMORY.md + daily logs | COO continuity | Permanent | memory/YYYY-MM-DD.md |
+Abzum uses four complementary memory tools, each owning a distinct memory type. Together they give agents full institutional memory across sessions, projects, and time.
+
+| Tool | Memory Type | What It Answers | Trigger |
+|------|-------------|-----------------|---------|
+| **Hindsight** | Episodic + Semantic + Client modeling | What happened, what we learned, how this client works | Post-task hook |
+| **LLM Wiki** | Procedural + Domain knowledge | How do we do X, SOP for Y | Post-project / post-research |
+| **ByteRover** | Cross-project decisions + patterns | What architectural decisions apply everywhere | Post-decision |
+| **MEMORY.md** | COO long-term curation | Felix's distilled institutional wisdom | Heartbeat |
+
+### Within a Single Project (5-Layer Stack)
+
+Within an active project container, the five-layer system remains the source of truth for live task state:
+
+| Layer | Mechanism | Purpose | Lifespan |
+|-------|-----------|---------|---------|
+| **Layer 1** | Project files (SPEC.md, ARCHITECTURE.md) | Long-term project truth | Permanent |
+| **Layer 2** | TASK_TRACKER.md | Live task status per feature | Feature lifecycle |
+| **Layer 3** | Inline dispatch context | Per-task agent input | Task duration |
+| **Layer 4** | Hindsight recall + LLM Wiki query | Cross-session + procedural context | Permanent |
+| **Layer 5** | ByteRover + MEMORY.md | Cross-project patterns + COO continuity | Permanent |
 
 ---
 
-## Layer 1: Project Files (Long-Term)
+## Tool 1: Hindsight — Episodic + Semantic Memory
 
-Everything substantive lives in files the next agent can read.
+**What it is:** Open-source agent memory (MIT, Vectorize.io). 91.4% on LongMemEval — vs 63.8% for Graphiti, 49% for Mem0.
 
-| File | Purpose | Who Writes |
-|---|---|---|
-| `SPEC.md` | Single source of truth for what to build | Architect Agent |
-| `ARCHITECTURE.md` | How it works at high level | Architect Agent |
-| `IMPLEMENTATION_PLAN.md` | Exact tasks with code | Architect Agent |
-| `docs/STANDARDS.md` | Coding conventions, patterns | Architect + Reviewers |
-| `MEMORY.md` | Cross-project context for Felix | Felix writes/reads |
+**Four memory networks:**
+
+| Network | Stores | Example |
+|---------|--------|---------|
+| **World (𝒲)** | Objective org facts | "Client AcmeCo runs PostgreSQL 14 on Azure" |
+| **Experience (ℬ)** | First-person agent actions | "We solved their slow query in session X via index optimisation" |
+| **Opinion (𝒪)** | Confidence-scored beliefs (0–1) | "Vijay prefers terse summaries (confidence: 0.9)" |
+| **Observation (𝒮)** | Preference-neutral entity summaries | "AcmeCo: fintech, 3 projects, compliance-focused" |
+
+**Retrieval (TEMPR):** Four parallel paths fused via Reciprocal Rank Fusion:
+- Semantic (HNSW vector index via pgvector)
+- Keyword (BM25 full-text with GIN index)
+- Graph traversal (entity/causal/temporal edges)
+- Temporal filtering (normalised date ranges)
+
+**Three operations:**
+```python
+await hindsight.retain(content, metadata)   # after every significant task
+await hindsight.recall(query)               # before starting new work
+await hindsight.reflect(topic)              # periodic synthesis
+```
+
+**Storage:** PostgreSQL + pgvector. Docker deployment or Python embedded.
 
 ---
 
-## Layer 2: TASK_TRACKER.md (Per Feature)
+## Tool 2: LLM Wiki — Procedural + Domain Knowledge
 
-Live document the Orchestrator updates:
+**What it is:** A compiled, contradiction-checked markdown knowledge base (Karpathy pattern, MIT). Zero infrastructure — plain markdown in git.
 
-```markdown
-# OAuth Implementation — Task Tracker
+**Structure:**
+```
+wiki/
+├── index.md           ← agent reads this first to find relevant pages
+├── overview.md        ← synthesised cross-source summary
+├── entities/          ← clients, agents, projects, people
+├── concepts/          ← frameworks, technologies, patterns
+├── procedures/        ← step-by-step SOPs
+└── syntheses/         ← saved query-answers as permanent pages
 
-**Feature:** GitHub OAuth Login
-**Plan:** docs/plans/2026-04-01-oauth-plan.md
-**Started:** 2026-04-01
+raw/                   ← immutable source documents
+```
 
-## Tasks
-- [x] Task 1: OAuth service skeleton — **COMPLETE** (sha: abc123f)
-- [x] Task 2: GitHub provider integration — **COMPLETE** (sha: def456a)
-- [ ] Task 3: User profile extraction — **IN PROGRESS**
-- [ ] Task 4: Session creation and JWT issuance
-- [ ] Task 5: Logout endpoint
+**Three operations:**
+- **Ingest** — new source → wiki pages generated → contradictions flagged at write time
+- **Query** — agent reads `index.md` → loads relevant pages → synthesises in-context → optionally saves answer as synthesis page
+- **Lint** — detects orphan pages, broken links, contradictions, gaps
 
-## Reviews
-- [x] Task 1 Spec Review — ✅ Approved
-- [x] Task 1 Quality Review — ✅ Approved
-- [x] Task 2 Spec Review — ✅ Approved
-- [ ] Task 2 Quality Review — Pending
+**When to ingest:**
+- After every project completion → lessons learned → procedures/
+- After research sessions → research notes → concepts/
+- After human corrections to agent output → correction → procedure update
+- After client onboarding → client profile → entities/
+
+**Agent query pattern:**
+```
+1. Read wiki/index.md (~3,000 tokens)
+2. Identify relevant pages
+3. Load only those pages into context
+4. Synthesise answer
+5. If novel answer: save as wiki/syntheses/YYYY-MM-DD-topic.md
 ```
 
 ---
 
-## Layer 3: Inline Dispatch Context (Per Task)
+## Tool 3: ByteRover — Cross-Project Decisions
 
-When the Orchestrator dispatches a Coder subagent, it provides **full inline context** — not a file path.
+ByteRover remains the authoritative store for architectural decisions that apply across all projects.
 
-```json
-{
-  "task": "Task 3: User profile extraction",
-  "files": {
-    "create": "src/auth/profile.ts",
-    "test": "tests/auth/test_profile.ts"
-  },
-  "scene": "OAuth service exists at src/auth/oauth.ts. This task adds profile extraction.",
-  "spec_ref": "SPEC.md → User Authentication → OAuth Providers → GitHub",
-  "standards_ref": "docs/STANDARDS.md → TypeScript Conventions"
-}
+```bash
+# After making a cross-project decision
+brv curate "Use JWT (not sessions) for API auth across all Abzum projects"
+
+# Before starting any new project/feature
+brv query "How did we handle multi-tenancy in previous projects?"
+
+brv status
+brv curate view
 ```
 
-**Rule:** The subagent should never have to read a file to understand what to do.
-
----
-
-## Layer 4: ByteRover Context Tree
-
-For cross-project patterns, decisions, and architectural rules, use ByteRover.
+**Rule:** Cross-project patterns belong in ByteRover. Project-specific facts belong in Hindsight. Procedural SOPs belong in LLM Wiki.
 
 **Key paths:**
 - Context tree: `/home/node/.openclaw/workspace/.brv/context-tree/`
 - brv CLI: `/home/node/.openclaw/workspace/node_modules/.bin/brv`
 
-**Commands:**
+---
 
-```bash
-# Curate a decision (after making it)
-cd /home/node/.openclaw/workspace && ./node_modules/.bin/brv curate "Use JWT (not sessions) for API authentication across all projects"
+## Tool 4: MEMORY.md — Felix COO Continuity
 
-# Query before starting new work
-cd /home/node/.openclaw/workspace && ./node_modules/.bin/brv query "How did we handle auth in previous projects?"
+Felix maintains `MEMORY.md` at the root level: curated long-term wisdom, major decisions, client relationships, and lessons learned — reviewed and updated during heartbeat sessions.
 
-# Status
-cd /home/node/.openclaw/workspace && ./node_modules/.bin/brv status
+Daily operational logs: `memory/logs/YYYY-MM-DD.md`
 
-# View curate history
-cd /home/node/.openclaw/workspace && ./node_modules/.bin/brv curate view
+---
+
+## Mandatory Agent Patterns
+
+### Pre-Task (before any significant work)
+```python
+async def before_task_start(task_description):
+    memories  = await hindsight.recall(task_description)
+    procedures = await llm_wiki.query(task_description)
+    patterns  = brv.query(task_description)
+    # Combine into inline dispatch context for subagents
 ```
 
-### ByteRover Best Practices
-- **Query before starting** new projects or features
-- **Curate after significant decisions** — document the why, not just the what
-- **Cross-project patterns** belong in ByteRover, not in project-specific files
-- **Context tree files** are dense, agent-consumable summaries — write for scanning
+### Post-Task (after every significant task)
+```python
+async def on_task_complete(task_result):
+    await hindsight.retain(task_result.summary, metadata)
+
+    if task_result.tool_call_count >= 5:
+        await llm_wiki.ingest(task_result.session_transcript, "procedures")
+
+    if task_result.has_cross_project_decision:
+        brv.curate(task_result.cross_project_decision)
+```
 
 ---
 
-## Layer 5: Felix/COO Memory (Human-AI Boundary)
-
-Felix maintains MEMORY.md and daily logs so context is preserved:
-
-| File | Purpose | Lifespan |
-|---|---|---|
-| `MEMORY.md` | Long-term: company decisions, client context, preferences | Permanent |
-| `memory/YYYY-MM-DD.md` | Daily: what was built, blockers, decisions | Permanent |
-
----
-
-## Golden Rules for Context
+## Golden Rules
 
 1. **Context in files, not in prompts.** Any context needed must be in a readable file OR inline in dispatch prompt.
-2. **Never assume the agent remembers.** "The agent should know from last time" is not acceptable.
-3. **Query ByteRover before starting.** "How did we handle X in previous projects?"
-4. **Curate after decisions.** Document cross-project patterns when they're made.
-5. **TASK_TRACKER.md is live.** Update it as tasks complete; it's the Orchestrator's source of truth.
-6. **Inline for task dispatch.** Provide full task context inline; don't make agents read files mid-task.
+2. **Never assume the agent remembers.** Write it down. Every time.
+3. **Recall before starting.** Query Hindsight + LLM Wiki + ByteRover before every significant task.
+4. **Retain after completing.** Post-task hook is mandatory — not optional.
+5. **TASK_TRACKER.md is live.** Update as tasks complete; it's the Orchestrator's source of truth.
+6. **Inline for task dispatch.** Provide full context inline; don't make subagents read files mid-task.
+7. **Text > Brain.** "Memory is limited — if you want to remember something, WRITE IT TO A FILE."
 
 ---
 
-## Text > Brain
+## Full Orchestration Design
 
-> "Memory is limited — if you want to remember something, WRITE IT TO A FILE."
-
-This is the single most important operational discipline for AI agent teams. Insights that aren't written down don't survive session restarts.
+See `strategy/agent_orchestration.md` for the complete end-to-end orchestration architecture including all three layers, agent lifecycle, inter-agent communication, and escalation design.
 
 ---
 
-*Source: AI_AGENT_CAPABILITIES_FRAMEWORK.md v1.0 + AGENTS.md*
+*Updated: 2026-04-13 — replaced ByteRover-only stack with Hermes + Hindsight + LLM Wiki*
+*Source: strategy/agent_orchestration.md + AI_AGENT_CAPABILITIES_FRAMEWORK.md v1.0*

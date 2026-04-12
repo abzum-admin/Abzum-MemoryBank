@@ -47,6 +47,7 @@
 | `strategy/ai_native_org_structure.md` | 5-tier AI-native org model overview |
 | `strategy/ai_native_org/ai_native_5_tier_org_model.md` | Full tier breakdown |
 | `strategy/ai_native_org/agent_kubernetes.md` | Agents as compute units model |
+| `strategy/agent_orchestration.md` | **End-to-end agent orchestration design** — 3-layer architecture, memory stack, intake-to-delivery flow |
 | `strategy/two_tier_agent_architecture.md` | Paperclip global + per-project containers (A71) |
 | `strategy/crm_delivery/crm_build_deploy_approaches.md` | 4 CRM deployment strategies |
 | `strategy/research/mcra_ai_security.md` | MCRA security framework research |

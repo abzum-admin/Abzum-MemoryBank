@@ -7,6 +7,9 @@
 
 Build an AI-first software engineering company using **Paperclip AI** as the orchestration backbone, powered by **Superpowers** workflow principles, with a multi-tier model strategy within a **~$30/month budget**.
 
+> **Orchestration design:** See `strategy/agent_orchestration.md` for the full end-to-end agent orchestration architecture — 3-layer hierarchy, memory stack (Hermes + Hindsight + LLM Wiki), and agent lifecycle.
+> **Memory stack:** Hermes (runtime) + Hindsight (episodic/semantic/client memory) + LLM Wiki (procedural/SOPs) + ByteRover (cross-project patterns). See `execution/context_persistence.md`.
+
 ---
 
 ## 1. The Platform Stack

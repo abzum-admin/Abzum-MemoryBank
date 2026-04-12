@@ -46,159 +46,73 @@ Every request flows through three layers plus a persistent memory substrate bene
 
 ## Memory Stack (Layer 3)
 
-The memory stack gives Abzum agents institutional memory that compounds over time. It uses three complementary tools, each owning a distinct memory type.
+> **Full specification:** `execution/context_persistence.md` is the authoritative implementation guide — exact code patterns, event schemas, SQL queries, setup instructions, and governance rules. This section is a summary for architectural context only.
 
-### Tool Selection
+The memory stack gives Abzum agents institutional memory that compounds over time. Three components, each with a distinct role:
 
-| Tool | Memory Type | What It Answers | Open Source |
-|------|-------------|-----------------|-------------|
-| **Hindsight** (Vectorize.io) | Episodic + Semantic + User/Client modeling | What happened, what we learned, how this client works | ✅ MIT |
-| **LLM Wiki** (Karpathy pattern) | Procedural + Domain knowledge | How do we do X, what is our SOP for Y | ✅ MIT |
-| **ByteRover** | Cross-project patterns | What decisions have we made that apply everywhere | ✅ MIT |
-| **MEMORY.md** | COO long-term curation | Felix's distilled institutional wisdom | N/A (file) |
+| Component | Role | Infrastructure | Intelligence Types |
+|-----------|------|----------------|--------------------|
+| **Hindsight** (Vectorize.io, MIT) | Primary agent memory — episodic, semantic, persona | PostgreSQL + pgvector | 7/9 types |
+| **LLM Wiki** (Karpathy, MIT) | Procedural knowledge + architectural decisions | Markdown in git (zero infra) | Procedural primary, Semantic secondary |
+| **ClickHouse** (Apache 2.0) | Analytics layer — all 9 types as structured events + BI feedback loop | Docker | All 9 types (analytics view) + Relational + Temporal primary |
 
-### Hindsight — Episodic + Semantic Memory
+**One-provider constraint:** Hermes supports exactly one external memory provider. Hindsight occupies that slot. LLM Wiki is a native Hermes skill (not a provider) and runs alongside Hindsight. ClickHouse receives events via `emit_signal()` hooks outside the Hermes memory API. ByteRover is deprecated — LLM Wiki `wiki/decisions/` replaces it.
 
-Hindsight (MIT, 91.4% on LongMemEval — vs 63.8% for Graphiti, 49% for Mem0) manages all dynamic agent memory through four networks:
+### Hindsight — Four Memory Networks
 
-| Network | Stores | Example |
-|---------|--------|---------|
-| **World (𝒲)** | Objective org facts | "Client AcmeCo runs PostgreSQL 14 on Azure" |
-| **Experience (ℬ)** | First-person agent actions | "We solved their slow query in session X via index optimisation" |
-| **Opinion (𝒪)** | Confidence-scored beliefs | "Vijay prefers terse summaries (0.9 confidence)" |
-| **Observation (𝒮)** | Preference-neutral entity summaries | "AcmeCo: fintech, 3 projects, focus on compliance" |
+| Network | Stores | Intelligence Type |
+|---------|--------|-------------------|
+| **World (𝒲)** | Objective org facts | Semantic |
+| **Experience (ℬ)** | First-person agent actions + outcomes | Episodic + Outcome |
+| **Opinion (𝒪)** | Confidence-scored beliefs (0–1 scale) | Persona |
+| **Observation (𝒮)** | Preference-neutral entity summaries | Persona + Semantic |
 
-**TEMPR retrieval** (four parallel paths fused via Reciprocal Rank Fusion):
-- Semantic — HNSW vector index (pgvector)
-- Keyword — BM25 full-text (GIN index)
-- Graph traversal — entity/causal/temporal edges
-- Temporal filtering — normalised date ranges
+TEMPR retrieval fuses four parallel paths: Semantic (HNSW pgvector) + Keyword (BM25 GIN) + Graph traversal + Temporal filtering. Benchmark: 91.4% LongMemEval.
 
-**CARA reasoning** — agent disposition parameters (Skepticism, Literalism, Empathy, 1–5 scale) shape how opinions are formed and confidence scores updated.
-
-**Three operations:**
-```python
-await hindsight.retain(content, metadata)   # after every significant task
-await hindsight.recall(query)               # before starting new work
-await hindsight.reflect(topic)              # periodic synthesis
-```
-
-**Storage:** PostgreSQL + pgvector. Docker deployment or Python embedded mode.
-
-### LLM Wiki — Procedural + Domain Knowledge
-
-LLM Wiki (Karpathy, MIT) maintains a compiled, contradiction-checked knowledge base of Abzum's procedures, SOPs, and domain expertise. Zero infrastructure — plain markdown in git.
+### LLM Wiki — Structure
 
 ```
 wiki/
-├── index.md              ← master catalog (agent reads this first)
-├── overview.md           ← synthesised summary
-├── entities/             ← clients, agents, projects, people
-├── concepts/             ← frameworks, technologies, patterns
-├── procedures/           ← step-by-step SOPs (MySQL hardening, CRM setup, etc.)
-└── syntheses/            ← saved query-answers filed as permanent pages
-
-raw/                      ← immutable source documents (reports, research, specs)
+├── index.md        ← agents read this first (~3,000 tokens)
+├── entities/       ← clients, agents, projects, people
+├── concepts/       ← frameworks, technologies, patterns
+├── procedures/     ← step-by-step SOPs (updated by Analysis Agent)
+├── decisions/      ← cross-project architectural decisions (replaces ByteRover)
+└── syntheses/      ← saved query-answers as permanent pages
 ```
 
-**Three operations:**
-- **Ingest** — add new source → LLM generates/updates wiki pages → propagates to related pages → flags contradictions at write time
-- **Query** — agent reads `index.md` → loads relevant pages → synthesises in-context → optionally saves answer as new synthesis page
-- **Lint** — detects orphan pages, broken links, content gaps, contradictions
+### ClickHouse — The 5 Capture Moments
 
-**When to ingest:**
-- After every project completion (lessons learned → procedures)
-- After research sessions (research notes → concepts)
-- After human corrections to agent outputs (correction → procedure update)
-- After each client onboarding (client profile → entities)
+Every agent emits structured signals at 5 moments: `task_start` (Intent) → `each_action` (Behavioral + cost) → `task_end` (Outcome + Relational) → `user_feedback` (Persona) → `periodic` (reflect + lint). These events power the BI feedback loop.
 
-**Practical limit:** ~50–200 source documents before context-window ceiling. Use ByteRover/Hindsight for high-volume dynamic data; LLM Wiki for stable curated knowledge.
-
-### ByteRover — Cross-Project Patterns
-
-ByteRover remains the authoritative store for architectural decisions and patterns that apply across all projects.
-
-```bash
-brv curate "Use JWT (not sessions) for API auth across all Abzum projects"
-brv query "How did we handle multi-tenancy in previous projects?"
-brv status
-```
-
-**Rule:** Cross-project patterns belong in ByteRover. Project-specific facts belong in Hindsight. Procedural SOPs belong in LLM Wiki.
-
-### MEMORY.md — Felix COO Continuity
-
-Felix maintains `MEMORY.md` at the root level: curated long-term wisdom, major decisions, client relationships, and lessons learned — reviewed and updated during heartbeat sessions.
-
-Daily operational logs live in `memory/logs/YYYY-MM-DD.md`.
-
-### Post-Task Write Hook (mandatory for all agents)
-
-Every agent executes this at task completion:
+### Mandatory Agent Patterns
 
 ```python
-async def on_task_complete(task_result):
-    # 1. Hindsight: retain the experience
-    await hindsight.retain(
-        content=task_result.summary,
-        metadata={
-            "agent": agent_id,
-            "client": task_result.client,
-            "project": task_result.project,
-            "task": task_result.task_name,
-            "outcome": task_result.outcome
-        }
-    )
+# Before every task (pre-task pattern):
+memories   = await hindsight.recall(task_description)     # episodic + semantic
+procedures = await llm_wiki.query(task_description)       # procedural + decisions
+emit_signal("task_start", {...})                           # analytics
 
-    # 2. LLM Wiki: if complex task (5+ tool calls), create/update procedure
-    if task_result.tool_call_count >= 5:
-        await llm_wiki.ingest(
-            source=task_result.session_transcript,
-            category="procedures"
-        )
-
-    # 3. ByteRover: if cross-project decision was made
-    if task_result.has_cross_project_decision:
-        brv.curate(task_result.cross_project_decision)
-
-    # 4. TASK_TRACKER.md: mark task complete (Orchestrator handles this)
+# After every task (post-task hook):
+await hindsight.retain(task_result.summary, metadata)     # episodic retention
+if task_result.tool_call_count >= 5:
+    await llm_wiki.ingest(transcript, "procedures")       # complex task → SOP
+if task_result.has_architectural_decision:
+    await llm_wiki.ingest(decision, "decisions")          # cross-project decision
+emit_signal("task_end", {...})                             # analytics + relational
 ```
 
-### Pre-Task Read Pattern (mandatory for all agents)
+### BI Feedback Loop (Self-Improvement)
 
-Every agent executes this before starting work:
+The Analysis Agent (Paperclip Meta-Layer) runs weekly/monthly queries on ClickHouse and writes improvements back into LLM Wiki and Hindsight:
 
-```python
-async def before_task_start(task_description):
-    # 1. Recall from Hindsight
-    memories = await hindsight.recall(task_description)
+1. **Model Routing** — Which model delivers best quality/cost per task type → updates `wiki/procedures/model_routing.md`
+2. **Agent Performance** — Drift detection (>10% success rate change) → Felix escalation or procedure update
+3. **Process Optimisation** — Gate rejection patterns → updated workflow SOPs
+4. **Cost Optimisation** — Free tier utilisation + burn rate → updated `wiki/procedures/budget_rules.md`
+5. **Client Intelligence** — Delivery quality trends → updated client entity pages + at-risk escalation
 
-    # 2. Query LLM Wiki for relevant procedures
-    wiki_context = await llm_wiki.query(task_description)
-
-    # 3. Query ByteRover for cross-project patterns
-    patterns = brv.query(task_description)
-
-    # 4. Return combined context for inline dispatch
-    return {
-        "memories": memories,
-        "procedures": wiki_context,
-        "patterns": patterns
-    }
-```
-
-### Memory Layer Comparison
-
-| Capability | Hindsight | LLM Wiki | ByteRover | MEMORY.md |
-|------------|-----------|----------|-----------|-----------|
-| Episodic (what happened) | ✅ Primary | ❌ | ❌ | ✅ curated |
-| Semantic (org facts) | ✅ World 𝒲 | ✅ entities/ | ❌ | ✅ curated |
-| Procedural (how-to) | ❌ | ✅ Primary | 🟡 patterns | ❌ |
-| User/client modeling | ✅ Opinion 𝒪 + Obs 𝒮 | ❌ | ❌ | ✅ curated |
-| Cross-project decisions | ❌ | ❌ | ✅ Primary | ✅ curated |
-| Temporal reasoning | ✅ TEMPR | ❌ | ❌ | ❌ |
-| Infrastructure needed | PostgreSQL + pgvector | None (markdown) | ByteRover CLI | None (file) |
-| Write trigger | Post-task hook | Post-project / post-research | Post-decision | Heartbeat |
+The loop closes: agents generate signals → ClickHouse stores → Analysis Agent queries → LLM Wiki/Hindsight updated → agents read updated context at next task_start → improved performance → new signals.
 
 ---
 

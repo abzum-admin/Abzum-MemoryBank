@@ -1,5 +1,5 @@
-# Superpowers-Inspired AI Workflow — Abzum
-**Version 1.0 — 2026-04-01**
+# Agent Workflow — Abzum
+**Version 1.1 — 2026-04-12 (consolidated from superpowers_workflow.md + agent_workflow.md)**
 
 ---
 
@@ -25,29 +25,112 @@ Brainstorming → Design Approval → Writing Plans → Execute (TDD) → Review
 
 ---
 
-## 1. Workflow Sequence (AI-First Adaptation)
+## Workflow Sequence
 
 ```
-Vijay: "I want a user authentication system with OAuth"
-        ↓
-🧠 Architect Agent: Socratic design dialogue → ARCHITECTURE.md
-        ↓ Vijay approves
-📋 Architect Agent: Writes IMPLEMENTATION_PLAN.md
-        ↓ (bite-sized tasks, 2-5 min each)
-⚡ Orchestrator (Paperclip AI): Dispatches Coder Agents per task
-        ↓ (each task: RED → GREEN → REFACTOR → Commit)
-🔍 Spec Reviewer Agent: Is implementation on spec?
-        ↓
-💎 Quality Reviewer Agent: Is code well-built?
-        ↓ (two-stage review, spec BEFORE quality)
-🚀 DevOps Agent: Deployment, CI/CD, monitoring
-        ↓
-✅ Felix (COO): Reports to Vijay
+Vijay (Product Owner)
+     │
+     │  Feature request
+     ▼
+┌─────────────────────────────────────────────────┐
+│  🧠 ARCHITECT AGENT                             │
+│  Input: Raw feature request                     │
+│  Output: ARCHITECTURE.md + IMPLEMENTATION_PLAN  │
+│  Gate: Vijay must approve before proceeding     │
+└────────────────────┬────────────────────────────┘
+                     │ Vijay approves
+                     ▼
+┌─────────────────────────────────────────────────┐
+│  ⚡ ORCHESTRATOR (Paperclip AI / Felix)          │
+│  Breaks IMPLEMENTATION_PLAN into tasks          │
+│  Creates TASK_TRACKER.md                        │
+│  Dispatches Coder Agent per task (sequential)   │
+└────────────────────┬────────────────────────────┘
+                     │ Per task
+                     ▼
+┌─────────────────────────────────────────────────┐
+│  👨‍💻 CODER AGENT                                │
+│  TDD per task: RED → GREEN → REFACTOR → commit  │
+│  Full context inline in dispatch prompt         │
+└────────┬────────────────────────────────────────┘
+         │ Commit done
+         ▼
+┌─────────────────────────────────────────────────┐
+│  🔍 SPEC REVIEWER AGENT (Stage 1)               │
+│  Is implementation on spec?                     │
+│  Output: APPROVED or REVISION REQUIRED          │
+│  Gate: MUST pass before Stage 2                 │
+└────────┬────────────────────────────────────────┘
+         │ APPROVED
+         ▼
+┌─────────────────────────────────────────────────┐
+│  💎 QUALITY REVIEWER AGENT (Stage 2)            │
+│  Is code well-built? (security, perf, style)    │
+│  Output: APPROVED or REVISION REQUIRED          │
+└────────┬────────────────────────────────────────┘
+         │ APPROVED
+         ▼
+  [Repeat per task until all tasks complete]
+         │
+         ▼
+┌─────────────────────────────────────────────────┐
+│  🚀 DEVOPS AGENT                                │
+│  CI/CD pipeline, deployment, smoke tests        │
+│  Only at milestones/releases                    │
+└────────┬────────────────────────────────────────┘
+         │
+         ▼
+         ✅ Felix (COO) → reports to Vijay
 ```
 
 ---
 
-## 2. TDD Cycle: RED-GREEN-REFACTOR
+## Mandatory Gates
+
+| Gate | Rule | Who Enforces |
+|---|---|---|
+| **Design approval** | Vijay must approve ARCHITECTURE.md before implementation | Vijay |
+| **TDD before code** | No production code without failing test first | Coder Agent (self-enforced) |
+| **Spec → Quality order** | Stage 1 (spec) MUST pass before Stage 2 (quality) | Orchestrator |
+| **Context in files** | Any needed context must be in file or inline; never assume agent remembers | Felix (COO) |
+
+---
+
+## Agent Invocation Order
+
+```
+1. Vijay           → Submit feature request
+2. Architect       → Produce SPEC.md + IMPLEMENTATION_PLAN.md (requires Vijay approval)
+3. Orchestrator    → Break plan into tasks, create TASK_TRACKER.md
+4. Coder Agent     → Per task: RED test → GREEN code → REFACTOR → commit
+5. Spec Reviewer   → Per task: verify spec compliance (Stage 1)
+6. Quality Reviewer → Per task: verify code quality (Stage 2, only after Stage 1 passes)
+7. DevOps          → Milestone/release: CI/CD + deployment
+8. Felix (COO)     → Continuous: coordinate, report, manage handoffs
+```
+
+**Skippable only:**
+- Coder → Tester: for hotfixes, minor changes
+- Reviewer → DevOps: can automate on approval
+- Architect: for trivial changes (Vijay must approve skip)
+
+---
+
+## Human Intervention Triggers
+
+| Trigger | Action |
+|---|---|
+| Reviewer rejects PR with >5 changes | Vijay reviews Coder's response |
+| Security vulnerability found | Vijay notified immediately, deployment blocked |
+| CI/CD pipeline failure | DevOps attempts fix, escalate after 2 tries |
+| Ambiguous feature request | Architect pauses, asks Vijay for clarification |
+| Budget usage >80% in month | Pause non-critical work, report to Vijay |
+| Test coverage <70% | Coder must improve before merge |
+| Any production outage | Full stop, human-led incident response |
+
+---
+
+## TDD Cycle: RED-GREEN-REFACTOR
 
 **Iron Law:** NO PRODUCTION CODE WITHOUT A FAILING TEST FIRST.
 
@@ -67,17 +150,9 @@ Run: `pytest tests/auth/test_oauth_flow.py -v` → Expected: **FAIL**
 
 ### Phase 2: GREEN — Minimal Code
 
-```python
-# File: src/auth/oauth.py
-def oauth_login(provider: str, code: str):
-    return UserProfile(
-        email="user@example.com",
-        name="Test User",
-        avatar_url="https://avatars.githubusercontent.com/u/1/v4.png"
-    )
-```
+Write the minimum code to make the test pass. Nothing more.
 
-Run: `pytest ...` → Expected: **PASS** — anything else deleted.
+Run: `pytest ...` → Expected: **PASS** — anything extra gets deleted.
 
 ### Phase 3: REFACTOR — Clean Up
 
@@ -112,7 +187,7 @@ git commit -m "feat(auth): add GitHub OAuth login returning user profile"
 
 ---
 
-## 3. Task Granularity
+## Task Granularity
 
 **Target:** 2-5 min per task OR one coherent unit of behavior.
 
@@ -151,7 +226,7 @@ git commit -m "feat(auth): add GitHub OAuth login"
 
 ---
 
-## 4. Role Definitions
+## Role Definitions
 
 ### Architect Agent
 - **When:** Beginning of every feature/ticket
@@ -202,113 +277,15 @@ git commit -m "feat(auth): add GitHub OAuth login"
 
 ---
 
-## 5. Handoff Protocol
+## Handoff Protocol
 
-### Document Flow
+See `execution/handoff_protocol.md` for full structured output formats per role and document flow.
 
-```
-Vijay's Request
-        ↓
-ARCHITECTURE.md          ← Architect Agent output (design)
-        ↓
-IMPLEMENTATION_PLAN.md   ← Architect Agent output (tasks)
-        ↓
-TASK_TRACKER.md          ← Orchestrator output (live progress)
-        ↓
-├──► Coder Agent output per task:
-│         ├── tests/x.test.ts   (test code)
-│         ├── src/x.ts           (implementation)
-│         └── git commit         (conventional commit)
-│
-├──► Spec Reviewer output:
-│         └── REVIEW_SPEC.md     (compliance report)
-│
-├──► Quality Reviewer output:
-│         └── REVIEW_QUALITY.md (quality report)
-│
-└──► DevOps Agent output:
-          └── DEPLOYMENT.md      (status + options)
-```
-
-### File Naming Conventions
-
-| Document | Format |
-|---|---|
-| Architecture/Design | `docs/designs/YYYY-MM-DD-feature-design.md` |
-| Implementation Plan | `docs/plans/YYYY-MM-DD-feature-plan.md` |
-| Task Tracker | `TASK_TRACKER.md` (project root) |
-| Spec Review | `REVIEWS/YYYY-MM-DD-task-N-spec.md` |
-| Quality Review | `REVIEWS/YYYY-MM-DD-task-N-quality.md` |
-| Deployment Report | `DEPLOYMENTS/YYYY-MM-DD-feature.md` |
-
-### Structured Handoff Contents
-
-**Architect → Coder (via Orchestrator):**
-```
-TASK TEXT: [Full text of task from IMPLEMENTATION_PLAN.md]
-SCENE SETTING: [What's already built, what this task adds]
-FILES:
-- Create: [exact path]
-- Modify: [exact path:line range]
-- Test: [exact test path]
-CONTEXT:
-- SPEC.md: [location]
-- ARCHITECTURE.md: [location]
-- STANDARDS.md: [location]
-```
-
-**Coder → Spec Reviewer:**
-```
-COMMIT SHA: [git SHA]
-FILES CHANGED: [list]
-TASK: [which task from the plan]
-WHAT WAS DONE: [plain text summary]
-TESTS: [list of tests added/modified, all passing?]
-```
-
-**Spec Reviewer → Quality Reviewer:**
-```
-VERDICT: APPROVED / REVISION REQUIRED
-REVIEW FILE: REVIEWS/YYYY-MM-DD-task-N-spec.md
-IF REVISION REQUIRED:
-  - Issue 1: [description, file:line]
-  - Issue 2: [description, file:line]
-```
-
-**Quality Reviewer → Orchestrator:**
-```
-VERDICT: APPROVED / REVISION REQUIRED
-REVIEW FILE: REVIEWS/YYYY-MM-DD-task-N-quality.md
-STRENGTHS: [list]
-ISSUES: [by severity]
-```
+See `execution/context_persistence.md` for the five memory layers and ByteRover usage.
 
 ---
 
-## 6. Context Persistence (Critical for AI Agents)
-
-AI agents are ephemeral — each new subagent starts fresh. Context persistence is the most critical infrastructure problem.
-
-### Layered Context Strategy
-
-| Layer | Mechanism | Purpose | Lifespan |
-|---|---|---|---|
-| **Layer 1** | Project files (SPEC.md, ARCHITECTURE.md, IMPLEMENTATION_PLAN.md) | Long-term project truth | Permanent |
-| **Layer 2** | TASK_TRACKER.md | Live task status per feature | Feature lifecycle |
-| **Layer 3** | Inline dispatch context | Per-task agent input | Task duration |
-| **Layer 4** | ByteRover context tree | Cross-project patterns + decisions | Permanent |
-| **Layer 5** | MEMORY.md + daily logs | COO-level continuity | Permanent |
-
-### Golden Rule
-**Any context an agent needs must be in:**
-1. A **file** the agent is told to read (for cross-task context)
-2. **Inline** in the dispatch prompt (for immediate task context)
-
-Context in a previous conversation or "the usual place" is **not acceptable**.
-
----
-
-## 7. Model Routing
+## Model Routing
 
 | Role | Primary Model | Budget Alternative | Notes |
 |---|---|---|---|
@@ -342,7 +319,7 @@ Is it orchestration or coordination?
 
 ---
 
-## 8. The Non-Negotiables
+## The Non-Negotiables
 
 These rules are never skipped regardless of time pressure:
 
@@ -355,5 +332,5 @@ These rules are never skipped regardless of time pressure:
 
 ---
 
-*Source: superpowers-ai-company-workflow.md v1.0 — Felix Stanley, COO*
+*Source: superpowers-ai-company-workflow.md v1.0 + agent_workflow.md — consolidated 2026-04-12*
 *Framework: github.com/obra/superpowers (MIT License)*

@@ -37,15 +37,15 @@
 | Document | Status | Location |
 |---|---|---|
 | AI Company Master Plan | ✅ Drafted | strategy/ai_company_master_plan.md |
-| AI Company Framework | ✅ Drafted | strategy/ai_company_framework.md |
-| Agent Capabilities Framework | ✅ Drafted | strategy/ai_agent_capabilities.md |
-| Security Framework (MCRA) | ✅ Drafted v2.0 | strategy/ai_security_framework.md |
+| AI Company Framework | ✅ Drafted | execution/ai_company_framework.md |
+| Agent Capabilities Framework | ✅ Drafted | execution/ai_agent_capabilities.md |
+| Security Framework (MCRA) | ✅ Drafted v2.0 | operations/ai_security_framework.md |
 | Access Control Framework | ✅ Drafted | strategy/ai_access_control.md |
 | Customer Comms Plan | ✅ Drafted | strategy/abzum_customer_comms_plan.md |
-| Infrastructure Plan | ✅ Drafted | infrastructure/ai_infrastructure_compliance.md |
+| Infrastructure Plan | ✅ Drafted | operations/ai_infrastructure_compliance.md |
 | Backup & Restore Strategy | ✅ Researched | memory/backup-restore-strategy-2026-04-01.md |
-| MCRA Research | ✅ Done | research/mcra_ai_security.md |
-| AI Monitoring Research | ✅ Done | research/ai_monitoring_research.md |
+| MCRA Research | ✅ Done | strategy/research/mcra_ai_security.md |
+| AI Monitoring Research | ✅ Done | strategy/research/ai_monitoring_research.md |
 
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Agent Scripting Intelligence
 tags: []
-related: [process/agent_workflow.md]
+related: [execution/agent_workflow.md]
 keywords: []
 importance: 50
 recency: 1

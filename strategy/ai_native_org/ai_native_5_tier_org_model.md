@@ -1,7 +1,7 @@
 ---
 title: AI-Native 5-Tier Org Model
 tags: []
-related: [strategy/ai_agent_capabilities.md, research/ai_monitoring_research.md]
+related: [execution/ai_agent_capabilities.md, strategy/research/ai_monitoring_research.md]
 keywords: []
 importance: 75
 recency: 1

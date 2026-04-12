@@ -14,7 +14,7 @@
     },
     {
       "order": 1,
-      "path": "memory/overview/_index.md",
+      "path": "memory/milestones/context_tree_v1_0_milestone.md",
       "tokens": 164,
       "type": "summary"
     },
@@ -68,13 +68,13 @@
     },
     {
       "importance": 50,
-      "path": "infrastructure/azure_architecture.md",
+      "path": "operations/azure_architecture.md",
       "tokens": 739,
       "type": "context"
     },
     {
       "importance": 50,
-      "path": "infrastructure/email_setup_brevo_cloudflare.md",
+      "path": "operations/email_setup_brevo_cloudflare.md",
       "tokens": 264,
       "type": "context"
     },

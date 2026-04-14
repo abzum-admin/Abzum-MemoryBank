@@ -8,33 +8,29 @@
 
 ## Overview
 
-Doppler is the secrets manager for Abzum's VPS services. Instead of storing API keys in `.env` files on disk, secrets live in Doppler's vault and are injected into processes at startup via the Doppler CLI.
+Doppler is the secrets manager for Abzum's VPS services. The Doppler CLI is installed on the VPS host and used to generate a `.env` file before each container start. This is Doppler's official pattern for Docker Compose deployments — secrets live in Doppler's vault and are written to a fresh `.env` file on demand, which Docker Compose reads normally.
 
-This means:
-- No plaintext secrets on the VPS filesystem
-- Rotate a secret in the Doppler dashboard → restart the affected service → done
-- All secrets are auditable in one place
+Hostinger's Docker Manager continues to manage the container lifecycle (start, stop, restart) — Doppler only provides the secrets file.
 
 ---
 
 ## Setup on the VPS
 
-**Doppler CLI** is installed on the VPS host (not inside containers):
+**Doppler CLI** v3.75.3 is installed on the VPS host (not inside containers):
 
 ```bash
-# Already installed on abzum.cloud — verify with:
+# Verify installation
 doppler --version
-# v3.75.3
 ```
 
-**Authentication** uses a service token (non-interactive, no user login required):
+**Authentication** uses a service token scoped to the project directory (non-interactive, no user login required):
 
 ```bash
-# Token is scoped to /docker/personal-assistants — already configured
-doppler configure set token <TOKEN> --scope /docker/personal-assistants
+# Already configured — token scoped to /docker/personal-assistants
+HOME=/root doppler configure set token <TOKEN> --scope /docker/personal-assistants
 ```
 
-The scoped config is stored in `/root/.config/doppler/`. When `doppler run` is invoked with `WorkingDirectory=/docker/personal-assistants` (as in the systemd service), it automatically picks up the correct token.
+Config is stored in `/root/.config/doppler/`. The `HOME=/root` prefix is required when running outside an interactive shell (e.g., scripts).
 
 ---
 
@@ -44,7 +40,7 @@ The scoped config is stored in `/root/.config/doppler/`. When `doppler run` is i
 |---------|-------|
 | **Doppler project** | `dev_personal` |
 | **Doppler config** | `dev` |
-| **Service account** | Service token (read-only access to `dev_personal` project) |
+| **Service account** | Service token (read-only) |
 | **Scope** | `/docker/personal-assistants` |
 
 ### Secrets managed (6)
@@ -60,24 +56,21 @@ The scoped config is stored in `/root/.config/doppler/`. When `doppler run` is i
 
 ---
 
-## How Secrets Are Injected
+## How Secrets Are Injected (Official Pattern)
 
-The `hermes.service` systemd unit wraps Docker Compose with `doppler run`:
+Doppler's official Docker Compose integration uses `doppler secrets download` to generate the `.env` file, which Docker Compose reads automatically at startup.
 
-```ini
-[Service]
-WorkingDirectory=/docker/personal-assistants
-Environment=HOME=/root
-ExecStart=/usr/bin/doppler run -- /usr/bin/docker compose up -d
+```bash
+cd /docker/personal-assistants
+
+# Step 1: Generate .env from Doppler vault
+HOME=/root doppler secrets download --format env --no-file > .env
+
+# Step 2: Start the container (Hostinger Docker Manager or directly)
+docker compose up -d
 ```
 
-At startup:
-1. systemd calls `doppler run` in `/docker/personal-assistants`
-2. Doppler reads the scoped token, fetches secrets from the vault
-3. Secrets are injected as environment variables into the `docker compose up -d` process
-4. Docker Compose passes `${OPENROUTER_API_KEY}` etc. into the `hermes` container
-
-The container receives the secrets as standard environment variables — no special SDK or Doppler library needed inside the container.
+Docker Compose reads `.env` from the project directory and passes the mapped variables into the container. The container receives them as standard environment variables — no Doppler SDK needed inside the container.
 
 ---
 
@@ -85,28 +78,37 @@ The container receives the secrets as standard environment variables — no spec
 
 1. Log in to [doppler.com](https://doppler.com) → `dev_personal` project → `dev` config
 2. Update the secret value
-3. On the VPS: `systemctl restart hermes`
+3. On the VPS — regenerate `.env` and recreate the container:
 
-The new value is picked up on the next `doppler run` invocation — no file edits needed.
+```bash
+cd /docker/personal-assistants
+HOME=/root doppler secrets download --format env --no-file > .env
+docker compose up -d
+```
 
 ---
 
 ## Adding a New Secret
 
 1. Add the secret in Doppler dashboard (`dev_personal` / `dev` config)
-2. Add the variable to `/docker/personal-assistants/docker-compose.yml` under `environment:`
+2. Add the variable to `/docker/personal-assistants/docker-compose.yml` under `environment:`:
    ```yaml
    NEW_SECRET_NAME: ${NEW_SECRET_NAME}
    ```
-3. `systemctl restart hermes`
+3. Regenerate `.env` and restart:
+   ```bash
+   cd /docker/personal-assistants
+   HOME=/root doppler secrets download --format env --no-file > .env
+   docker compose up -d
+   ```
 
 ---
 
 ## Verifying Secrets Are Injected
 
 ```bash
-# List all available secrets (names only)
-cd /docker/personal-assistants && doppler secrets --only-names
+# List all secrets available in Doppler (names only)
+cd /docker/personal-assistants && HOME=/root doppler secrets --only-names
 
 # Spot-check a value inside the running container
 docker exec hermes printenv OPENROUTER_API_KEY | cut -c1-10
@@ -116,6 +118,6 @@ docker exec hermes printenv OPENROUTER_API_KEY | cut -c1-10
 
 ## References
 
-- `operations/docker_containers.md` — hermes container details
+- `operations/docker_containers.md` — hermes container details and update runbook
 - `operations/vps_infrastructure.md` — VPS SSH access and layout
-- Doppler docs: https://docs.doppler.com
+- Doppler Docker Compose docs: https://docs.doppler.com/docs/docker-compose

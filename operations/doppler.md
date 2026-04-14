@@ -144,6 +144,18 @@ docker exec hermes printenv TAVILY_API_KEY | cut -c1-10
 cd /docker/personal-assistants && HOME=/root doppler secrets --only-names
 ```
 
+### Run hermes commands inside the container
+
+The `hermes` binary is inside a Python venv. `docker exec sh` creates a new root shell without the venv activated — `hermes` will not be found. This is normal; the gateway process runs correctly because the entrypoint handles venv activation.
+
+```bash
+# Run a hermes command directly
+docker exec -it hermes /opt/hermes/.venv/bin/hermes --help
+
+# Exec into a shell with the venv pre-activated
+docker exec -it hermes bash -c "source /opt/hermes/.venv/bin/activate && bash"
+```
+
 ### Update the hermes image
 
 ```bash

@@ -47,6 +47,20 @@ docker logs hermes --tail 50
 docker logs hermes -f        # live follow
 ```
 
+### Run hermes commands inside the container
+
+The `hermes` binary lives inside a Python venv at `/opt/hermes/.venv/bin/hermes`. The container entrypoint activates the venv for the gateway process, but **`docker exec sh` creates a new root shell without the venv** — so `hermes` is not in PATH in that shell.
+
+```bash
+# Run a hermes command directly (no shell needed)
+docker exec -it hermes /opt/hermes/.venv/bin/hermes --help
+
+# Exec into a shell with the venv already activated
+docker exec -it hermes bash -c "source /opt/hermes/.venv/bin/activate && bash"
+```
+
+This is expected behaviour — the gateway itself runs correctly because the entrypoint handles venv activation for the main process.
+
 ### Update to latest image
 
 ```bash

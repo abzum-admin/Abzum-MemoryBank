@@ -1,95 +1,273 @@
-# Two-Tier Agent Architecture
+# Two-Tier Agent Architecture — Abzum
+**A distributed, multi-agent operating system with global governance and project-level execution.**
 
-**Date:** 2026-04-05  
-**Source:** Vijay's Proposal  
-**Status:** Proposed — Pending Implementation
+*Version 1.0 — 2026-04-14 (rewrite from v0.1 stub, 2026-04-05)*
 
----
-
-## Summary
-
-Vijay proposed a **two-tier agent architecture** for Abzum, featuring:
-- **Tier 1 (Paperclip Container):** Global/meta agents that manage orchestration, routing, planning, strategy, compliance, cost optimization, memory management, project allocation, RBAC, provisioning, and monitoring/audit.
-- **Tier 2 (Project Containers):** Per-project isolated containers, each running project-specific agents (Coder, Reviewer, Tester, Documentation, Scrum Master, domain-specific agents).
-
-This architecture provides enterprise-grade isolation, scalability, and clean operational boundaries.
+> This document defines the structural separation between Abzum's global agents and project-scoped agents — why the separation is fundamental, what each tier contains, and the design principles that make the system scalable, secure, and auditable.
 
 ---
 
-## Architecture
+## Overview
 
-### Tier 1 — Paperclip Container (Global/Meta Layer)
+```
+┌──────────────────────────────────────────────────────────────────────┐
+│  TIER 1 — GLOBAL AGENTS CONTAINER                                    │
+│  Always-on · Stateful · Cross-project · Policy-enforcing            │
+│                                                                      │
+│  Hermes runtime · OpenClaw runtime · Paperclip adapter              │
+│  Global memory · Global tools · Global routing logic                │
+│                                                                      │
+│  "The brain of the company"                                         │
+└────────────────────────────────┬─────────────────────────────────────┘
+                                 │ provision + inject full context
+                                 ↓
+┌──────────────────────────────────────────────────────────────────────┐
+│  TIER 2 — PROJECT CONTAINER  (one per project, ephemeral)           │
+│  Ephemeral · Isolated · Domain-specific · Tool-rich                 │
+│                                                                      │
+│  Coder · Reviewer · Tester · Documentation · Domain Expert         │
+│  Scrum Master · DevOps                                               │
+│                                                                      │
+│  "The organs of the project"                                        │
+└──────────────────────────────────────────────────────────────────────┘
+```
 
-The "paperclip" container is the global orchestration layer. It runs **meta agents** that coordinate everything:
+---
+
+## Tier 1 — Global Agents Container
+
+### What it contains
+
+| Component | Role |
+|-----------|------|
+| **Hermes runtime** | Agent execution engine for all global profiles |
+| **OpenClaw runtime** | Orchestration and coordination engine |
+| **Paperclip adapter** | Company-level employee model and policy enforcement |
+| **Global memory** | Hindsight shared bank + LLM Wiki + ClickHouse |
+| **Global tools** | Cross-project MCP tools, admin APIs, billing, DNS, Hostinger MCP |
+| **Global routing logic** | Classifies and routes incoming work to project containers |
+
+### Meta-Agents in Tier 1
 
 | Agent | Role |
 |-------|------|
-| Orchestrator | Coordinates all agent activity |
-| Router | Routes requests to appropriate agents/containers |
-| Planner | Strategic project planning |
-| Strategy | Long-term direction and decision-making |
-| Compliance | Ensures regulatory/policy adherence |
-| Cost-Optimizer | Manages token usage and cost efficiency |
-| Memory Manager | Coordinates BIMemoryBank across projects |
-| Project Allocator | Assigns projects to appropriate teams/containers |
+| Orchestrator | Coordinates all agent activity across all projects |
+| Router | Routes requests to the appropriate project container |
+| Planner | Strategic project planning and task decomposition |
+| Strategy | Long-term direction and cross-project decision-making |
+| Compliance | Ensures regulatory and policy adherence before work begins |
+| Cost-Optimizer | Manages model selection, token usage, and budget |
+| Memory Manager | Coordinates Hindsight and LLM Wiki across all projects |
+| Project Allocator | Assigns work to the appropriate project team |
 | RBAC | Role-based access control enforcement |
-| Provisioning | Manages container/agent provisioning |
-| Monitoring/Audit | Centralized logging and audit trail |
+| Provisioning | Manages container spin-up, context injection, and teardown |
+| Monitoring/Audit | Centralised logging and audit trail across all containers |
 
-### Tier 2 — Project Containers (Per-Project Isolation)
+### Properties
 
-Each project gets its **own isolated container** with:
+- **Always-on** — never torn down between projects
+- **Stateful** — holds persistent cross-project memory
+- **Cross-project** — full visibility across all active and historical projects
+- **Policy-enforcing** — enforces RBAC, compliance, and cost rules before any project work begins
+- **Company-level decision makers** — Tier 1 agents represent the company, not any single project
 
-- **Project-specific agents:** Coder, Reviewer, Tester, Documentation, Scrum Master, domain-specialists
-- **Project-specific context:** Tailored instructions, knowledge, and memory
-- **Project-specific secrets:** Doppler integration for secure credential management
-- **Project-specific tools:** Tools and integrations unique to the project
-- **Project-specific memory:** Isolated ByteRover context tree
+### What Tier 1 holds
 
-### Why This Architecture is Ideal
+- **RBAC policies** — which agent can access which repo, which secrets are injected
+- **Company-wide compliance rules** — security posture, data handling, audit requirements
+- **Cost optimisation strategies** — model routing rules, budget allocation, free-tier utilisation
+- **Provisioning logic** — how project containers are created, configured, and decommissioned
+- **Global knowledge** — Hindsight shared bank, LLM Wiki institutional knowledge
+- **Multi-project context** — visibility across all active and historical projects
+- **Audit logs** — full history of all agent actions across the company
+- **Routing heuristics** — how incoming work is classified and assigned
 
-| Benefit | Description |
-|---------|-------------|
-| **Isolation** | Each project container is fully isolated — no cross-contamination of context, secrets, or state |
-| **Scalability** | Project containers can be scaled independently based on workload |
-| **Clean Boundaries** | Clear separation between global coordination (Tier 1) and project execution (Tier 2) |
-| **Easy Provisioning** | Containers can be spun up/down on demand per project lifecycle |
-| **Doppler Integration** | Native secrets management per project via Doppler |
-| **Enterprise-Grade** | Validated by Vijay as suitable for enterprise workloads |
+### Why Tier 1 must be centralised
 
----
+Scattering these agents across project containers causes:
 
-## Integration Map
+| Loss | Consequence |
+|------|-------------|
+| **Consistency** | Each project enforces different rules; no single source of truth |
+| **Authority** | No agent has company-wide authority; governance collapses |
+| **Governance** | Compliance rules applied inconsistently across projects |
+| **Observability** | No unified audit trail; impossible to detect cross-project anomalies |
+| **Security boundaries** | Secrets and RBAC policies leak across project scopes |
 
-This architecture validates and extends the existing agent framework by integrating with:
-
-| Action | System | Integration Point |
-|--------|--------|-------------------|
-| A41 | BIMemoryBank | Memory management across containers |
-| A42 | Change Management | Change tracking for container provisioning |
-| A43 | CMDB | Configuration management for all containers and agents |
-| A49 | Agent Size | Right-sizing agent teams per project container |
-| A59 | Customer Isolation | Per-customer isolation alignment |
-| A66 | Hermes | Local dev/test environment for container development |
+> A company needs a brain. Tier 1 is your brain.
 
 ---
 
-## Implementation Notes
+## Tier 2 — Project Container
 
-- **Paperclip container** = the meta/global layer named "Paperclip" in Vijay's proposal
-- **Project containers** = individual Docker containers per project
-- **Doppler** = secrets management platform for per-project credentials
-- **ByteRover** = per-container context tree for project memory
-- **CMDB registration** = all containers and agents must be registered in the Configuration Management Database
+### What it contains
+
+Project containers are provisioned on demand by Tier 1 and contain agents specific to a single project:
+
+| Agent | Role |
+|-------|------|
+| **Coder** | Feature implementation, bug fixes |
+| **Spec Reviewer** | Validates specs before coding begins |
+| **Quality Reviewer** | Reviews code against acceptance criteria |
+| **Tester** | Writes and executes test suites |
+| **Documentation** | Generates and maintains project docs |
+| **Domain Expert** | Insurance, e-commerce, fintech, legal — project-specific knowledge |
+| **Scrum Master** | Task tracking, blockers, sprint coordination |
+| **DevOps** | CI/CD, deployment, environment management |
+
+### Properties
+
+- **Ephemeral** — torn down cleanly when the project completes or is paused
+- **Isolated** — no shared memory or filesystem with other projects
+- **Domain-specific** — Hermes profiles and LLM Wiki knowledge scoped to this project's domain
+- **Tool-rich** — full local MCP toolset injected by Tier 1 at provisioning time
+- **Memory-local** — project-scoped Hindsight namespace, local task tracker
+- **Project-scoped** — operates entirely within the boundaries set by Tier 1
+
+### Why Tier 2 must be isolated
+
+Project agents need direct access to:
+
+- **Filesystem** — read/write the project codebase
+- **Git** — commits, branches, PRs scoped to this repo
+- **Test runners** — Jest, pytest, Playwright — in the project's environment
+- **Environment variables** — `DATABASE_URL`, `API_KEY` — project-specific
+- **Secrets** — per-project credentials, never shared across projects
+- **Domain memory** — Hindsight namespace scoped to this project's client
+- **Local MCP tools** — project-specific tools injected by Tier 1 at boot
+
+Putting Tier 2 agents in the global container would break:
+
+| Loss | Consequence |
+|------|-------------|
+| **Isolation** | Project A can read Project B's filesystem and secrets |
+| **Reproducibility** | Global state bleeds into every project; no clean slate |
+| **Security** | Secrets from different clients co-located; compliance violation |
+| **Compliance** | GDPR and data residency requirements become unenforceable |
+| **Teardown simplicity** | Can't destroy a project without affecting global state |
+
+> A project needs its own organs. Tier 2 is your body.
 
 ---
 
-## Related Actions
+## Why the Separation Is Fundamental
 
-- **A71** (this architecture): Implement Two-Tier Agent Architecture (Paperclip + Project Containers)
-- **A41**: BIMemoryBank Git Sync Architecture
-- **A42**: Centralised Change Management System
-- **A43**: Configuration Management Database (CMDB)
-- **A49**: Agent Team Size Optimization
-- **A59**: Customer Isolation Architecture
-- **A66**: Hermes Local Development Environment
+### 1. Security and RBAC
+
+Tier 1 enforces:
+- Which agents can access which repositories
+- Which secrets are injected into which containers
+- Which tools are allowed per project type
+- Audit trail for every permission grant
+
+Project agents operate *under* those rules — they cannot escalate their own privileges.
+
+**Mirrors real companies:** CEO / CTO / Compliance (Tier 1) governs what Developers / Testers / PMs (Tier 2) are permitted to do.
+
+### 2. Scalability
+
+| Tier | Scaling strategy |
+|------|-----------------|
+| Tier 1 | Horizontal — more routing and planning throughput |
+| Tier 2 | Vertical — more compute per project as needed |
+
+Tier 1 stays lean and fast. Tier 2 absorbs the heavy context windows and expensive reasoning — only when a project demands it.
+
+### 3. Isolation and Blast Radius
+
+If a Tier 2 agent corrupts memory, crashes, loops, or misbehaves:
+
+1. The project container is destroyed
+2. A fresh container is provisioned from clean state
+3. **Tier 1 is completely untouched**
+
+This is exactly how Kubernetes isolates pods. The blast radius of any failure is bounded to one project.
+
+### 4. Cost Optimisation
+
+| Tier | Model strategy |
+|------|---------------|
+| Tier 1 | Small, fast models — routing, classification, policy checks — low inference cost |
+| Tier 2 | Heavy models, high-context windows, expensive reasoning — only when a task demands it |
+
+You don't run a 72B reasoning model for every routing decision. Tier 1 uses cheap inference per call. Tier 2 pays for expensive inference only when necessary.
+
+### 5. Hermes Profile Cleanliness
+
+| Tier 1 profiles | Tier 2 profiles |
+|-----------------|-----------------|
+| `router` | `coder` |
+| `planner` | `reviewer` |
+| `compliance` | `tester` |
+| `cost-optimizer` | `domain-expert` |
+| `provisioning` | `scrum-master` |
+| `audit` | `devops` |
+
+Profiles stay clean, predictable, and role-aligned. No single Hermes profile attempts to be both a company-level router and a project-level coder.
+
+### 6. OpenClaw Integration
+
+OpenClaw thrives when:
+- **Global agents handle orchestration** — what needs to be done, by whom, under what rules
+- **Project agents handle execution** — actually doing the work
+
+This architecture matches OpenClaw's design philosophy: strict separation of coordination from execution.
+
+### 7. Paperclip Company Model
+
+Paperclip expects:
+- A **stable set of employees** who represent the company and hold institutional authority (Tier 1)
+- **Project-specific workers** assigned to active work who can be swapped in and out (Tier 2)
+
+This architecture is a direct implementation of Paperclip's intended usage model.
+
+---
+
+## Infrastructure Mapping (Current VPS State)
+
+```
+abzum.cloud  (76.13.213.212 — KVM 2, Ubuntu 24.04, 8GB RAM)
+│
+├── /docker/paperclip/            ← Tier 1 (always-on)
+│   └── docker-compose.yml        Paperclip orchestration engine (port 3100)
+│
+├── /docker/personal-assistants/  ← Tier 1 (always-on)
+│   └── docker-compose.yml        Hermes agent runtime (nousresearch/hermes-agent)
+│
+├── /docker/cloudflared/          ← Infrastructure (tunnel — not an agent tier)
+│   └── docker-compose.yml        Cloudflare tunnel → paperclip.abzum.cloud
+│
+└── /docker/projects/             ← Tier 2 (ephemeral, provisioned per project)
+    ├── project-alpha/
+    └── project-beta/
+```
+
+**Current Tier 1 status:** Paperclip (healthy, up 8 days) + Hermes (running, up 5 days).
+
+---
+
+## Decision Record
+
+| Question | Decision | Rationale |
+|----------|----------|-----------|
+| Should global agents be stateless? | No — stateful | Hold company-wide context that must persist across projects |
+| Can project agents call Tier 1 directly? | Via structured request only | Prevents privilege escalation; all Tier 1 access is mediated |
+| How long does Tier 2 live? | Project duration only | Destroyed on completion; no residual state |
+| Can Tier 2 have its own Hindsight namespace? | Yes — project-scoped | Isolated from global bank; Tier 1 syncs relevant learnings up |
+| Who provisions Tier 2? | Tier 1 Provisioning Agent | Tier 1 injects full context, secrets, and tools at container boot |
+| Where does secrets management live? | Tier 1 (injected at provision time) | Per-project credentials injected by Tier 1; Tier 2 never holds master secrets |
+
+---
+
+## References
+
+- `strategy/agent_orchestration.md` — End-to-end orchestration with all layers
+- `execution/context_persistence.md` — Memory stack: Hindsight + LLM Wiki + ClickHouse
+- `execution/agent_workflow.md` — 6-gate Superpowers workflow within Tier 2 containers
+- `operations/agent_watcher/agent_watcher_system.md` — Agent monitoring and 4-level escalation
+
+---
+
+*Owner: Felix Stanley (COO)*
+*Version 1.0 — 2026-04-14*
+*Supersedes: v0.1 stub (2026-04-05)*

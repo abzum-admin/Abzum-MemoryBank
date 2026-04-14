@@ -8,13 +8,13 @@
 
 ## Active Containers
 
-| Project folder | Container name | Image | Role | Status |
-|----------------|---------------|-------|------|--------|
-| `/docker/personal-assistants/` | `hermes` | `nousresearch/hermes-agent:latest` | AI agent runtime gateway (Tier 1) | Running — managed by Hostinger Docker Manager |
-| `/docker/paperclip/` | `paperclip-1` | `ghcr.io/hostinger/hvps-paperclip:latest` | Orchestration engine (Tier 1) | Healthy — port 3100 |
-| `/docker/cloudflared/` | `cloudflared-1` | `cloudflare/cloudflared:latest` | Cloudflare tunnel → `paperclip.abzum.cloud` | Running — no healthcheck (distroless image, no shell) |
+| Project folder | Container name | Image | Role | Managed by |
+|----------------|---------------|-------|------|------------|
+| `/docker/personal-assistants/` | `hermes` | `nousresearch/hermes-agent:latest` | AI agent runtime gateway (Tier 1) | `hermes.service` systemd + Doppler |
+| `/docker/paperclip/` | `paperclip-1` | `ghcr.io/hostinger/hvps-paperclip:latest` | Orchestration engine (Tier 1) | Hostinger Docker Manager |
+| `/docker/cloudflared/` | `cloudflared-1` | `cloudflare/cloudflared:latest` | Cloudflare tunnel → `paperclip.abzum.cloud` | Hostinger Docker Manager |
 
-All containers are connected to the external Docker network `proxy`.
+All containers share the external Docker network `proxy`.
 
 ---
 
@@ -26,54 +26,56 @@ All containers are connected to the external Docker network `proxy`.
 | **Command** | `gateway run` |
 | **Volume** | `hermes-data:/opt/data` |
 | **Network** | `proxy` (external) |
-| **Secrets** | Via Doppler-generated `.env` file — see `operations/doppler.md` |
-| **Managed by** | Hostinger Docker Manager (native project management) |
-| **Restart policy** | `unless-stopped` |
+| **Secrets** | Injected at startup by Doppler — no `.env` file on disk |
+| **Managed by** | `systemd` — `hermes.service` (see `operations/doppler.md`) |
+| **Restart policy** | `unless-stopped` (Docker handles reboots after initial start) |
 
-### Starting / stopping Hermes
-
-Use the Hostinger Docker Manager UI, or via Hostinger MCP tools:
-
-```
-VPS_startProjectV1  → projectName: personal-assistants
-VPS_stopProjectV1   → projectName: personal-assistants
-VPS_restartProjectV1 → projectName: personal-assistants
-```
-
-Or via SSH:
-```bash
-cd /docker/personal-assistants && docker compose up -d    # start
-cd /docker/personal-assistants && docker compose down     # stop
-```
-
-### Updating Hermes
+### Start / stop / restart
 
 ```bash
-cd /docker/personal-assistants
-
-# 1. Pull latest image
-docker compose pull
-
-# 2. Refresh .env from Doppler (in case secrets changed)
-HOME=/root doppler secrets download --format env --no-file > .env
-
-# 3. Recreate container with new image
-docker compose up -d
+systemctl start hermes      # start with Doppler secret injection
+systemctl stop hermes       # stop
+systemctl restart hermes    # restart — required after any config or secret change
+systemctl status hermes     # check status
+journalctl -u hermes -n 50  # view logs
 ```
 
-> **Note:** `hermes update` (native CLI command) does NOT work with the Docker image. Use `docker compose pull` instead.
+### View container logs
 
-### Rotating secrets
+```bash
+docker logs hermes --tail 50
+docker logs hermes -f        # live follow
+```
+
+### Update to latest image
 
 ```bash
 cd /docker/personal-assistants
-
-# Regenerate .env from Doppler with updated values
-HOME=/root doppler secrets download --format env --no-file > .env
-
-# Recreate container to pick up new secrets
-docker compose up -d
+docker compose pull       # pull latest from Docker Hub
+systemctl restart hermes  # restart — Doppler re-injects secrets automatically
 ```
+
+### Verify secrets are live inside the container
+
+```bash
+docker exec hermes printenv OPENROUTER_API_KEY | cut -c1-10
+docker exec hermes printenv TELEGRAM_BOT_TOKEN | cut -c1-10
+```
+
+---
+
+## ⚠️ Hostinger Docker Manager — What NOT to Do for Hermes
+
+The Hostinger Docker Manager UI **must not be used** for the `personal-assistants` project. Any action through the UI breaks the Doppler integration:
+
+| Action | What breaks |
+|--------|-------------|
+| **"Deploy" button** | Overwrites `docker-compose.yml`; strips Doppler-compatible env var format |
+| **Edit env vars in Visual Editor + Deploy** | Writes secrets to plaintext `.env` file; bypasses Doppler |
+| **Start/Stop buttons in UI** | Runs plain `docker compose` without Doppler — container starts with empty env vars |
+
+**Use `systemctl` commands over SSH for all hermes operations.**
+The Hostinger UI is safe and correct for `paperclip` and `cloudflared`.
 
 ---
 
@@ -82,12 +84,12 @@ docker compose up -d
 | Property | Value |
 |----------|-------|
 | **Image** | `ghcr.io/hostinger/hvps-paperclip:latest` |
-| **Port** | 3100 (internal only, exposed via Cloudflare tunnel) |
+| **Port** | 3100 (internal, exposed via Cloudflare tunnel) |
 | **Network** | `proxy` (external) |
-| **Managed by** | Hostinger VPS project management |
+| **Managed by** | Hostinger Docker Manager |
 | **Tunnel URL** | `paperclip.abzum.cloud` |
 
-Paperclip is Hostinger's orchestration engine. Do not stop without coordination with Felix (COO).
+Do not stop without coordination with Felix (COO).
 
 ---
 
@@ -96,12 +98,12 @@ Paperclip is Hostinger's orchestration engine. Do not stop without coordination 
 | Property | Value |
 |----------|-------|
 | **Image** | `cloudflare/cloudflared:latest` |
-| **Purpose** | Cloudflare Zero Trust tunnel routing `paperclip.abzum.cloud` → `paperclip:3100` |
+| **Purpose** | Zero Trust tunnel: `paperclip.abzum.cloud` → `paperclip:3100` |
 | **Network** | `proxy` (external) |
-| **Healthcheck** | None — distroless image has no shell; `CMD-SHELL` healthchecks always fail |
-| **Managed by** | Hostinger VPS project management |
+| **Healthcheck** | None — distroless image has no shell; `CMD-SHELL` always fails |
+| **Managed by** | Hostinger Docker Manager |
 
-The health check was removed from the compose file. `restart: unless-stopped` handles crash recovery.
+`restart: unless-stopped` handles crash recovery. The health check was intentionally removed.
 
 ---
 
@@ -109,13 +111,13 @@ The health check was removed from the compose file. `restart: unless-stopped` ha
 
 | Resource | Detail |
 |----------|--------|
-| **Docker network `proxy`** | External bridge network shared by all three projects |
-| **VPS ID** | `1423236` (use with Hostinger MCP tools) |
+| **Docker network `proxy`** | External bridge shared by all three projects — must exist before any project starts |
+| **VPS ID** | `1423236` (for Hostinger MCP tools) |
 
 ---
 
 ## References
 
+- `operations/doppler.md` — Full Doppler setup, operations runbook, and Hostinger UI warnings
 - `operations/vps_infrastructure.md` — VPS server details and SSH access
-- `operations/doppler.md` — Doppler secrets management setup and rotation
 - `strategy/two_tier_agent_architecture.md` — Why Tier 1 containers are always-on

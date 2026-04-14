@@ -51,7 +51,7 @@ doppler --version   # verify
 HOME=/root doppler configure set token <SERVICE_TOKEN> --scope /docker/personal-assistants
 ```
 
-Config stored in `/root/.config/doppler/`. The `HOME=/root` prefix is required in non-interactive contexts (scripts, systemd).
+Config stored in `/root/.doppler/.doppler.yaml`. The `HOME=/root` prefix is required in non-interactive contexts (scripts, systemd) — Doppler derives the config path from `$HOME`.
 
 ---
 
@@ -99,6 +99,17 @@ WantedBy=multi-user.target
 ```
 
 > `Environment=HOME=/root` is required because systemd does not set `$HOME` by default, and the Doppler CLI needs it to find its config at `/root/.config/doppler/`.
+
+---
+
+## Behaviour on VPS Reboot
+
+On reboot, hermes comes back correctly without any manual intervention:
+
+1. Docker daemon starts → sees `hermes` container with `restart: unless-stopped` → restores it using **env vars stored in the container config** (set by the last `doppler run -- docker compose up -d`)
+2. `hermes.service` (systemd, enabled) runs → calls `doppler run -- docker compose up -d` → container already running → no-op
+
+Both paths result in a correctly running container with valid secrets. The only scenario requiring action after a reboot is if **secrets were rotated in Doppler between the last container start and the reboot** — in that case, run `systemctl restart hermes` once after the VPS comes back up to fetch the new values.
 
 ---
 

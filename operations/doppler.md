@@ -146,15 +146,12 @@ cd /docker/personal-assistants && HOME=/root doppler secrets --only-names
 
 ### Run hermes commands inside the container
 
-The `hermes` binary is inside a Python venv. `docker exec sh` creates a new root shell without the venv activated — `hermes` will not be found. This is normal; the gateway process runs correctly because the entrypoint handles venv activation.
-
 ```bash
-# Run a hermes command directly
-docker exec -it hermes /opt/hermes/.venv/bin/hermes --help
-
-# Exec into a shell with the venv pre-activated
-docker exec -it hermes bash -c "source /opt/hermes/.venv/bin/activate && bash"
+docker exec -it hermes bash    # hermes is in PATH
+hermes --version               # works directly
 ```
+
+The compose file sets `PATH=/opt/hermes/.venv/bin:...` so `hermes` is available in any exec session.
 
 ### Update the hermes image
 
@@ -196,6 +193,7 @@ services:
     restart: unless-stopped
     command: gateway run
     environment:
+      - PATH=/opt/hermes/.venv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
       - OPENROUTER_API_KEY
       - MINIMAX_API_KEY
       - TELEGRAM_BOT_TOKEN
@@ -214,6 +212,8 @@ networks:
   proxy:
     external: true
 ```
+
+> The `PATH` entry is hardcoded (not from Doppler) — it ensures `hermes` is findable in any `docker exec` session, since the image's entrypoint only activates the venv for the main gateway process.
 
 ---
 

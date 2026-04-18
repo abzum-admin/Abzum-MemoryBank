@@ -10,7 +10,8 @@
 
 | Project folder | Container name | Image | Role | Managed by |
 |----------------|---------------|-------|------|------------|
-| `/docker/personal-assistants/` | `hermes` | `nousresearch/hermes-agent:latest` | AI agent runtime gateway (Tier 1) | `hermes.service` systemd + Doppler |
+| `/docker/personal-assistants/` | `hermes` | `nousresearch/hermes-agent:latest` | **Hermes — Personal Assistant** gateway (Tier 1) | `hermes.service` systemd + Doppler |
+| `/docker/personal-assistants/` | `hermes-dashboard` | `nousresearch/hermes-agent:latest` | **Hermes — Personal Assistant** dashboard UI (Tier 1) | `hermes.service` systemd + Doppler |
 | `/docker/paperclip/` | `paperclip-1` | `ghcr.io/hostinger/hvps-paperclip:latest` | Orchestration engine (Tier 1) | Hostinger Docker Manager |
 | `/docker/cloudflared/` | `cloudflared-1` | `cloudflare/cloudflared:latest` | Cloudflare tunnel → `paperclip.abzum.cloud` | Hostinger Docker Manager |
 
@@ -18,14 +19,19 @@ All containers share the external Docker network `proxy`.
 
 ---
 
-## Hermes (`/docker/personal-assistants/`)
+## Hermes — Personal Assistant (`/docker/personal-assistants/`)
+
+> **Tag:** This is the Docker setup for **Hermes — Personal Assistant**. The compose project runs two services: the `hermes` gateway and the optional `hermes-dashboard` UI, both built from the same image.
 
 | Property | Value |
 |----------|-------|
-| **Image** | `nousresearch/hermes-agent:latest` |
-| **Command** | `gateway run` |
-| **Volume** | `hermes-data:/opt/data` |
+| **Image** | `nousresearch/hermes-agent:latest` (same image for both services) |
+| **Services** | `hermes` (gateway) + `hermes-dashboard` (UI) |
+| **Commands** | `gateway run` / `dashboard --host 0.0.0.0` |
+| **Published ports** | `8642` (gateway API), `9119` (dashboard UI) |
+| **Volume** | Bind mount `/root/.hermes:/opt/data` (shared by both services) |
 | **Network** | `proxy` (external) |
+| **Shared memory** | `shm_size: 1g` on the gateway — required for Playwright/Chromium browser tools |
 | **Secrets** | Injected at startup by Doppler — no `.env` file on disk |
 | **Managed by** | `systemd` — `hermes.service` (see `operations/doppler.md`) |
 | **Restart policy** | `unless-stopped` (Docker handles reboots after initial start) |
@@ -44,8 +50,14 @@ journalctl -u hermes -n 50  # view logs
 
 ```bash
 docker logs hermes --tail 50
-docker logs hermes -f        # live follow
+docker logs hermes -f                  # live follow (gateway)
+docker logs hermes-dashboard --tail 50 # dashboard logs
 ```
+
+### Access URLs (on the VPS)
+
+- Gateway API: `http://localhost:8642`
+- Dashboard UI: `http://localhost:9119` (reads gateway state via `GATEWAY_HEALTH_URL=http://hermes:8642` on the `proxy` network)
 
 ### Run hermes commands inside the container
 

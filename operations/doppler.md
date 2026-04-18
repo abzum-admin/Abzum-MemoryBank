@@ -129,7 +129,8 @@ journalctl -u hermes -n 50  # view systemd logs
 
 ```bash
 docker logs hermes --tail 50
-docker logs hermes -f        # follow live
+docker logs hermes -f                  # follow live (gateway)
+docker logs hermes-dashboard --tail 50 # dashboard logs
 ```
 
 ### Verify secrets are injected correctly
@@ -181,7 +182,9 @@ Doppler fetches the new value on the next `doppler run` invocation — no file e
 
 ---
 
-## docker-compose.yml Reference
+## docker-compose.yml Reference — Hermes Personal Assistant
+
+> **Tag:** This is the compose file for **Hermes — Personal Assistant**. Aligned with the official Hermes Docker guide (<https://hermes-agent.nousresearch.com/docs/user-guide/docker/>) with two project-specific deviations: network is the shared external `proxy` (not `hermes-net`), and secrets are injected by Doppler (not a `.env` file on disk).
 
 The compose file uses bare env var names (no values). Docker Compose reads them from the shell environment that `doppler run` provides:
 
@@ -192,6 +195,9 @@ services:
     container_name: hermes
     restart: unless-stopped
     command: gateway run
+    shm_size: '1g'
+    ports:
+      - "8642:8642"
     environment:
       - PATH=/opt/hermes/.venv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
       - OPENROUTER_API_KEY
@@ -201,19 +207,40 @@ services:
       - TAVILY_API_KEY
       - BRAVE_SEARCH_API_KEY
     volumes:
-      - hermes-data:/opt/data
+      - /root/.hermes:/opt/data
     networks:
       - proxy
 
-volumes:
-  hermes-data:
+  dashboard:
+    image: nousresearch/hermes-agent:latest
+    container_name: hermes-dashboard
+    restart: unless-stopped
+    command: dashboard --host 0.0.0.0
+    ports:
+      - "9119:9119"
+    environment:
+      - PATH=/opt/hermes/.venv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+      - GATEWAY_HEALTH_URL=http://hermes:8642
+    volumes:
+      - /root/.hermes:/opt/data
+    networks:
+      - proxy
+    depends_on:
+      - hermes
 
 networks:
   proxy:
     external: true
 ```
 
-> The `PATH` entry is hardcoded (not from Doppler) — it ensures `hermes` is findable in any `docker exec` session, since the image's entrypoint only activates the venv for the main gateway process.
+### Why each non-default setting
+
+- **`shm_size: '1g'`** — required by the official docs for Playwright/Chromium browser tools. Without it Chromium crashes (`Target.crashed` / `SIGBUS`) on any non-trivial page. Chromium is pre-installed in the image (`npx playwright install --with-deps chromium` runs at image build).
+- **`/root/.hermes` (explicit, not `~/.hermes`)** — systemd runs the unit with `Environment=HOME=/root` and does not expand `~`. An explicit path avoids surprises at compose-parse time.
+- **`ports: 8642:8642`** — publishes the gateway API on the host so the dashboard (and future Cloudflare tunnel) can reach it; also lets you `curl http://localhost:8642` for health checks.
+- **`networks: proxy (external: true)`** — reuses the shared bridge with `paperclip` and `cloudflared` instead of the docs' `hermes-net`.
+- **Hardcoded `PATH`** — ensures `hermes` is findable in any `docker exec` session, since the image's entrypoint only activates the venv for the main gateway process.
+- **No resource limits** — deliberately omitted (the docs' `4G`/`2.0 CPU` and `512M`/`0.5` examples are guidance, not requirements).
 
 ---
 

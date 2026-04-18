@@ -193,26 +193,44 @@ if docker ps -a --format '{{.Names}}' | grep -Eq "^${INSTANCE}$"; then
   INSTANCE_EXISTS=true
 fi
 
+# --- deployment summary + confirmation -----------------------------------
+echo
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo "  DEPLOYMENT SUMMARY"
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+printf "  %-22s %s\n" "Instance:"         "$INSTANCE"
+printf "  %-22s %s\n" "Template:"         "$TEMPLATE"
+printf "  %-22s %s\n" "Docker project:"   "$DOCKER_ROOT/$INSTANCE/"
+printf "  %-22s %s\n" "Systemd unit:"     "$INSTANCE.service"
+printf "  %-22s %s\n" "Image:"            "nousresearch/hermes-agent:latest"
+printf "  %-22s %s\n" "Public URL:"       "https://$DOMAIN"
+printf "  %-22s %s\n" "Tunnel upstream:"  "$UPSTREAM_SERVICE:$UPSTREAM_PORT"
+if [[ "$ACCESS_EMAILS" != "none" && -n "$ACCESS_EMAILS" ]]; then
+printf "  %-22s %s\n" "CF Access (login):" "$ACCESS_EMAILS"
+else
+printf "  %-22s %s\n" "CF Access:"        "disabled (public)"
+fi
 if $INSTANCE_EXISTS; then
-  echo
-  log "container '$INSTANCE' already exists."
-  if $ASSUME_YES; then
-    choice="r"
-  else
-    read -r -p "  (r)eplace — tear down + fresh install, (s)kip docker + only update tunnel, (c)ancel: " choice
+printf "  %-22s %s\n" "Existing instance:" "FOUND — will be replaced (containers + volume removed)"
+else
+printf "  %-22s %s\n" "Existing instance:" "none — fresh install"
+fi
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo
+if ! $ASSUME_YES; then
+  read -r -p "  Proceed with deployment? [y/N]: " _confirm
+  [[ "$_confirm" == "y" || "$_confirm" == "Y" ]] || die "aborted by user"
+fi
+echo
+
+SKIP_DOCKER=false
+
+if $INSTANCE_EXISTS; then
+  log "replacing existing instance: stopping + removing volumes"
+  if systemctl list-unit-files | grep -q "^${INSTANCE}.service"; then
+    systemctl stop "$INSTANCE.service" || true
   fi
-  case "$choice" in
-    r|R)
-      log "replacing: stopping + removing volumes"
-      if systemctl list-unit-files | grep -q "^${INSTANCE}.service"; then
-        systemctl stop "$INSTANCE.service" || true
-      fi
-      (cd "$DOCKER_ROOT/$INSTANCE" 2>/dev/null && docker compose down -v || true)
-      ;;
-    s|S) SKIP_DOCKER=true;;
-    c|C|"") die "cancelled";;
-    *) die "unknown choice: $choice";;
-  esac
+  (cd "$DOCKER_ROOT/$INSTANCE" 2>/dev/null && docker compose down -v || true)
 fi
 
 # --- render compose + systemd unit --------------------------------------

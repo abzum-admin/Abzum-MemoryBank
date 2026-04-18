@@ -11,7 +11,7 @@
 # Templates live in templates/ alongside this script (see templates/hermes.compose.tmpl).
 set -euo pipefail
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+SCRIPT_DIR="$(cd "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")" && pwd)"
 LIB_DIR="$SCRIPT_DIR/lib"
 TEMPLATE_DIR="$SCRIPT_DIR/templates"
 DOCKER_ROOT="/docker"

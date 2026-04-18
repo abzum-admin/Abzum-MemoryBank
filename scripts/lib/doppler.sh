@@ -16,7 +16,8 @@ doppler_scope_token() {
 doppler_list_secret_names() {
   local instance="$1"
   local dir="/docker/$instance"
-  HOME=/root doppler secrets --only-names --project-directory "$dir" --silent 2>/dev/null \
+  # Run from the scoped dir so Doppler picks up the token for that scope.
+  (cd "$dir" && HOME=/root doppler secrets --only-names --silent 2>/dev/null) \
     | grep -Ev '^(DOPPLER_PROJECT|DOPPLER_CONFIG|DOPPLER_ENVIRONMENT)$' \
     || true
 }

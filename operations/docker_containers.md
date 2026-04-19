@@ -2,7 +2,7 @@
 
 **Inventory of all Docker Compose projects and containers on the production VPS (`abzum.cloud`).**
 
-*Last updated: 2026-04-14*
+*Last updated: 2026-04-19*
 
 ---
 
@@ -10,84 +10,88 @@
 
 | Project folder | Container name | Image | Role | Managed by |
 |----------------|---------------|-------|------|------------|
-| `/docker/personal-assistants/` | `hermes` | `nousresearch/hermes-agent:latest` | **Hermes — Personal Assistant** gateway (Tier 1) | `hermes.service` systemd + Doppler |
-| `/docker/personal-assistants/` | `hermes-dashboard` | `nousresearch/hermes-agent:latest` | **Hermes — Personal Assistant** dashboard UI (Tier 1) | `hermes.service` systemd + Doppler |
+| `/docker/hermes-felix/` | `hermes-felix` | `nousresearch/hermes-agent:latest` | **Hermes — Personal Assistant** gateway (Tier 1) | `hermes-felix.service` + deploy-service |
+| `/docker/hermes-felix/` | `hermes-felix-ui` | `nousresearch/hermes-agent:latest` | **Hermes — Personal Assistant** dashboard UI (Tier 1) | `hermes-felix.service` + deploy-service |
 | `/docker/paperclip/` | `paperclip-1` | `ghcr.io/hostinger/hvps-paperclip:latest` | Orchestration engine (Tier 1) | Hostinger Docker Manager |
-| `/docker/cloudflared/` | `cloudflared-1` | `cloudflare/cloudflared:latest` | Cloudflare tunnel → `paperclip.abzum.cloud` | Hostinger Docker Manager |
+| `/docker/cloudflared/` | `cloudflared-1` | `cloudflare/cloudflared:latest` | Cloudflare tunnel daemon (remote-managed) | Hostinger Docker Manager |
 
 All containers share the external Docker network `proxy`.
 
 ---
 
-## Hermes — Personal Assistant (`/docker/personal-assistants/`)
+## Hermes — Personal Assistant (`/docker/hermes-felix/`)
 
-> **Tag:** This is the Docker setup for **Hermes — Personal Assistant**. The compose project runs two services: the `hermes` gateway and the optional `hermes-dashboard` UI, both built from the same image.
+> **Tag:** This is the Docker setup for **Hermes — Personal Assistant**. The instance name is `hermes-felix`. The compose project runs two services: the gateway and the dashboard UI, both from the same image. The entire lifecycle (deploy, update, remove) is managed by `deploy-service` — see `operations/deploy_service.md`.
 
 | Property | Value |
 |----------|-------|
 | **Image** | `nousresearch/hermes-agent:latest` (same image for both services) |
-| **Services** | `hermes` (gateway) + `hermes-dashboard` (UI) |
-| **Commands** | `gateway run` / `dashboard --host 0.0.0.0` |
-| **Published ports** | `8642` (gateway API), `9119` (dashboard UI) |
-| **Volume** | Bind mount `/root/.hermes:/opt/data` (shared by both services) |
+| **Instance name** | `hermes-felix` |
+| **Services** | `hermes-felix` (gateway) + `hermes-felix-ui` (dashboard) |
+| **Commands** | `gateway run` / `dashboard --host 0.0.0.0 --no-open --port 9119 --insecure` |
+| **Volume** | Named volume `hermes-felix-data:/opt/data` (shared by both services) |
 | **Network** | `proxy` (external) |
 | **Shared memory** | `shm_size: 1g` on the gateway — required for Playwright/Chromium browser tools |
 | **Secrets** | Injected at startup by Doppler — no `.env` file on disk |
-| **Managed by** | `systemd` — `hermes.service` (see `operations/doppler.md`) |
-| **Restart policy** | `unless-stopped` (Docker handles reboots after initial start) |
+| **Managed by** | `systemd` — `hermes-felix.service` (`doppler run -- docker compose up -d`) |
+| **Restart policy** | `unless-stopped` |
+| **Public URL** | `https://hermes-felix.abzum.cloud` (behind Cloudflare Access — email login required) |
+| **Doppler** | Project `hostinger-vps`, config `dev_personal` |
+
+> **`--insecure` on the dashboard:** The Hermes dashboard refuses to bind to `0.0.0.0` without this flag. It is safe here because Cloudflare Access enforces email authentication in front of the service — users must log in before reaching the dashboard.
 
 ### Start / stop / restart
 
 ```bash
-systemctl start hermes      # start with Doppler secret injection
-systemctl stop hermes       # stop
-systemctl restart hermes    # restart — required after any config or secret change
-systemctl status hermes     # check status
-journalctl -u hermes -n 50  # view logs
+systemctl start hermes-felix      # start with Doppler secret injection
+systemctl stop hermes-felix       # stop
+systemctl restart hermes-felix    # restart — required after any config or secret change
+systemctl status hermes-felix     # check status
+journalctl -u hermes-felix -n 50  # view logs
 ```
 
 ### View container logs
 
 ```bash
-docker logs hermes --tail 50
-docker logs hermes -f                  # live follow (gateway)
-docker logs hermes-dashboard --tail 50 # dashboard logs
+docker logs hermes-felix --tail 50      # gateway logs
+docker logs hermes-felix-ui --tail 50   # dashboard logs
+docker logs hermes-felix -f             # live follow
 ```
-
-### Access URLs (on the VPS)
-
-- Gateway API: `http://localhost:8642`
-- Dashboard UI: `http://localhost:9119` (reads gateway state via `GATEWAY_HEALTH_URL=http://hermes:8642` on the `proxy` network)
 
 ### Run hermes commands inside the container
 
 ```bash
-docker exec -it hermes bash    # opens a shell where hermes is in PATH
-hermes --version               # works directly
+docker exec -it hermes-felix bash    # opens a shell where hermes is in PATH
+hermes --version
 ```
 
-The compose file sets `PATH=/opt/hermes/.venv/bin:...` so `hermes` is available in any exec session, not just the gateway process.
+The compose file sets `PATH=/opt/hermes/.venv/bin:...` so `hermes` is available in any exec session.
 
 ### Update to latest image
 
 ```bash
-cd /docker/personal-assistants
-docker compose pull       # pull latest from Docker Hub
-systemctl restart hermes  # restart — Doppler re-injects secrets automatically
+deploy-service \
+  --instance hermes-felix \
+  --domain hermes-felix.abzum.cloud \
+  --access-emails vijaykrishnatilak@gmail.com \
+  --doppler-token-file /path/to/token \
+  --yes
 ```
+
+The script is idempotent — it stops the old instance, pulls the latest image, and restarts.
 
 ### Verify secrets are live inside the container
 
 ```bash
-docker exec hermes printenv OPENROUTER_API_KEY | cut -c1-10
-docker exec hermes printenv TELEGRAM_BOT_TOKEN | cut -c1-10
+docker exec hermes-felix printenv OPENROUTER_API_KEY | cut -c1-10
+docker exec hermes-felix printenv TELEGRAM_BOT_TOKEN | cut -c1-10
 ```
 
 ---
 
 ## ⚠️ Hostinger Docker Manager — What NOT to Do for Hermes
 
-The Hostinger Docker Manager UI **must not be used** for the `personal-assistants` project. Any action through the UI breaks the Doppler integration:
+The Hostinger Docker Manager UI **must not be used** for any `hermes-*` project. Any action through the UI breaks the Doppler integration:
 
 | Action | What breaks |
 |--------|-------------|

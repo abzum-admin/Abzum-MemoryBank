@@ -53,6 +53,8 @@ cached at $CONFIG_FILE (non-secret IDs, 644) and $TOKEN_FILE (token, 600).
 CF API token scopes required:
   Account → Cloudflare Tunnel → Edit
   Account → Access: Apps and Policies → Edit
+  Account → Access: Organizations → Edit        (login page branding — optional)
+  Account → Access: Custom Pages → Edit         (no-access page — optional)
   Zone    → DNS → Edit
   Zone    → Zone → Read
 EOF
@@ -347,6 +349,15 @@ if [[ "$ACCESS_EMAILS" != "none" && -n "$ACCESS_EMAILS" ]]; then
   ACCESS_APP_ID=$(cf_create_or_update_access_app "$DOMAIN" "$INSTANCE")
   cf_upsert_access_policy "$ACCESS_APP_ID" "$ACCESS_EMAILS"
   log "access: protected https://$DOMAIN — allowed: $ACCESS_EMAILS"
+
+  # Apply account-wide login page branding + custom no-access page.
+  # Both soft-fail with a warning if the token lacks the extra scopes.
+  _primary_email="${ACCESS_EMAILS%%,*}"
+  cf_set_login_branding \
+    "Abzum AI Platform" \
+    "Private access only — contact ${_primary_email}" \
+    "#0f172a" "#f8fafc" ""
+  cf_upsert_no_access_page "$_primary_email"
 else
   log "access: skipping Cloudflare Access (no email protection)"
 fi

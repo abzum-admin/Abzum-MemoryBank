@@ -205,7 +205,8 @@ cf_upsert_access_policy() {
 }
 
 # --- Access: set account-wide login page branding ------------------------
-# Idempotent — PUTs to the organizations endpoint which always updates.
+# Idempotent. GETs the existing org first to preserve auth_domain and other
+# required fields, then PUTs with the login_design block merged in.
 # Soft-fails with a warning if the token lacks Access:Organizations:Edit.
 cf_set_login_branding() {
   local header_text="$1" footer_text="$2"
@@ -213,25 +214,41 @@ cf_set_login_branding() {
   local text_color="${4:-#f8fafc}"
   local logo_path="${5:-}"
 
+  # Fetch existing org to get auth_domain (required by the PUT endpoint).
+  local get_resp auth_domain
+  get_resp=$(cf_api GET "/accounts/$CF_ACCOUNT_ID/access/organizations")
+  if [[ "$(jq -r '.success' <<<"$get_resp")" != "true" ]]; then
+    log "WARNING: could not fetch org for login branding — token may need Access:Organizations:Edit scope"
+    jq -r '.errors' <<<"$get_resp" >&2
+    return 0
+  fi
+  auth_domain=$(jq -r '.result.auth_domain // ""' <<<"$get_resp")
+  if [[ -z "$auth_domain" ]]; then
+    log "WARNING: no auth_domain set on CF Zero Trust org — skipping login branding"
+    return 0
+  fi
+
   local body resp
   body=$(jq -nc \
+    --arg auth_domain "$auth_domain" \
     --arg header "$header_text" \
     --arg footer "$footer_text" \
     --arg bg "$background_color" \
     --arg fg "$text_color" \
     --arg logo "$logo_path" \
-    '{login_design:{background_color:$bg,text_color:$fg,logo_path:$logo,header_text:$header,footer_text:$footer}}')
+    '{auth_domain:$auth_domain,login_design:{background_color:$bg,text_color:$fg,logo_path:$logo,header_text:$header,footer_text:$footer}}')
 
-  log "access: applying login page branding"
+  log "access: applying login page branding (auth_domain=$auth_domain)"
   resp=$(cf_api PUT "/accounts/$CF_ACCOUNT_ID/access/organizations" "$body")
   if [[ "$(jq -r '.success' <<<"$resp")" != "true" ]]; then
-    log "WARNING: could not set login branding — token may need Access:Organizations:Edit scope"
+    log "WARNING: could not set login branding"
     jq -r '.errors' <<<"$resp" >&2
   fi
 }
 
 # --- Access: upsert the account-wide "forbidden" (no-access) custom page -
-# Soft-fails with a warning if the token lacks Access:Custom Pages:Edit.
+# Soft-fails with a warning if the token lacks the scope OR the account is on
+# the free Zero Trust plan (custom pages require a paid plan).
 # contact_email is embedded in the page HTML.
 cf_upsert_no_access_page() {
   local contact_email="$1"

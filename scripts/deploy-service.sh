@@ -276,8 +276,11 @@ deploy_docker() {
   (cd "$instance_dir" && HOME=/root doppler run -- docker compose pull)
 
   systemctl daemon-reload
-  systemctl enable --now "$INSTANCE.service"
-  log "systemctl enabled + started $INSTANCE.service"
+  systemctl enable "$INSTANCE.service"
+  # Use restart so systemd always re-executes ExecStart, even if the oneshot
+  # service is already "active (exited)" from a previous run.
+  systemctl restart "$INSTANCE.service"
+  log "systemctl enabled + restarted $INSTANCE.service"
 }
 
 if [[ "${SKIP_DOCKER:-false}" != "true" ]]; then

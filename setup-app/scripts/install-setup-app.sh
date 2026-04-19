@@ -77,14 +77,26 @@ fi
 # ── Fetch CF credentials from Doppler API ─────────────────────────────────────
 info "Loading Cloudflare credentials from Doppler…"
 
+# Download all secrets in one call using the service token.
+# The /download endpoint works with service tokens without requiring
+# explicit project/config params — they are encoded in the token.
+_DOPPLER_SECRETS=$(curl -fsS \
+  "https://api.doppler.com/v3/configs/config/secrets/download?format=json&include_dynamic_secrets=false" \
+  -H "Authorization: Bearer ${DOPPLER_TOKEN}") \
+  || error "Failed to download secrets from Doppler. Check your DOPPLER_TOKEN and ensure it has access."
+
 doppler_secret() {
   local name="$1"
-  local result
-  result=$(curl -fsS "https://api.doppler.com/v3/configs/config/secrets/get?name=${name}" \
-    -H "Authorization: Bearer ${DOPPLER_TOKEN}" \
-    | python3 -c "import sys,json; print(json.load(sys.stdin)['value']['computed'])") \
-    || error "Failed to fetch ${name} from Doppler. Check your DOPPLER_TOKEN."
-  echo "$result"
+  local value
+  value=$(echo "${_DOPPLER_SECRETS}" | python3 -c "
+import sys, json
+d = json.load(sys.stdin)
+val = d.get('$name')
+if val is None:
+    raise KeyError('Secret $name not found in Doppler config')
+print(val)
+") || error "Secret ${name} not found in Doppler. Check the token has access to this secret."
+  echo "$value"
 }
 
 CF_API_TOKEN=$(doppler_secret CF_API_TOKEN)

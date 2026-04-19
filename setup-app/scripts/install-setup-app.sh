@@ -3,20 +3,22 @@
 # ║  Abzum Setup App — bootstrap installer                                  ║
 # ║                                                                          ║
 # ║  Usage (fresh VPS, run as root):                                         ║
-# ║    curl -fsSL https://raw.githubusercontent.com/vijaytilak/              ║
-# ║      Abzum-MemoryBank-BusinessIntelligence/main/                         ║
-# ║      setup-app/scripts/install-setup-app.sh | sudo bash                 ║
+# ║    curl -fsSL https://raw.githubusercontent.com/vijaytilak/             ║
+# ║      Abzum-Setup-Script/main/install-setup-app.sh | sudo bash           ║
 # ║                                                                          ║
 # ║  What it does:                                                           ║
-# ║    1. Install Docker Engine (if not already present)                    ║
-# ║    2. Create the `proxy` Docker network (shared with other services)    ║
-# ║    3. Create required directories on the host                           ║
-# ║    4. Generate SETUP_APP_SECRET (32-byte key, base64, mode 0600)        ║
-# ║    5. Generate a one-time bootstrap token (abzs_...)                    ║
-# ║    6. Hash the token and store it (bcrypt-like via sha3-256)            ║
-# ║    7. Write /docker/abzum-setup-app/docker-compose.yml                  ║
-# ║    8. Pull the setup app image and start the container                  ║
-# ║    9. Print the bootstrap URL + one-time token                          ║
+# ║    1. Checks prerequisites (root, Docker, cloudflared, DOPPLER_TOKEN)   ║
+# ║    2. Creates the `proxy` Docker network (shared with other services)   ║
+# ║    3. Builds the setup-app Docker image from source (GitHub)            ║
+# ║    4. Creates required directories on the host                          ║
+# ║    5. Generate SETUP_APP_SECRET (32-byte key, base64, mode 0600)        ║
+# ║    6. Generate a one-time bootstrap token (abzs_...)                    ║
+# ║    7. Hash the token and store it (SHA3-256)                            ║
+# ║    8. Write /docker/abzum-setup-app/docker-compose.yml                  ║
+# ║    9. Pull the setup app image and start the container                  ║
+# ║   10. Configure Cloudflare tunnel ingress for abzum.cloud               ║
+# ║   11. Ensure DNS CNAME for abzum.cloud points to the tunnel             ║
+# ║   12. Print the bootstrap URL + one-time token                          ║
 # ╚══════════════════════════════════════════════════════════════════════════╝
 
 set -euo pipefail
@@ -47,6 +49,8 @@ DATA_DIR="/opt/abzum-setup-app/data"
 SECRET_DIR="/etc/abzum-setup-app"
 SECRET_FILE="${SECRET_DIR}/secret"
 CONTAINER_NAME="abzum-setup-app"
+SETUP_DOMAIN="${SETUP_DOMAIN:-abzum.cloud}"
+APP_SOURCE_REPO="https://github.com/vijaytilak/Abzum-MemoryBank-BusinessIntelligence"
 
 # ── Banner ───────────────────────────────────────────────────────────────────
 echo ""
@@ -55,12 +59,45 @@ echo -e "${BOLD}║   Abzum Setup App — Bootstrap          ║${RESET}"
 echo -e "${BOLD}╚════════════════════════════════════════╝${RESET}"
 echo ""
 
+# ── Prerequisite: cloudflared ─────────────────────────────────────────────────
+if ! docker ps --format '{{.Names}}' | grep -qE '^cloudflared'; then
+  error "cloudflared container is not running.
+  The setup app is exposed at https://${SETUP_DOMAIN} via the cloudflared tunnel.
+  Start cloudflared first, then re-run this installer."
+fi
+success "cloudflared is running"
+
+# ── Prerequisite: DOPPLER_TOKEN ────────────────────────────────────────────────
+DOPPLER_TOKEN="${DOPPLER_TOKEN:-}"
+if [[ -z "$DOPPLER_TOKEN" ]]; then
+  error "DOPPLER_TOKEN environment variable is required.
+  Run: DOPPLER_TOKEN=dp.st.xxx bash install-setup-app.sh"
+fi
+
+# ── Fetch CF credentials from Doppler API ─────────────────────────────────────
+info "Loading Cloudflare credentials from Doppler…"
+
+doppler_secret() {
+  local name="$1"
+  local result
+  result=$(curl -fsS "https://api.doppler.com/v3/configs/config/secrets/get?name=${name}" \
+    -H "Authorization: Bearer ${DOPPLER_TOKEN}" \
+    | python3 -c "import sys,json; print(json.load(sys.stdin)['value']['computed'])") \
+    || error "Failed to fetch ${name} from Doppler. Check your DOPPLER_TOKEN."
+  echo "$result"
+}
+
+CF_API_TOKEN=$(doppler_secret CF_API_TOKEN)
+CF_ACCOUNT_ID=$(doppler_secret CF_ACCOUNT_ID)
+CF_TUNNEL_ID=$(doppler_secret CF_TUNNEL_ID)
+CF_ZONE_ID=$(doppler_secret CF_ZONE_ID)
+success "CF credentials loaded from Doppler"
+
 # ── Step 1: Docker ────────────────────────────────────────────────────────────
 if command -v docker &>/dev/null && docker info &>/dev/null; then
   success "Docker already installed ($(docker --version | cut -d' ' -f3 | tr -d ','))"
 else
   info "Installing Docker Engine…"
-  # Detect OS
   if [[ -f /etc/os-release ]]; then
     # shellcheck disable=SC1091
     source /etc/os-release
@@ -98,7 +135,6 @@ else
     curl -fsSL https://get.docker.com | sh
   fi
 
-  # Start Docker daemon if not running
   if ! docker info &>/dev/null; then
     systemctl start docker || service docker start || true
     sleep 2
@@ -117,6 +153,20 @@ else
   success "Docker network 'proxy' created"
 fi
 
+# ── Step 2b: Build setup-app Docker image ─────────────────────────────────────
+if docker image inspect "${IMAGE}" &>/dev/null; then
+  success "Image ${IMAGE} already present locally"
+else
+  info "Cloning app source and building image (first run: ~3-5 min)…"
+  if [[ -d /tmp/abzum-build/.git ]]; then
+    git -C /tmp/abzum-build pull --ff-only
+  else
+    git clone --depth 1 "${APP_SOURCE_REPO}" /tmp/abzum-build
+  fi
+  docker build -t "${IMAGE}" /tmp/abzum-build/setup-app
+  success "Image built: ${IMAGE}"
+fi
+
 # ── Step 3: Directories ───────────────────────────────────────────────────────
 info "Creating required directories…"
 mkdir -p "${COMPOSE_DIR}" "${DATA_DIR}" "${SECRET_DIR}" /docker
@@ -131,11 +181,9 @@ if [[ -f "${SECRET_FILE}" ]]; then
   success "Encryption key already exists at ${SECRET_FILE}"
 else
   info "Generating encryption key…"
-  # Generate 32 random bytes, base64-encode (no newline), write with 0600.
   if command -v openssl &>/dev/null; then
     openssl rand -base64 32 | tr -d '\n' > "${SECRET_FILE}"
   else
-    # Fallback: python3
     python3 -c "import os, base64; print(base64.b64encode(os.urandom(32)).decode(), end='')" \
       > "${SECRET_FILE}"
   fi
@@ -144,14 +192,9 @@ else
   success "Encryption key written to ${SECRET_FILE} (mode 0600)"
 fi
 
-# ── Step 5 & 6: Bootstrap token ───────────────────────────────────────────────
-# Generate a one-time bootstrap token and its SHA3-256 hash.
-# The hash is stored in the setup app's SQLite DB by the token injector below.
-# The plain token is printed to stdout ONCE and never stored.
-
+# ── Steps 5 & 6: Bootstrap token ──────────────────────────────────────────────
 BOOTSTRAP_TOKEN="abzs_$(openssl rand -hex 24 2>/dev/null || python3 -c "import os; print(os.urandom(24).hex())")"
 
-# Compute SHA3-256 hash of the token using openssl (3.x) or python3.
 if openssl dgst -sha3-256 /dev/null &>/dev/null; then
   TOKEN_HASH=$(printf '%s' "${BOOTSTRAP_TOKEN}" | openssl dgst -sha3-256 -hex | awk '{print $2}')
 else
@@ -181,8 +224,6 @@ services:
     environment:
       NODE_ENV: production
       SETUP_APP_SECRET_PATH: /run/secrets/setup-app-secret
-      # Bootstrap token hash — used by the wizard to validate the one-time token.
-      # Cleared from the DB after first use in production.
       BOOTSTRAP_TOKEN_HASH: "${TOKEN_HASH}"
 
     volumes:
@@ -202,60 +243,101 @@ COMPOSEOF
 
 success "Compose file written"
 
-# ── Step 8: Pull image and start ──────────────────────────────────────────────
-info "Pulling image ${IMAGE}…"
-docker pull "${IMAGE}" || warn "Could not pull image — will use cached version if available"
-
+# ── Step 8: Start container ───────────────────────────────────────────────────
 info "Starting ${CONTAINER_NAME}…"
 cd "${COMPOSE_DIR}"
-
-# Stop existing container if any.
 docker compose down --remove-orphans 2>/dev/null || true
-
 docker compose up -d
 
-# Wait up to 15s for the container to become healthy.
+# ── Step 9: Wait for health ───────────────────────────────────────────────────
 info "Waiting for setup app to start…"
-for i in $(seq 1 15); do
+for i in $(seq 1 30); do
   if docker exec "${CONTAINER_NAME}" wget -qO- http://localhost:3000/api/health &>/dev/null 2>&1; then
     break
   fi
   sleep 1
 done
 
-# ── Inject bootstrap token hash into SQLite ───────────────────────────────────
-# The hash is injected into the DB directly so the wizard can verify it.
-# This avoids passing it as an env var that persists after first use.
+# Inject bootstrap token hash into SQLite
 info "Injecting bootstrap token hash into database…"
 docker exec "${CONTAINER_NAME}" sh -c "
   until [ -f /opt/abzum-setup-app/data/setup.db ]; do sleep 1; done
   sqlite3 /opt/abzum-setup-app/data/setup.db \
     \"INSERT OR REPLACE INTO setup_config (key, value, updated_at)
       VALUES ('bootstrap_token_hash', '${TOKEN_HASH}', unixepoch('subsec') * 1000);\"
-" 2>/dev/null || warn "Could not inject token hash (DB may not be ready — the setup app will handle it via env var)"
+" 2>/dev/null || warn "Could not inject token hash into DB (setup app will use BOOTSTRAP_TOKEN_HASH env var as fallback)"
 
 success "Setup app started"
 
-# ── Step 9: Print access info ─────────────────────────────────────────────────
-VPS_IP=$(curl -fsSL --connect-timeout 3 https://api.ipify.org 2>/dev/null \
-         || hostname -I 2>/dev/null | awk '{print $1}' \
-         || echo "<your-vps-ip>")
+# ── Step 10: Cloudflare tunnel ingress for ${SETUP_DOMAIN} ───────────────────
+info "Configuring Cloudflare tunnel ingress for ${SETUP_DOMAIN}…"
 
+CURRENT=$(curl -fsS \
+  "https://api.cloudflare.com/client/v4/accounts/${CF_ACCOUNT_ID}/cfd_tunnel/${CF_TUNNEL_ID}/configurations" \
+  -H "Authorization: Bearer ${CF_API_TOKEN}") \
+  || error "Failed to fetch tunnel configuration from Cloudflare API."
+
+NEW_CONFIG=$(CURRENT="${CURRENT}" SETUP_DOMAIN="${SETUP_DOMAIN}" CONTAINER_NAME="${CONTAINER_NAME}" python3 - <<'PYEOF'
+import json, os
+data = json.loads(os.environ['CURRENT'])
+domain = os.environ['SETUP_DOMAIN']
+container = os.environ['CONTAINER_NAME']
+ingress = data.get('result', {}).get('config', {}).get('ingress', [])
+# Remove existing rule for this domain and any bare catch-all
+ingress = [r for r in ingress if r.get('hostname') and r.get('hostname') != domain]
+# Prepend our rule
+ingress = [{'hostname': domain, 'service': f'http://{container}:3000'}] + ingress
+# Always end with catch-all
+ingress.append({'service': 'http_status:404'})
+print(json.dumps({'config': {'ingress': ingress}}))
+PYEOF
+)
+
+curl -fsS -X PUT \
+  "https://api.cloudflare.com/client/v4/accounts/${CF_ACCOUNT_ID}/cfd_tunnel/${CF_TUNNEL_ID}/configurations" \
+  -H "Authorization: Bearer ${CF_API_TOKEN}" \
+  -H "Content-Type: application/json" \
+  -d "${NEW_CONFIG}" > /dev/null \
+  || error "Failed to update Cloudflare tunnel configuration."
+
+success "Tunnel ingress configured: ${SETUP_DOMAIN} → ${CONTAINER_NAME}:3000"
+
+# ── Step 11: DNS CNAME for ${SETUP_DOMAIN} (idempotent) ──────────────────────
+info "Ensuring DNS record for ${SETUP_DOMAIN}…"
+
+DNS_RECORDS=$(curl -fsS \
+  "https://api.cloudflare.com/client/v4/zones/${CF_ZONE_ID}/dns_records?name=${SETUP_DOMAIN}&type=CNAME" \
+  -H "Authorization: Bearer ${CF_API_TOKEN}")
+
+DNS_COUNT=$(echo "${DNS_RECORDS}" | python3 -c "import sys,json; print(len(json.load(sys.stdin).get('result',[])))")
+
+if [[ "$DNS_COUNT" -eq 0 ]]; then
+  curl -fsS -X POST \
+    "https://api.cloudflare.com/client/v4/zones/${CF_ZONE_ID}/dns_records" \
+    -H "Authorization: Bearer ${CF_API_TOKEN}" \
+    -H "Content-Type: application/json" \
+    -d "{\"type\":\"CNAME\",\"name\":\"@\",\"content\":\"${CF_TUNNEL_ID}.cfargotunnel.com\",\"proxied\":true}" > /dev/null \
+    || warn "Could not create DNS CNAME — it may already exist as a different record type."
+  success "DNS CNAME created: ${SETUP_DOMAIN} → ${CF_TUNNEL_ID}.cfargotunnel.com"
+else
+  success "DNS CNAME already exists for ${SETUP_DOMAIN}"
+fi
+
+# ── Step 12: Print access info ────────────────────────────────────────────────
 echo ""
 echo -e "${BOLD}╔════════════════════════════════════════════════════════════╗${RESET}"
 echo -e "${BOLD}║  Abzum Setup App is running!                               ║${RESET}"
 echo -e "${BOLD}╚════════════════════════════════════════════════════════════╝${RESET}"
 echo ""
-echo -e "  ${CYAN}Setup URL:${RESET}       http://${VPS_IP}:${PORT}/bootstrap"
+echo -e "  ${CYAN}Setup URL:${RESET}       https://${SETUP_DOMAIN}/bootstrap"
 echo ""
 echo -e "  ${YELLOW}${BOLD}Bootstrap token:${RESET} ${BOLD}${BOOTSTRAP_TOKEN}${RESET}"
 echo ""
 echo -e "  ${RED}⚠  This token is shown ONCE and never stored in plain text.${RESET}"
 echo -e "  ${RED}   Copy it now — you will need it to complete setup.${RESET}"
 echo ""
-echo -e "  Once setup is complete, the domain you configure will be"
-echo -e "  secured by Cloudflare Access (Google SSO). Port ${PORT} can"
-echo -e "  then be firewalled off."
+echo -e "  Once setup is complete, Cloudflare Access (Google SSO) will"
+echo -e "  protect ${SETUP_DOMAIN}. Port ${PORT} can then be firewalled off."
 echo ""
 echo -e "  ${CYAN}Logs:${RESET} docker logs -f ${CONTAINER_NAME}"
 echo ""

@@ -22,7 +22,7 @@ services:
     image: nousresearch/hermes-agent:latest
     container_name: @@INSTANCE_UI@@
     restart: unless-stopped
-    command: dashboard --host 0.0.0.0 --no-open --port 9119
+    command: dashboard --host 0.0.0.0 --no-open --port 9119 --insecure
     environment:
       - PATH=/opt/hermes/.venv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
     volumes:

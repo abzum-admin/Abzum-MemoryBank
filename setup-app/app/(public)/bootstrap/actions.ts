@@ -173,7 +173,9 @@ export async function actionSaveDopplerToken(
 /* ── Step 3: Validate secrets ────────────────────────────────────────────── */
 
 export async function actionValidateSecrets(
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   _prev: ActionResult | null,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   _formData: FormData
 ): Promise<ActionResult> {
   try {

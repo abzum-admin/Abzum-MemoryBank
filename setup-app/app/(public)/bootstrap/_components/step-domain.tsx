@@ -33,7 +33,7 @@ export function StepDomain({
         </h1>
         <p className="mt-2 text-sm text-text-secondary">
           Provision a public domain for this setup console, secured behind
-          Cloudflare Access with Google SSO. After this step you'll access the
+          Cloudflare Access with Google SSO. After this step you&apos;ll access the
           app via HTTPS with your Google account — no bootstrap token needed again.
         </p>
       </div>
@@ -71,7 +71,7 @@ export function StepDomain({
             <li>Cloudflare Access app with Google SSO</li>
             <li>Access policy for admin email(s) from Settings</li>
             <li>Login page branding</li>
-            <li>Custom "access denied" page</li>
+            <li>Custom &quot;access denied&quot; page</li>
           </ul>
         </div>
 
@@ -115,7 +115,7 @@ export function StepDomain({
           <span className="font-medium text-text-secondary">
             Admin emails for Access policy
           </span>{" "}
-          are read from Settings → Application → Admin emails. Make sure you've
+          are read from Settings → Application → Admin emails. Make sure you&apos;ve
           configured at least one email there, or the Access app will have no
           allow-list and nobody will be able to log in.
         </p>

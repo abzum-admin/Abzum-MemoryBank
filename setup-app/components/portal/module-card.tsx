@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { ExternalLink, MoreHorizontal, Zap } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { Badge } from "@/components/ui/badge";
+
 import { Button } from "@/components/ui/button";
 
 type HealthStatus = "healthy" | "degraded" | "unhealthy" | "unknown";

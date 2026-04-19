@@ -2,7 +2,7 @@
 import { useActionState } from "react";
 import { actionSaveDopplerToken } from "../actions";
 import type { ActionResult } from "../actions";
-import { CloudCog, Loader2, AlertCircle, CheckCircle2, ExternalLink } from "lucide-react";
+import { CloudCog, Loader2, AlertCircle, ExternalLink } from "lucide-react";
 import { SecretsChecklist } from "@/components/portal/secrets-checklist";
 import { SETUP_SECRETS } from "@/lib/secrets/setup-secrets";
 

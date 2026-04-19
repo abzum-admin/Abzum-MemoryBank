@@ -2,7 +2,7 @@
 import { useActionState } from "react";
 import { actionVerifyToken } from "../actions";
 import type { ActionResult } from "../actions";
-import { Key, Loader2, AlertCircle, CheckCircle2 } from "lucide-react";
+import { Key, Loader2, AlertCircle } from "lucide-react";
 
 export function StepToken({ onSuccess }: { onSuccess: () => void }) {
   const [state, dispatch, isPending] = useActionState<ActionResult | null, FormData>(
@@ -80,7 +80,7 @@ export function StepToken({ onSuccess }: { onSuccess: () => void }) {
 
       <div className="rounded-lg border border-border bg-elevated/40 p-4">
         <p className="text-[11px] text-text-muted leading-relaxed">
-          <span className="font-medium text-text-secondary">Can't find your token?</span>{" "}
+          <span className="font-medium text-text-secondary">Can&apos;t find your token?</span>{" "}
           SSH into the VPS and run:{" "}
           <code className="font-mono text-xs">
             cat /opt/abzum-setup-app/bootstrap-token

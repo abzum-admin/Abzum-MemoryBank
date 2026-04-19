@@ -34,4 +34,29 @@ export async function register(): Promise<void> {
   runBootOrchestrator().catch((err: unknown) => {
     console.error("[instrumentation] boot orchestrator threw unexpectedly:", err);
   });
+
+  // Seed process.env with the bootstrap state and CF auth domain so the
+  // Edge middleware can read them without touching SQLite.
+  // These are NOT secrets — they are just identifiers the middleware needs.
+  try {
+    const { isBootstrapped, getCfAuthDomain } = await import("@/lib/auth/bootstrap-state");
+    const [bootstrapped, authDomain] = await Promise.all([
+      isBootstrapped(),
+      getCfAuthDomain(),
+    ]);
+
+    // process.env writes are visible to the middleware in the same process.
+    if (bootstrapped) {
+      process.env.BOOTSTRAP_COMPLETE = "1";
+    }
+    if (authDomain) {
+      process.env.CF_AUTH_DOMAIN = authDomain;
+    }
+
+    console.log(
+      `[instrumentation] bootstrap=${bootstrapped} authDomain=${authDomain ?? "(not set)"}`
+    );
+  } catch (err: unknown) {
+    console.warn("[instrumentation] could not read bootstrap state:", err);
+  }
 }

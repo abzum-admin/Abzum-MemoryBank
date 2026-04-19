@@ -1,5 +1,5 @@
 import "server-only";
-import { composeFilePath, composeDirPath } from "@/lib/docker/compose";
+import { composeFilePath } from "@/lib/docker/compose";
 import { dopplerComposeUp } from "@/lib/doppler";
 
 /**

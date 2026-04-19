@@ -1,13 +1,12 @@
 import {
-  Globe,
   CloudCog,
   Package,
   Settings2,
-  AlertCircle,
-} from "lucide-react";
+  AlertCircle} from "lucide-react";
 import { Topbar } from "@/components/shell/topbar";
 import { Separator } from "@/components/ui/separator";
 import { getSettings } from "@/lib/config/settings";
+import { SettingsSaveButton } from "./_components/settings-save-button";
 
 /**
  * Settings → Configuration
@@ -29,7 +28,7 @@ export default async function SettingsPage() {
       />
 
       <div className="flex-1 p-6">
-        <div className="mx-auto max-w-2xl space-y-10">
+        <form className="mx-auto max-w-2xl space-y-10">
 
           {/* ── Application ── */}
           <SettingsSection
@@ -165,21 +164,10 @@ export default async function SettingsPage() {
             />
           </SettingsSection>
 
-          {/* Save — wired in Step 11 with a Server Action */}
-          <div className="flex items-center justify-between rounded-xl border border-border bg-elevated px-6 py-4">
-            <p className="text-xs text-text-muted">
-              Changes take effect immediately on next install or service restart.
-            </p>
-            <button
-              type="button"
-              disabled
-              className="flex h-9 items-center rounded-lg bg-accent px-4 text-sm font-medium text-white shadow-lg shadow-accent/20 transition-all hover:bg-accent/90 disabled:opacity-40 disabled:cursor-not-allowed"
-            >
-              Save Changes
-            </button>
-          </div>
+          {/* Save */}
+          <SettingsSaveButton />
 
-        </div>
+        </form>
       </div>
     </div>
   );
@@ -191,8 +179,7 @@ function SettingsSection({
   icon,
   title,
   description,
-  children,
-}: {
+  children}: {
   icon: React.ReactNode;
   title: string;
   description: string;
@@ -226,8 +213,7 @@ function FieldRow({
   defaultValue,
   placeholder,
   type = "text",
-  readOnly = false,
-}: {
+  readOnly = false}: {
   label: string;
   hint: string;
   id: string;

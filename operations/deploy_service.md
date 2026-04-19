@@ -92,16 +92,22 @@ deploy-service \
 
 The script needs one CF API token stored at `/etc/abzum-deploy/cf-token`. Create it at `dash.cloudflare.com → My Profile → API Tokens → Create Custom Token`.
 
-**Two policy rows required:**
+**Policy rows required:**
 
 | Scope | Permission | Why |
 |---|---|---|
 | Entire account | **Cloudflare Tunnel: Edit** (listed as "Argo Tunnel (Legacy)" in the UI) | PUT tunnel ingress config |
 | Entire account | **Access: Apps and Policies: Edit** | Create/update Access apps and policies |
+| Entire account | **Access: Organizations: Edit** | Set login page branding (colors, header/footer) |
+| Entire account | **Access: Custom Pages: Edit** | Set the "no access" custom HTML page |
 | Zone: `abzum.cloud` | **DNS: Edit** | Upsert proxied CNAME |
 | Zone: `abzum.cloud` | **Zone: Read** | Look up zone ID from hostname |
 
-> The "Cloudflare Tunnel" permission is found under **Cloudflare One / Zero Trust → Argo Tunnel (Legacy)** in the token editor UI.
+> **Where to find these in the token editor UI:**
+> - "Cloudflare Tunnel" → **Cloudflare One / Zero Trust → Argo Tunnel (Legacy)**
+> - "Access: Organizations" and "Access: Custom Pages" → **Cloudflare One / Zero Trust → Access** section
+
+The branding and custom page calls soft-fail with a warning if the token lacks those scopes — the core deploy (containers, DNS, tunnel ingress, Access app) still succeeds.
 
 **Update the token on the VPS:**
 
@@ -121,6 +127,33 @@ chmod 600 /etc/abzum-deploy/cf-token
 | `/etc/abzum-deploy/config.env` | First deploy | `CF_ACCOUNT_ID`, `CF_TUNNEL_ID` (644) |
 | `/etc/abzum-deploy/cf-token` | First deploy | CF API token (600) |
 | `/root/.doppler/.doppler.yaml` | Every deploy | Doppler scope for `/docker/<instance>/` |
+
+---
+
+## Login page branding
+
+When CF Access protection is enabled, the script automatically applies account-wide Abzum branding to the Cloudflare Access login page:
+
+| Setting | Value |
+|---|---|
+| Background colour | `#0f172a` (dark navy) |
+| Text colour | `#f8fafc` (near-white) |
+| Header text | `Abzum AI Platform` |
+| Footer text | `Private access only — contact <primary email>` |
+| Logo | Not set by default (requires a public URL — see below) |
+
+A custom **"no access" page** is also created: shown to users whose identity is rejected by the policy. It includes the Abzum logo (inline SVG) and a contact email link.
+
+Both are **account-wide** settings — they apply to all CF Access apps on the account, not just the one being deployed. Both calls are idempotent.
+
+### Adding a logo
+
+The CF login page supports a `logo_path` URL. To use the Abzum logo SVG:
+
+1. Host `assets/abzum-logo.svg` at a publicly accessible URL (e.g. Cloudflare Pages, a public GitHub raw URL, or any CDN).
+2. In `scripts/lib/cloudflare.sh`, update the `cf_set_login_branding` call in `scripts/deploy-service.sh` to pass the URL as the fifth argument to `cf_set_login_branding`.
+
+The logo file is at [`assets/abzum-logo.svg`](../assets/abzum-logo.svg) in this repo.
 
 ---
 
@@ -154,6 +187,8 @@ The Hermes dashboard refuses to bind to `0.0.0.0` without `--insecure`. The temp
 | Symptom | Cause | Fix |
 |---|---|---|
 | `Authentication error` on CF tunnel/Access calls | API token missing `Argo Tunnel: Edit` scope | Recreate token with correct permissions |
+| `WARNING: could not set login branding` | Token missing `Access: Organizations: Edit` | Add that scope in CF dashboard → My Profile → API Tokens |
+| `WARNING: could not manage custom pages` | Token missing `Access: Custom Pages: Edit` | Add that scope in CF dashboard → My Profile → API Tokens |
 | Compose `environment:` block has box-drawing characters | Used `doppler secrets --only-names` (outputs ASCII table) | Script now uses `--json \| jq -r 'keys[]'` — re-render |
 | Script errors `unknown option readlink` | CRLF line endings from Windows git | Run `sed -i 's/\r//'` on the scripts |
 | `hermes-*-ui` crashes: "Refusing to bind to 0.0.0.0" | Missing `--insecure` flag on dashboard command | Template now includes `--insecure`; re-deploy |

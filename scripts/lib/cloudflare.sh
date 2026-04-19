@@ -204,6 +204,84 @@ cf_upsert_access_policy() {
   cf_require_success "$resp" "writing Access policy"
 }
 
+# --- Access: set account-wide login page branding ------------------------
+# Idempotent — PUTs to the organizations endpoint which always updates.
+# Soft-fails with a warning if the token lacks Access:Organizations:Edit.
+cf_set_login_branding() {
+  local header_text="$1" footer_text="$2"
+  local background_color="${3:-#0f172a}"
+  local text_color="${4:-#f8fafc}"
+  local logo_path="${5:-}"
+
+  local body resp
+  body=$(jq -nc \
+    --arg header "$header_text" \
+    --arg footer "$footer_text" \
+    --arg bg "$background_color" \
+    --arg fg "$text_color" \
+    --arg logo "$logo_path" \
+    '{login_design:{background_color:$bg,text_color:$fg,logo_path:$logo,header_text:$header,footer_text:$footer}}')
+
+  log "access: applying login page branding"
+  resp=$(cf_api PUT "/accounts/$CF_ACCOUNT_ID/access/organizations" "$body")
+  if [[ "$(jq -r '.success' <<<"$resp")" != "true" ]]; then
+    log "WARNING: could not set login branding — token may need Access:Organizations:Edit scope"
+    jq -r '.errors' <<<"$resp" >&2
+  fi
+}
+
+# --- Access: upsert the account-wide "forbidden" (no-access) custom page -
+# Soft-fails with a warning if the token lacks Access:Custom Pages:Edit.
+# contact_email is embedded in the page HTML.
+cf_upsert_no_access_page() {
+  local contact_email="$1"
+  local resp page_id body custom_html
+
+  # Self-contained HTML — inline SVG logo, no external dependencies.
+  custom_html=$(cat <<ENDHTML
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Access Denied — Abzum</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#0f172a;color:#f8fafc;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;min-height:100vh;display:flex;align-items:center;justify-content:center}
+.card{background:#1e293b;border:1px solid #334155;border-radius:12px;padding:48px 40px;max-width:440px;width:100%;text-align:center}
+.logo{margin-bottom:24px}h1{font-size:20px;font-weight:600;margin-bottom:12px}
+p{color:#94a3b8;font-size:14px;line-height:1.6}a{color:#60a5fa}
+</style></head><body><div class="card">
+<div class="logo"><svg width="64" height="64" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="120" height="120" rx="24" fill="#0f172a"/><path d="M60 18L102 96H18L60 18Z" fill="none" stroke="#3b82f6" stroke-width="5" stroke-linejoin="round"/><path d="M60 18L102 96H18L60 18Z" fill="#3b82f6" fill-opacity="0.08"/><line x1="36" y1="72" x2="84" y2="72" stroke="#3b82f6" stroke-width="5" stroke-linecap="round"/><circle cx="60" cy="54" r="4" fill="#60a5fa"/></svg></div>
+<h1>Access Denied</h1>
+<p>Your account is not authorised to access this service.<br><br>Contact <a href="mailto:${contact_email}">${contact_email}</a> to request access.</p>
+</div></body></html>
+ENDHTML
+)
+
+  resp=$(cf_api GET "/accounts/$CF_ACCOUNT_ID/access/custom_pages")
+  if [[ "$(jq -r '.success' <<<"$resp")" != "true" ]]; then
+    log "WARNING: could not manage custom pages — token may need Access:Custom Pages:Edit scope"
+    jq -r '.errors' <<<"$resp" >&2
+    return 0
+  fi
+
+  page_id=$(jq -r '.result[]? | select(.type == "forbidden") | .id' <<<"$resp" | head -1)
+
+  body=$(jq -nc --arg name "Abzum — Access Denied" --arg html "$custom_html" \
+    '{name:$name,type:"forbidden",custom_html:$html}')
+
+  if [[ -n "$page_id" ]]; then
+    log "access: updating no-access custom page (id $page_id)"
+    resp=$(cf_api PUT "/accounts/$CF_ACCOUNT_ID/access/custom_pages/$page_id" "$body")
+  else
+    log "access: creating no-access custom page"
+    resp=$(cf_api POST "/accounts/$CF_ACCOUNT_ID/access/custom_pages" "$body")
+  fi
+
+  if [[ "$(jq -r '.success' <<<"$resp")" != "true" ]]; then
+    log "WARNING: could not set no-access page — token may need Access:Custom Pages:Edit scope"
+    jq -r '.errors' <<<"$resp" >&2
+  fi
+}
+
 # --- Access: delete the app for a given domain (used on --remove) --------
 cf_delete_access_app() {
   local domain="$1"

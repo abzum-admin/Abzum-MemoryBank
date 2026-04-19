@@ -1,0 +1,174 @@
+@import "tailwindcss";
+
+/* ── Design tokens ─────────────────────────────────────────────────────── */
+@layer base {
+  :root {
+    /* Base surfaces — deep navy stack */
+    --bg-base:          215 40% 5%;     /* #070d1a — body / page bg   */
+    --bg-sidebar:       220 40% 7%;     /* #0b1220 — sidebar          */
+    --bg-elevated:      220 35% 9%;     /* #0f1827 — cards / panels   */
+    --bg-surface:       220 30% 12%;   /* #141f32 — inputs / hover   */
+    --bg-surface-hover: 220 28% 15%;   /* #192540 — deeper hover     */
+
+    /* Borders */
+    --border:           220 30% 18%;   /* subtle dividers            */
+    --border-strong:    220 25% 22%;   /* stronger separation        */
+
+    /* Accent — blue 500 */
+    --accent:           217 91% 60%;   /* #3b82f6                    */
+    --accent-muted:     217 70% 20%;   /* dark blue wash             */
+    --accent-glow:      217 91% 60%;   /* for box-shadow glow        */
+
+    /* Text */
+    --text-primary:     210 40% 97%;   /* #f5f9ff                    */
+    --text-secondary:   215 25% 65%;   /* #8ba3bc                    */
+    --text-muted:       215 20% 42%;   /* #5a7390                    */
+
+    /* Status colours */
+    --status-success:   158 64% 42%;   /* emerald-500                */
+    --status-warning:   38  92% 50%;   /* amber-500                  */
+    --status-error:     0   84% 60%;   /* red-500                    */
+    --status-idle:      215 25% 45%;   /* slate                      */
+
+    /* Semantic aliases (shadcn/ui compat) */
+    --background:       var(--bg-base);
+    --foreground:       var(--text-primary);
+    --card:             var(--bg-elevated);
+    --card-foreground:  var(--text-primary);
+    --popover:          var(--bg-elevated);
+    --popover-foreground: var(--text-primary);
+    --primary:          var(--accent);
+    --primary-foreground: 210 40% 98%;
+    --secondary:        var(--bg-surface);
+    --secondary-foreground: var(--text-primary);
+    --muted:            var(--bg-surface);
+    --muted-foreground: var(--text-muted);
+    --destructive:      0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+    --border:           220 30% 16%;
+    --input:            var(--bg-surface);
+    --ring:             var(--accent);
+    --radius:           0.5rem;
+  }
+
+  * {
+    border-color: hsl(var(--border));
+    box-sizing: border-box;
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background-color: hsl(var(--bg-base));
+    color: hsl(var(--text-primary));
+    font-family: var(--font-sans, ui-sans-serif, system-ui, sans-serif);
+  }
+
+  /* Scrollbar styling */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: hsl(var(--border-strong)); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: hsl(var(--text-muted)); }
+}
+
+/* ── Tailwind theme extension ──────────────────────────────────────────── */
+@theme {
+  /* Surface colours exposed as utilities */
+  --color-base:          hsl(var(--bg-base));
+  --color-sidebar:       hsl(var(--bg-sidebar));
+  --color-elevated:      hsl(var(--bg-elevated));
+  --color-surface:       hsl(var(--bg-surface));
+  --color-surface-hover: hsl(var(--bg-surface-hover));
+
+  --color-accent:        hsl(var(--accent));
+  --color-accent-muted:  hsl(var(--accent-muted));
+
+  --color-text-primary:   hsl(var(--text-primary));
+  --color-text-secondary: hsl(var(--text-secondary));
+  --color-text-muted:     hsl(var(--text-muted));
+
+  --color-status-success: hsl(var(--status-success));
+  --color-status-warning: hsl(var(--status-warning));
+  --color-status-error:   hsl(var(--status-error));
+  --color-status-idle:    hsl(var(--status-idle));
+
+  /* shadcn/ui compat */
+  --color-background:   hsl(var(--bg-base));
+  --color-foreground:   hsl(var(--text-primary));
+  --color-card:         hsl(var(--bg-elevated));
+  --color-card-foreground: hsl(var(--text-primary));
+  --color-primary:      hsl(var(--accent));
+  --color-primary-foreground: hsl(210 40% 98%);
+  --color-secondary:    hsl(var(--bg-surface));
+  --color-secondary-foreground: hsl(var(--text-primary));
+  --color-muted:        hsl(var(--bg-surface));
+  --color-muted-foreground: hsl(var(--text-muted));
+  --color-destructive:  hsl(0 84% 60%);
+  --color-border:       hsl(220 30% 16%);
+  --color-input:        hsl(var(--bg-surface));
+  --color-ring:         hsl(var(--accent));
+  --radius:             0.5rem;
+
+  /* Gradients */
+  --gradient-brand:
+    radial-gradient(ellipse 80% 80% at 50% -20%, hsl(217 91% 60% / 0.15) 0%, transparent 60%);
+  --gradient-sidebar:
+    linear-gradient(180deg, hsl(220 40% 8%) 0%, hsl(220 40% 6%) 100%);
+}
+
+/* ── Utility classes ───────────────────────────────────────────────────── */
+@layer utilities {
+  /* Gradient mesh overlaid on the page background */
+  .bg-gradient-brand {
+    background-image:
+      radial-gradient(ellipse 90% 60% at 50% -10%, hsl(217 91% 60% / 0.12) 0%, transparent 60%);
+  }
+
+  /* Glass-morphism card surface */
+  .glass {
+    background: hsl(var(--bg-elevated) / 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  /* Blue glow on focus rings and active states */
+  .glow-accent {
+    box-shadow: 0 0 0 1px hsl(var(--accent) / 0.4),
+                0 0 16px hsl(var(--accent) / 0.15);
+  }
+
+  /* Subtle card shadow used throughout the portal */
+  .shadow-card {
+    box-shadow:
+      0 1px 2px hsl(0 0% 0% / 0.3),
+      0 0 0 1px hsl(var(--border) / 0.8);
+  }
+
+  /* Animated pulse for status dot */
+  .pulse-dot {
+    animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  /* Gradient text */
+  .text-gradient {
+    background: linear-gradient(135deg, hsl(var(--text-primary)) 0%, hsl(var(--accent)) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Sidebar active nav item highlight */
+  .nav-active {
+    background: hsl(var(--accent-muted));
+    color: hsl(var(--accent));
+    box-shadow: inset 3px 0 0 hsl(var(--accent));
+  }
+}
+
+@keyframes pulse-ring {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}

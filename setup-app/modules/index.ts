@@ -1,13 +1,32 @@
+import type { ModuleRegistry } from "@/lib/modules/types";
+import { hermes } from "./hermes";
+
 /**
- * Module registry. Each module is a `ModuleDef` exported from `modules/<id>.ts`.
+ * Global module registry — keyed by module ID.
  *
- * Scaffold placeholder for Step 1. The real `ModuleDef` interface + discovery
- * lands in Step 3 together with `modules/hermes.ts` (the first module).
+ * To add a module:
+ *   1. Create `modules/<id>.ts` implementing `ModuleDef<TConfig>`.
+ *   2. Import it here and add it to the MODULES object.
  *
  * Planned modules (from the design doc):
- *   - hermes     (Hermes agent + dashboard)
- *   - cloudflared (migrated from /docker/cloudflared)
- *   - paperclip  (migrated from existing container)
- *   - multica    (future — multica.ai)
+ *   - cloudflared  — adopt existing /docker/cloudflared container
+ *   - paperclip    — adopt existing paperclip container
+ *   - multica      — multica.ai agent (future)
  */
-export const MODULES: Record<string, unknown> = {};
+export const MODULES: ModuleRegistry = {
+  hermes,
+  // cloudflared: cloudflaredModule,
+  // paperclip: paperclipModule,
+  // multica: multicaModule,
+};
+
+/**
+ * Look up a module by ID. Returns undefined if not found.
+ * Use this instead of `MODULES[id]` for type-safe access.
+ */
+export function getModule(id: string) {
+  return MODULES[id];
+}
+
+/** All registered module IDs in insertion order. */
+export const MODULE_IDS = Object.keys(MODULES);

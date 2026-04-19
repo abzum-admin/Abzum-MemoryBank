@@ -1,0 +1,11 @@
+<svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="120" height="120" rx="24" fill="#0f172a"/>
+  <!-- Outer "A" triangle -->
+  <path d="M60 18L102 96H18L60 18Z" fill="none" stroke="#3b82f6" stroke-width="5" stroke-linejoin="round"/>
+  <!-- Inner fill accent -->
+  <path d="M60 18L102 96H18L60 18Z" fill="#3b82f6" fill-opacity="0.08"/>
+  <!-- Crossbar -->
+  <line x1="36" y1="72" x2="84" y2="72" stroke="#3b82f6" stroke-width="5" stroke-linecap="round"/>
+  <!-- Center dot / accent -->
+  <circle cx="60" cy="54" r="4" fill="#60a5fa"/>
+</svg>

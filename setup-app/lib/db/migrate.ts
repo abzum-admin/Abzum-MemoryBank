@@ -5,9 +5,10 @@
  */
 import "server-only";
 import { migrate } from "drizzle-orm/better-sqlite3/migrator";
-import { db } from "./client";
+import { getDb } from "./client";
 
 export function runMigrations() {
+  const db = getDb();
   migrate(db as unknown as Parameters<typeof migrate>[0], {
     migrationsFolder: "./lib/db/migrations",
   });

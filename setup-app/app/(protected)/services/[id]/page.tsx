@@ -38,7 +38,8 @@ export default async function ServiceDetailPage({ params }: Props) {
   let health: "healthy" | "degraded" | "unhealthy" | "unknown" = "unknown";
 
   try {
-    const { db } = await import("@/lib/db/client");
+    const { getDb } = await import("@/lib/db/client");
+    const db = getDb();
     const { installations } = await import("@/lib/db/schema");
     const { eq } = await import("drizzle-orm");
 

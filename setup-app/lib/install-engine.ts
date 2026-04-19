@@ -160,7 +160,8 @@ async function runInstall(
   ctx.completeStep("compose-up", "Containers started");
 
   /* ── CF steps — need CF credentials from setup Doppler project ── */
-  const { db } = await import("@/lib/db/client");
+  const { getDb } = await import("@/lib/db/client");
+  const db = getDb();
   const { dopplerServiceTokens, cloudflareConfig: cfConfigTable } = await import("@/lib/db/schema");
   const { eq } = await import("drizzle-orm");
   const { decryptSecret } = await import("@/lib/crypto");

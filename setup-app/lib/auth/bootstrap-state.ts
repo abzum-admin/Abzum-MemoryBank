@@ -7,9 +7,10 @@
  */
 export async function isBootstrapped(): Promise<boolean> {
   try {
-    const { db } = await import("@/lib/db/client");
+    const { getDb } = await import("@/lib/db/client");
     const { setupConfig } = await import("@/lib/db/schema");
     const { eq } = await import("drizzle-orm");
+    const db = getDb();
 
     const rows = await db
       .select({ value: setupConfig.value })
@@ -29,8 +30,9 @@ export async function isBootstrapped(): Promise<boolean> {
  */
 export async function getCfAuthDomain(): Promise<string | null> {
   try {
-    const { db } = await import("@/lib/db/client");
+    const { getDb } = await import("@/lib/db/client");
     const { cloudflareConfig } = await import("@/lib/db/schema");
+    const db = getDb();
 
     const rows = await db.select().from(cloudflareConfig).limit(1);
     return rows[0]?.authDomain ?? null;

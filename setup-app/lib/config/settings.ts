@@ -73,7 +73,17 @@ export type SettingsInput = z.input<typeof settingsSchema>;
 
 /* ── Defaults ────────────────────────────────────────────────────────────── */
 
-export const DEFAULT_SETTINGS: Settings = settingsSchema.parse({});
+export const DEFAULT_SETTINGS: Settings = {
+  app: { name: "Abzum", domain: "", adminEmails: "" },
+  cloudflare: { defaultDomainSuffix: "", authDomain: "" },
+  doppler: {
+    setupProject: "",
+    setupConfig: "production",
+    defaultModuleProjectTemplate: "",
+    defaultModuleConfig: "dev",
+  },
+  modules: { defaultUpstreamPort: 9119, defaultTemplate: "hermes" },
+};
 
 /* ── DB key helpers ──────────────────────────────────────────────────────── */
 
@@ -133,9 +143,10 @@ export function settingsFromConfigRows(
 export async function getSettings(): Promise<Settings> {
   try {
     // Dynamic import keeps the DB client out of the client bundle
-    const { db } = await import("@/lib/db/client");
+    const { getDb } = await import("@/lib/db/client");
     const { setupConfig } = await import("@/lib/db/schema");
     const { like } = await import("drizzle-orm");
+    const db = getDb();
 
     const rows = await db
       .select()
@@ -151,8 +162,9 @@ export async function getSettings(): Promise<Settings> {
 
 /** Persist a partial settings update (upsert each key). */
 export async function saveSettings(input: Partial<SettingsInput>): Promise<void> {
-  const { db } = await import("@/lib/db/client");
+  const { getDb } = await import("@/lib/db/client");
   const { setupConfig } = await import("@/lib/db/schema");
+  const db = getDb();
 
   const rows = settingsToConfigRows(input);
   const now = Date.now();

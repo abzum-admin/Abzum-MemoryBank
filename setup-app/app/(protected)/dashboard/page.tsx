@@ -45,7 +45,8 @@ async function getDashboardData(): Promise<DashboardData> {
   };
 
   try {
-    const { db } = await import("@/lib/db/client");
+    const { getDb } = await import("@/lib/db/client");
+    const db = getDb();
     const { installations } = await import("@/lib/db/schema");
     const { desc } = await import("drizzle-orm");
     const { containerHealthFromState } = await import("@/lib/docker/compose");

@@ -59,7 +59,8 @@ async function runUninstall(
   /* ── preflight ── */
   ctx.startStep("preflight");
 
-  const { db } = await import("@/lib/db/client");
+  const { getDb } = await import("@/lib/db/client");
+  const db = getDb();
   const { installations, dopplerServiceTokens, cloudflareConfig: cfConfigTable } = await import("@/lib/db/schema");
   const { eq } = await import("drizzle-orm");
 

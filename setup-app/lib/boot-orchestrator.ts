@@ -98,10 +98,9 @@ export async function runBootOrchestrator(): Promise<void> {
 
   // Dynamic imports keep heavy modules (better-sqlite3) out of the cold-start
   // critical path — they're loaded once here.
-  let db: Awaited<ReturnType<typeof import("@/lib/db/client")["db"]["transaction"]>> | undefined;
-
   try {
-    const { db: dbClient } = await import("@/lib/db/client");
+    const { getDb } = await import("@/lib/db/client");
+    const dbClient = getDb();
     const { setupConfig, installations, auditLog } = await import("@/lib/db/schema");
     const { eq } = await import("drizzle-orm");
 
@@ -216,7 +215,6 @@ export async function runBootOrchestrator(): Promise<void> {
           : "")
     );
 
-    void db; // suppress unused warning
   } catch (err: unknown) {
     const message = err instanceof Error ? err.message : String(err);
     console.error(`[boot-orchestrator] fatal error: ${message}`);

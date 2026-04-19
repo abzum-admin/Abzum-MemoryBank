@@ -51,7 +51,8 @@ export async function actionStartInstall(
     const config = parseResult.data;
 
     // Check no existing installation with the same instanceId.
-    const { db } = await import("@/lib/db/client");
+    const { getDb } = await import("@/lib/db/client");
+    const db = getDb();
     const { installations } = await import("@/lib/db/schema");
     const { eq } = await import("drizzle-orm");
 

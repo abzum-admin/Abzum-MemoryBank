@@ -21,7 +21,8 @@ export type ActionResult = {
 };
 
 async function getDb() {
-  const { db } = await import("@/lib/db/client");
+  const { getDb } = await import("@/lib/db/client");
+  const db = getDb();
   const { setupConfig, dopplerServiceTokens, cloudflareConfig } = await import(
     "@/lib/db/schema"
   );

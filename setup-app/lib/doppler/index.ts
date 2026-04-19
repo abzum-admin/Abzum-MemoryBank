@@ -101,6 +101,35 @@ export async function dopplerValidateToken(
   }
 }
 
+/* ── Secret values ────────────────────────────────────────────────────────── */
+
+/**
+ * Fetch the computed values of specific secrets from a Doppler project/config.
+ * Returns a map of secretName → value (empty string if the secret is absent).
+ *
+ * Used by server actions that need to read CF credentials (CF_API_TOKEN, etc.)
+ * out of Doppler to call the Cloudflare API directly — rather than via
+ * `doppler run --` which only works for subprocess injection.
+ */
+export async function dopplerGetSecretValues(
+  token: string,
+  project: string,
+  config: string,
+  names: string[]
+): Promise<Record<string, string>> {
+  const stdout = await runDoppler(
+    ["secrets", "--json", "--silent", "--project", project, "--config", config],
+    { DOPPLER_TOKEN: token }
+  );
+
+  const data = JSON.parse(stdout) as Record<string, { computed: string }>;
+  const result: Record<string, string> = {};
+  for (const name of names) {
+    result[name] = data[name]?.computed ?? "";
+  }
+  return result;
+}
+
 /* ── Secret listing ───────────────────────────────────────────────────────── */
 
 /**

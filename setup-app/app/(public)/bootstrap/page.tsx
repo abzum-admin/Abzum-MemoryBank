@@ -1,74 +1,65 @@
 import Image from "next/image";
-import { Key, CloudCog, ShieldCheck, Globe, CheckCircle2 } from "lucide-react";
-import { SecretsChecklist } from "@/components/portal/secrets-checklist";
-import { SETUP_SECRETS } from "@/lib/secrets/setup-secrets";
-import { getSettings } from "@/lib/config/settings";
+import { redirect } from "next/navigation";
+import {
+  Key,
+  CloudCog,
+  ShieldCheck,
+  Globe,
+  CheckCircle2,
+} from "lucide-react";
 import { cn } from "@/lib/utils";
-import type { SecretCheckResult } from "@/lib/secrets/types";
+import { getBootstrapState } from "./actions";
+import { BootstrapWizard } from "./_components/wizard";
 
-/* ── Step definitions ───────────────────────────────────────────────────── */
+/* ── Step sidebar definition ────────────────────────────────────────────── */
 
 const STEPS = [
   {
     icon: Key,
     title: "Bootstrap Token",
-    description: "One-time token from the install script — verifies you're on the right VPS",
-    status: "done" as const,
+    description: "One-time token from the install script",
+    step: 1 as const,
   },
   {
     icon: CloudCog,
     title: "Doppler Setup",
-    description: "Service token for the setup app's own Doppler project",
-    status: "current" as const,
+    description: "Service token for infrastructure secrets",
+    step: 2 as const,
   },
   {
     icon: ShieldCheck,
     title: "Secrets Validation",
-    description: "Verify all required Cloudflare secrets are present in Doppler",
-    status: "upcoming" as const,
+    description: "Verify all required Cloudflare secrets",
+    step: 3 as const,
   },
   {
     icon: Globe,
     title: "App Domain",
-    description: "Provision setup.abzum.cloud via CF tunnel + Access + Google SSO",
-    status: "upcoming" as const,
+    description: "Provision setup console via CF tunnel + Access",
+    step: 4 as const,
   },
   {
     icon: CheckCircle2,
     title: "Ready",
-    description: "Setup app secured — start installing modules",
-    status: "upcoming" as const,
+    description: "Setup secured — start installing modules",
+    step: 5 as const,
   },
 ];
 
-/* ── Mock secret results for UI preview (Step 9 replaces with live checks) */
-
-const MOCK_RESULTS: SecretCheckResult[] = SETUP_SECRETS.map((def, i) => ({
-  def,
-  result:
-    i < 2
-      ? { status: "present" as const }
-      : i === 2
-      ? { status: "missing" as const }
-      : { status: "unchecked" as const },
-}));
-
-/* ── Components ─────────────────────────────────────────────────────────── */
-
-type StepStatus = "done" | "current" | "upcoming";
+/* ── Step indicator ──────────────────────────────────────────────────────── */
 
 function StepItem({
   step,
-  index,
+  currentStep,
   isLast,
 }: {
   step: (typeof STEPS)[number];
-  index: number;
+  currentStep: number;
   isLast: boolean;
 }) {
   const Icon = step.icon;
-  const isDone = step.status === "done";
-  const isCurrent = step.status === "current";
+  const isDone = step.step < currentStep;
+  const isCurrent = step.step === currentStep;
 
   return (
     <div className="flex gap-3">
@@ -117,13 +108,21 @@ function StepItem({
   );
 }
 
-/* ── Page ───────────────────────────────────────────────────────────────── */
+/* ── Page ────────────────────────────────────────────────────────────────── */
 
 export default async function BootstrapPage() {
-  const settings = await getSettings();
-  const dopplerHint = settings.doppler.setupProject
-    ? `${settings.doppler.setupProject} / ${settings.doppler.setupConfig}`
-    : undefined;
+  const state = await getBootstrapState();
+
+  // Already bootstrapped — send to the protected app.
+  if (state.complete) {
+    redirect("/dashboard");
+  }
+
+  const dopplerHint =
+    state.savedProject && state.savedConfig
+      ? `${state.savedProject} / ${state.savedConfig}`
+      : undefined;
+  void dopplerHint; // used in wizard child
 
   return (
     <div className="flex min-h-screen bg-base bg-gradient-brand">
@@ -141,16 +140,16 @@ export default async function BootstrapPage() {
             </div>
           </div>
 
-          {/* Step indicator */}
+          {/* Step indicator — current step driven from DB state */}
           <div>
             <p className="mb-4 text-[10px] font-semibold uppercase tracking-widest text-text-muted">
               Setup steps
             </p>
-            {STEPS.map((step, i) => (
+            {STEPS.map((s, i) => (
               <StepItem
-                key={step.title}
-                step={step}
-                index={i}
+                key={s.title}
+                step={s}
+                currentStep={state.currentStep}
                 isLast={i === STEPS.length - 1}
               />
             ))}
@@ -165,7 +164,7 @@ export default async function BootstrapPage() {
             </p>
             <p className="mt-1 text-[11px] text-text-muted leading-relaxed">
               The setup app container ships with the Doppler CLI. No separate
-              installation needed on the host — just a service token.
+              installation needed — just a service token.
             </p>
           </div>
           <p className="text-[11px] text-text-muted leading-relaxed">
@@ -175,7 +174,7 @@ export default async function BootstrapPage() {
         </div>
       </div>
 
-      {/* ── Right panel — active step form ── */}
+      {/* ── Right panel — active step ── */}
       <div className="flex flex-1 items-start justify-center overflow-y-auto p-8 pt-12">
         <div className="w-full max-w-lg space-y-8">
           {/* Mobile logo */}
@@ -188,103 +187,8 @@ export default async function BootstrapPage() {
             </p>
           </div>
 
-          {/* Step header */}
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-widest text-accent">
-              Step 2 of 5
-            </p>
-            <h1 className="mt-1 text-2xl font-semibold text-text-primary">
-              Configure Doppler
-            </h1>
-            <p className="mt-2 text-sm text-text-secondary">
-              All API tokens are managed by Doppler — this app never stores raw
-              secrets. Enter a Doppler Service Token for the project that holds
-              your Cloudflare and infrastructure secrets.
-            </p>
-          </div>
-
-          {/* Doppler token input */}
-          <div className="space-y-4">
-            <div className="space-y-2">
-              <label
-                className="text-sm font-medium text-text-primary"
-                htmlFor="doppler-token"
-              >
-                Doppler Service Token
-              </label>
-              <input
-                id="doppler-token"
-                type="password"
-                placeholder="dp.st.xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-                className="flex h-10 w-full rounded-lg border border-border bg-surface px-3 py-2 font-mono text-sm text-text-primary placeholder:text-text-muted focus:border-accent/60 focus:outline-none focus:ring-1 focus:ring-accent/40 transition-colors"
-              />
-              <div className="flex items-center justify-between">
-                <p className="text-xs text-text-muted">
-                  Starts with{" "}
-                  <code className="font-mono">dp.st.</code>
-                </p>
-                <a
-                  href="https://dashboard.doppler.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-xs text-accent hover:underline"
-                >
-                  Open Doppler dashboard ↗
-                </a>
-              </div>
-            </div>
-
-            {/* How to get a Doppler service token */}
-            <div className="rounded-lg border border-border bg-elevated/60 p-4 space-y-2">
-              <p className="text-xs font-semibold text-text-primary">
-                How to create a Doppler Service Token
-              </p>
-              <ol className="space-y-1.5">
-                {[
-                  "Go to dashboard.doppler.com → select your project + config.",
-                  'Navigate to "Access" → "Service Tokens" → "Generate".',
-                  'Name it (e.g. "abzum-setup-prod") and set expiry (or no expiry).',
-                  "Copy the token — it starts with dp.st. and is shown once.",
-                  "Paste it above and click Validate.",
-                ].map((step, i) => (
-                  <li key={i} className="flex gap-2.5 text-xs text-text-secondary">
-                    <span className="flex h-4.5 w-4.5 shrink-0 items-center justify-center rounded-full bg-accent/10 text-[10px] font-bold text-accent mt-px">
-                      {i + 1}
-                    </span>
-                    {step}
-                  </li>
-                ))}
-              </ol>
-            </div>
-
-            <button
-              type="button"
-              className="flex h-10 w-full items-center justify-center rounded-lg bg-accent px-4 text-sm font-medium text-white shadow-lg shadow-accent/20 transition-all hover:bg-accent/90"
-            >
-              Validate Token & Check Secrets →
-            </button>
-          </div>
-
-          {/* ── Secrets checklist preview ── */}
-          <div className="border-t border-border pt-8">
-            <SecretsChecklist
-              title="Required Cloudflare Secrets"
-              description="These must be present in your Doppler config before the setup app can provision CF tunnel routes and Access apps."
-              results={MOCK_RESULTS}
-              dopplerProjectHint={dopplerHint}
-            />
-          </div>
-
-          {/* Note about module secrets */}
-          <div className="rounded-lg border border-border bg-elevated/40 p-4">
-            <p className="text-[11px] text-text-muted leading-relaxed">
-              <span className="font-medium text-text-secondary">
-                Module-specific secrets (e.g. OPENROUTER_API_KEY for Hermes)
-              </span>{" "}
-              live in a separate Doppler project scoped to that module. You'll
-              configure those in the module's own install wizard — not here.
-            </p>
-          </div>
+          {/* Client wizard — takes over from here */}
+          <BootstrapWizard initial={state} />
         </div>
       </div>
     </div>

@@ -151,8 +151,8 @@ export CF_ACCOUNT_ID CF_TUNNEL_ID CF_API_TOKEN
 UPSTREAM_SERVICE="${UPSTREAM_SERVICE:-${INSTANCE}-ui}"
 UPSTREAM_PORT="${UPSTREAM_PORT:-9119}"
 
-# Prompt for CF Access emails unless already provided or explicitly skipped.
-if [[ -z "$ACCESS_EMAILS" ]]; then
+# Prompt for CF Access emails only on deploy, not remove.
+if ! $DO_REMOVE && [[ -z "$ACCESS_EMAILS" ]]; then
   echo
   echo "  Cloudflare Access protects the dashboard with a login page."
   read -r -p "  Allowed email(s) — comma-separated (or 'none' to skip): " ACCESS_EMAILS
@@ -161,21 +161,71 @@ fi
 
 # --- remove path ---------------------------------------------------------
 if $DO_REMOVE; then
-  log "REMOVE mode: tearing down instance '$INSTANCE' and CF route for '$DOMAIN'"
-  if ! $ASSUME_YES; then
-    read -r -p "Confirm remove? [y/N]: " c; [[ "$c" == "y" || "$c" == "Y" ]] || die "aborted"
+  # Detect what actually exists before touching anything.
+  HAS_SYSTEMD=false
+  HAS_CONTAINERS=false
+  HAS_COMPOSE_DIR=false
+  HAS_CF_ROUTE=false
+  HAS_CF_ACCESS=false
+
+  [[ -f "/etc/systemd/system/$INSTANCE.service" ]] && HAS_SYSTEMD=true
+  if docker ps -a --format '{{.Names}}' | grep -qE "^(${INSTANCE}|${INSTANCE}-ui|${INSTANCE}-dashboard)$"; then
+    HAS_CONTAINERS=true
   fi
-  cf_remove_tunnel_ingress "$DOMAIN" || true
-  cf_delete_access_app "$DOMAIN" || true
-  if systemctl list-unit-files | grep -q "^${INSTANCE}.service"; then
+  [[ -d "$DOCKER_ROOT/$INSTANCE" ]] && HAS_COMPOSE_DIR=true
+
+  _cf_tunnel_resp=$(cf_api GET "/accounts/$CF_ACCOUNT_ID/cfd_tunnel/$CF_TUNNEL_ID/configurations" 2>/dev/null || true)
+  if jq -e --arg h "$DOMAIN" '.result.config.ingress[]? | select(.hostname == $h)' <<<"$_cf_tunnel_resp" >/dev/null 2>&1; then
+    HAS_CF_ROUTE=true
+  fi
+  _cf_access_resp=$(cf_api GET "/accounts/$CF_ACCOUNT_ID/access/apps" 2>/dev/null || true)
+  if jq -e --arg d "$DOMAIN" '.result[]? | select(.domain == $d)' <<<"$_cf_access_resp" >/dev/null 2>&1; then
+    HAS_CF_ACCESS=true
+  fi
+
+  echo
+  echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+  echo "  REMOVAL SUMMARY — instance: $INSTANCE"
+  echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+  $HAS_SYSTEMD     && printf "  %-30s %s\n" "Systemd unit:" "/etc/systemd/system/$INSTANCE.service  [WILL REMOVE]" \
+                   || printf "  %-30s %s\n" "Systemd unit:" "not found — skip"
+  $HAS_CONTAINERS  && printf "  %-30s %s\n" "Docker containers:" "${INSTANCE} + ${INSTANCE}-ui  [WILL STOP + REMOVE]" \
+                   || printf "  %-30s %s\n" "Docker containers:" "not found — skip"
+  $HAS_COMPOSE_DIR && printf "  %-30s %s\n" "Compose directory:" "$DOCKER_ROOT/$INSTANCE/  [WILL REMOVE]" \
+                   || printf "  %-30s %s\n" "Compose directory:" "not found — skip"
+  $HAS_CF_ROUTE    && printf "  %-30s %s\n" "CF tunnel route:" "$DOMAIN  [WILL REMOVE]" \
+                   || printf "  %-30s %s\n" "CF tunnel route:" "not found or undetectable — skip"
+  $HAS_CF_ACCESS   && printf "  %-30s %s\n" "CF Access app:" "$DOMAIN  [WILL REMOVE]" \
+                   || printf "  %-30s %s\n" "CF Access app:" "not found or undetectable — skip"
+  echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+  echo
+
+  if ! $ASSUME_YES; then
+    read -r -p "  Proceed with removal? [y/N]: " _rc
+    [[ "$_rc" == "y" || "$_rc" == "Y" ]] || die "aborted"
+  fi
+  echo
+
+  if $HAS_CF_ROUTE;   then cf_remove_tunnel_ingress "$DOMAIN" || true; fi
+  if $HAS_CF_ACCESS;  then cf_delete_access_app "$DOMAIN" || true; fi
+
+  if $HAS_SYSTEMD; then
     systemctl disable --now "$INSTANCE.service" || true
     rm -f "/etc/systemd/system/$INSTANCE.service"
     systemctl daemon-reload
+    log "removed systemd unit $INSTANCE.service"
   fi
-  if [[ -d "$DOCKER_ROOT/$INSTANCE" ]]; then
-    (cd "$DOCKER_ROOT/$INSTANCE" && docker compose down -v || true)
+
+  if $HAS_COMPOSE_DIR; then
+    (cd "$DOCKER_ROOT/$INSTANCE" && docker compose down -v 2>/dev/null || true)
+    rm -rf "$DOCKER_ROOT/$INSTANCE"
+    log "removed $DOCKER_ROOT/$INSTANCE"
+  elif $HAS_CONTAINERS; then
+    # Compose dir is gone but containers still exist — force remove.
+    docker rm -f "${INSTANCE}" "${INSTANCE}-ui" 2>/dev/null || true
   fi
-  log "removed instance $INSTANCE"
+
+  log "removal complete: $INSTANCE"
   exit 0
 fi
 

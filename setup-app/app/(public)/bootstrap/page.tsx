@@ -2,6 +2,7 @@ import Image from "next/image";
 import { Key, CloudCog, ShieldCheck, Globe, CheckCircle2 } from "lucide-react";
 import { SecretsChecklist } from "@/components/portal/secrets-checklist";
 import { SETUP_SECRETS } from "@/lib/secrets/setup-secrets";
+import { getSettings } from "@/lib/config/settings";
 import { cn } from "@/lib/utils";
 import type { SecretCheckResult } from "@/lib/secrets/types";
 
@@ -118,7 +119,12 @@ function StepItem({
 
 /* ── Page ───────────────────────────────────────────────────────────────── */
 
-export default function BootstrapPage() {
+export default async function BootstrapPage() {
+  const settings = await getSettings();
+  const dopplerHint = settings.doppler.setupProject
+    ? `${settings.doppler.setupProject} / ${settings.doppler.setupConfig}`
+    : undefined;
+
   return (
     <div className="flex min-h-screen bg-base bg-gradient-brand">
       {/* ── Left panel — branding + steps ── */}
@@ -265,7 +271,7 @@ export default function BootstrapPage() {
               title="Required Cloudflare Secrets"
               description="These must be present in your Doppler config before the setup app can provision CF tunnel routes and Access apps."
               results={MOCK_RESULTS}
-              dopplerProjectHint="abzum-setup / production"
+              dopplerProjectHint={dopplerHint}
             />
           </div>
 

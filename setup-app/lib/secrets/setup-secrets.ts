@@ -27,7 +27,7 @@ export const SETUP_SECRETS: SecretDef[] = [
    • Access: Organizations: Edit
    • Access: Custom Pages: Edit
 
-   Zone level (select zone "abzum.cloud"):
+   Zone level (select your domain zone, e.g. "yourdomain.com"):
    • DNS: Edit
    • Zone: Read
 
@@ -75,7 +75,7 @@ export const SETUP_SECRETS: SecretDef[] = [
    VPS), click it — the UUID is in the URL and shown on the tunnel detail page.
 
 3. If you don't have a tunnel yet, create one:
-   a. Click "Create a tunnel" → "Cloudflared" → name it (e.g. "abzum-vps").
+   a. Click "Create a tunnel" → "Cloudflared" → name it (e.g. "my-vps").
    b. Copy the tunnel UUID shown after creation.
    c. Install cloudflared on the VPS and run the token command shown.
 
@@ -86,12 +86,12 @@ export const SETUP_SECRETS: SecretDef[] = [
 
   {
     name: "CF_ZONE_ID",
-    description: "Zone ID for abzum.cloud (needed for DNS record upserts)",
+    description: "Zone ID for your domain (needed for DNS record upserts)",
     required: true,
     example: "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4",
     howToGetUrl: "https://dash.cloudflare.com",
     howToGet: `
-1. Go to dash.cloudflare.com and select the zone "abzum.cloud".
+1. Go to dash.cloudflare.com and select your domain zone (e.g. "yourdomain.com").
 
 2. Scroll down on the right sidebar of the Overview page.
 

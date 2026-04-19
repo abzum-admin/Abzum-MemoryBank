@@ -188,7 +188,8 @@ The Hermes dashboard refuses to bind to `0.0.0.0` without `--insecure`. The temp
 |---|---|---|
 | `Authentication error` on CF tunnel/Access calls | API token missing `Argo Tunnel: Edit` scope | Recreate token with correct permissions |
 | `WARNING: could not set login branding` | Token missing `Access: Organizations: Edit` | Add that scope in CF dashboard → My Profile → API Tokens |
-| `WARNING: could not manage custom pages` | Token missing `Access: Custom Pages: Edit` | Add that scope in CF dashboard → My Profile → API Tokens |
+| `WARNING: could not manage custom pages` | Free CF Zero Trust plan (custom pages require paid plan) or token missing `Access: Custom Pages: Edit` | Custom pages are a paid feature — upgrade plan or skip; token scope won't help on free plan |
+| `access.api.error.invalid_auth_domain` on login branding | PUT was missing `auth_domain` field | Fixed: script now GETs the existing org first to include `auth_domain` in the PUT |
 | Compose `environment:` block has box-drawing characters | Used `doppler secrets --only-names` (outputs ASCII table) | Script now uses `--json \| jq -r 'keys[]'` — re-render |
 | Script errors `unknown option readlink` | CRLF line endings from Windows git | Run `sed -i 's/\r//'` on the scripts |
 | `hermes-*-ui` crashes: "Refusing to bind to 0.0.0.0" | Missing `--insecure` flag on dashboard command | Template now includes `--insecure`; re-deploy |

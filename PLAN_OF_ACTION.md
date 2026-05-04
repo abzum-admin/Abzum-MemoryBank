@@ -1,5 +1,5 @@
 # Plan of Action — Abzum
-**Last Updated: 2026-04-12**
+**Last Updated: 2026-05-05**
 **Current Status: Phase 0 BLOCKED — awaiting Vijay decisions**
 
 ---
@@ -107,6 +107,7 @@ Nothing in Phase 1+ can proceed until these are answered. Record answers in [`wo
 | — | Feasibility research: Hermes + Hindsight vs BI Memory requirements | Felix | ✅ Done | [README.md](README.md) · [SUMMARY.md](SUMMARY.md) |
 | — | Technical reference & architecture | Felix | ✅ Done | [TECHNICAL_REFERENCE.md](TECHNICAL_REFERENCE.md) |
 | — | Implementation guide (4 phases) | Felix | ✅ Done | [IMPLEMENTATION_GUIDE.md](IMPLEMENTATION_GUIDE.md) |
+| — | **Hermes × Space Agent integration research & plan** (Hybrid Plugin Bridge A+D) | Felix | ✅ Done | [hermes_space_agent_integration.md](strategy/research/hermes_space_agent_integration.md) |
 | — | **Deploy Hermes Phase 1** (quick start, ~1 day) | Felix | ⬜ Next | [IMPLEMENTATION_GUIDE.md](IMPLEMENTATION_GUIDE.md) |
 | — | **Episodic memory enhancement** (custom build, ~1-2 wks) | Felix | ⬜ Pending | [IMPLEMENTATION_GUIDE.md](IMPLEMENTATION_GUIDE.md) |
 | — | Causal relationship extraction (~1-2 wks) | Felix | ⬜ Pending | [IMPLEMENTATION_GUIDE.md](IMPLEMENTATION_GUIDE.md) |
@@ -191,6 +192,7 @@ Nothing in Phase 1+ can proceed until these are answered. Record answers in [`wo
 | A64 | Bake Scripting Intelligence into Agents | 2026-04-03 | [agent_scripting_intelligence.md](execution/agent_scripting/agent_scripting_intelligence.md) |
 | A65 | Build Customer Data Compliance Intake System | 2026-04-03 | [ai_infrastructure_compliance.md](operations/ai_infrastructure_compliance.md) |
 | — | BI Memory Architecture Research (Hermes + Hindsight) | 2026-04-12 | [README.md](README.md) · [SUMMARY.md](SUMMARY.md) · [IMPLEMENTATION_GUIDE.md](IMPLEMENTATION_GUIDE.md) · [TECHNICAL_REFERENCE.md](TECHNICAL_REFERENCE.md) |
+| — | Hermes × Space Agent Integration Research & Plan (Hybrid Plugin Bridge A+D) | 2026-05-05 | [hermes_space_agent_integration.md](strategy/research/hermes_space_agent_integration.md) |
 
 ---
 
@@ -232,6 +234,7 @@ Phase 5: First Project → First Revenue (A36–A40)
 | See all active blockers | [work/blockers/_index.md](work/blockers/_index.md) |
 | See phase-by-phase detail | [work/plan/phases.md](work/plan/phases.md) |
 | Implement BI Memory (Hermes) | [IMPLEMENTATION_GUIDE.md](IMPLEMENTATION_GUIDE.md) |
+| Plan Hermes + Space Agent integration | [strategy/research/hermes_space_agent_integration.md](strategy/research/hermes_space_agent_integration.md) |
 | Understand agent workflow | [execution/agent_workflow.md](execution/agent_workflow.md) |
 | Company strategy overview | [strategy/ai_company_master_plan.md](strategy/ai_company_master_plan.md) |
 | Full repo map | [MASTER_INDEX.md](MASTER_INDEX.md) |

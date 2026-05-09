@@ -1,3 +1,13 @@
+---
+id: exec-skill-matrix
+title: Skill Matrix
+summary: Skills × Agent Roles matrix
+tags: [execution, skills]
+updated: 2026-05-09
+load_priority: 45
+load_lane: context
+status: active
+---
 # Skill Matrix — Abzum
 **Skills × Roles**
 

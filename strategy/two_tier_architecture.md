@@ -271,6 +271,10 @@ abzum.cloud  (76.13.213.212 — KVM 2, Ubuntu 24.04, 8GB RAM)
 
 ## References
 
+- `strategy/persona_team_v013.md` — 17-persona project team detail (Tier 1 + Tier 2 personas with model + tool mappings)
+- `execution/persona_hermes_config.md` — Hermes ProviderProfile patterns
+- `execution/use_case_team_mapping.md` — UC → persona team mapping
+- `personas/` — per-persona files
 - `strategy/agent_orchestration.md` — End-to-end orchestration with all layers
 - `execution/context_persistence.md` — Memory stack: Hindsight + LLM Wiki + ClickHouse
 - `execution/workflow.md` — 6-gate Superpowers workflow within Tier 2 containers

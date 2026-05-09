@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-05-09",
+  "updated": "2026-05-10",
   "namespaces": {
     "A##": "Action",
     "B##": "Blocker",
@@ -122,7 +122,16 @@
     {"id": "UC-07", "title": "Business Process Automation (Sales)", "description": "Subset of BPA family."},
     {"id": "UC-09", "title": "Business Process Automation (Finance)", "description": "Subset of BPA family."},
     {"id": "UC-16", "title": "System Integration", "description": "Addresses data silos across 5-15 SMB tools; API work suits AI agents."},
-    {"id": "UC-20", "title": "AI Chatbot/Assistant", "description": "Visible/demoable; lower-cost entry; demonstrates AI-first differentiation."}
+    {"id": "UC-20", "title": "AI Chatbot/Assistant", "description": "Visible/demoable; lower-cost entry; demonstrates AI-first differentiation."},
+    {"id": "UC-21", "title": "Build a Website", "description": "Marketing site or landing page on Next.js + Tailwind + Vercel. BA-led discovery → Interface Designer → Junior Coder → DevOps → Infra. 1-3 weeks."},
+    {"id": "UC-22", "title": "Build a Research Document", "description": "Structured research deliverable: competitive analysis, tech evaluation, market scan. BA → Researcher (Kimi K2.6 Agent Swarm) → Tech Writer. 3-10 days."},
+    {"id": "UC-23", "title": "Build a SaaS / Internal Tool", "description": "Multi-page application with auth + persistence + business logic. Full Abzum stack engagement. 2-6 weeks."},
+    {"id": "UC-24", "title": "Marketing Campaign / Brand Asset Production", "description": "Multi-asset campaign: landing page, social graphics, email, video. Brand + Motion + Tech Writer."},
+    {"id": "UC-25", "title": "Pitch Deck / Investor Document", "description": "Investor-grade deck or board pack. Default lane BP - quality is the deliverable."},
+    {"id": "UC-26", "title": "Code/Security Audit on Existing Codebase", "description": "Client provides codebase; Abzum audits vulnerabilities, code quality, architectural risk. Researcher + Senior Coder + Security."},
+    {"id": "UC-27", "title": "Production Incident Response", "description": "Severity-graded response. DevOps first responder, Senior Coder root-cause, Architect for structural fixes, Tech Writer postmortem."},
+    {"id": "UC-28", "title": "Ongoing Maintenance / On-call", "description": "Continuous engagement keeping a deployed system patched and healthy. DevOps + Junior Coder + Tester on ongoing Kanban."},
+    {"id": "UC-29", "title": "Explainer / Demo Reel Production", "description": "Product demo video or social short. BA → Tech Writer (script) → Brand → Motion."}
   ],
   "operations_log": [
     {"id": "O01", "date": "2026-04-01", "title": "BIMemoryBank Architecture received", "owner": "Vijay", "significance": "Foundation for centralized BI memory bank"},
@@ -168,6 +177,7 @@
     {"id": "O42", "date": "2026-04-04", "title": "Agile Scrum Team Structure task added (A68)", "owner": "Felix", "significance": "Fixed + dynamic team structure per project"},
     {"id": "O43", "date": "2026-04-04", "title": "Dynamic Agent Provisioning Plan created (A69)", "owner": "Felix", "significance": "Agent Kubernetes vision: right agents/size/cost/time"},
     {"id": "O44", "date": "2026-04-04", "title": "Hybrid Project Management Methodology defined (A70)", "owner": "Felix", "significance": "Kanban default + Scrum for enterprise + Waterfall for compliance"},
-    {"id": "O45", "date": "2026-04-05", "title": "Two-Tier Agent Architecture proposal received (A71)", "owner": "Vijay", "significance": "Paperclip global + per-project containers; enterprise-grade"}
+    {"id": "O45", "date": "2026-04-05", "title": "Two-Tier Agent Architecture proposal received (A71)", "owner": "Vijay", "significance": "Paperclip global + per-project containers; enterprise-grade"},
+    {"id": "O46", "date": "2026-05-10", "title": "Hermes v0.13 Persona Team landed", "owner": "Vijay+Felix", "significance": "17 personas across 5 disciplines (orchestration/product/engineering/design/knowledge); BV $40 + BP $50 subscription stacks; BA voice = Gemini 3.1 Flash Live (BV) / Grok voice-think-fast-1.0 (BP); 9 new use cases UC-21..UC-29; canonical Pattern A vs Pattern B persona-hosting docs"}
   ]
 }

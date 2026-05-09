@@ -3,17 +3,27 @@ id: now
 title: Now — Current State
 summary: Current priorities, decisions, blockers — the live status board
 tags: [status, current]
-updated: 2026-05-09
+updated: 2026-05-10
 load_priority: 95
 load_lane: summary
 status: active
 ---
 # NOW — Current State
-**Updated: 2026-04-12**
+**Updated: 2026-05-10**
 
 ---
 
-## Completed Today
+## Completed Today (2026-05-10)
+
+| Task | Status | Doc |
+|---|---|---|
+| Hermes v0.13 Persona Team landed (O46) | ✅ Done | [strategy/persona_team_v013.md](strategy/persona_team_v013.md) · [personas/](personas/) · [execution/persona_hermes_config.md](execution/persona_hermes_config.md) · [execution/use_case_team_mapping.md](execution/use_case_team_mapping.md) |
+| BA voice runtime decided: Gemini 3.1 Flash Live (BV) / Grok voice-think-fast-1.0 (BP) | ✅ Done | [personas/product/business_analyst.md](personas/product/business_analyst.md) |
+| 9 new use cases UC-21..UC-29 added to registry | ✅ Done | [work/registry.json](work/registry.json) |
+
+---
+
+## Earlier
 
 | Task | Status | Doc |
 |---|---|---|

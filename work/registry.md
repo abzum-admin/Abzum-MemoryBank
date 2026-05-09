@@ -2,7 +2,7 @@
 
 # Work Registry
 
-Source of truth: `work/registry.json` (149 entries)
+Source of truth: `work/registry.json` (159 entries)
 
 ## Actions
 
@@ -133,6 +133,15 @@ Source of truth: `work/registry.json` (149 entries)
 | UC-09 | Business Process Automation (Finance) | Subset of BPA family. |
 | UC-16 | System Integration | Addresses data silos across 5-15 SMB tools; API work suits AI agents. |
 | UC-20 | AI Chatbot/Assistant | Visible/demoable; lower-cost entry; demonstrates AI-first differentiation. |
+| UC-21 | Build a Website | Marketing site or landing page on Next.js + Tailwind + Vercel. BA-led discovery → Interface Designer → Junior Coder → DevOps → Infra. 1-3 weeks. |
+| UC-22 | Build a Research Document | Structured research deliverable: competitive analysis, tech evaluation, market scan. BA → Researcher (Kimi K2.6 Agent Swarm) → Tech Writer. 3-10 days. |
+| UC-23 | Build a SaaS / Internal Tool | Multi-page application with auth + persistence + business logic. Full Abzum stack engagement. 2-6 weeks. |
+| UC-24 | Marketing Campaign / Brand Asset Production | Multi-asset campaign: landing page, social graphics, email, video. Brand + Motion + Tech Writer. |
+| UC-25 | Pitch Deck / Investor Document | Investor-grade deck or board pack. Default lane BP - quality is the deliverable. |
+| UC-26 | Code/Security Audit on Existing Codebase | Client provides codebase; Abzum audits vulnerabilities, code quality, architectural risk. Researcher + Senior Coder + Security. |
+| UC-27 | Production Incident Response | Severity-graded response. DevOps first responder, Senior Coder root-cause, Architect for structural fixes, Tech Writer postmortem. |
+| UC-28 | Ongoing Maintenance / On-call | Continuous engagement keeping a deployed system patched and healthy. DevOps + Junior Coder + Tester on ongoing Kanban. |
+| UC-29 | Explainer / Demo Reel Production | Product demo video or social short. BA → Tech Writer (script) → Brand → Motion. |
 
 ## Operations Log
 
@@ -182,3 +191,4 @@ Source of truth: `work/registry.json` (149 entries)
 | O43 | 2026-04-04 | Dynamic Agent Provisioning Plan created (A69) | Felix | Agent Kubernetes vision: right agents/size/cost/time |
 | O44 | 2026-04-04 | Hybrid Project Management Methodology defined (A70) | Felix | Kanban default + Scrum for enterprise + Waterfall for compliance |
 | O45 | 2026-04-05 | Two-Tier Agent Architecture proposal received (A71) | Vijay | Paperclip global + per-project containers; enterprise-grade |
+| O46 | 2026-05-10 | Hermes v0.13 Persona Team landed | Vijay+Felix | 17 personas across 5 disciplines (orchestration/product/engineering/design/knowledge); BV $40 + BP $50 subscription stacks; BA voice = Gemini 3.1 Flash Live (BV) / Grok voice-think-fast-1.0 (BP); 9 new use cases UC-21..UC-29; canonical Pattern A vs Pattern B persona-hosting docs |

@@ -15,6 +15,7 @@
 - `execution/` — see `execution/_index.md`
 - `memory/` — see `memory/_index.md`
 - `operations/` — see `operations/_index.md`
+- `personas/` — see `personas/_index.md`
 - `research/` — see `research/_index.md`
 - `strategy/` — see `strategy/_index.md`
 - `user/` — see `user/_index.md`

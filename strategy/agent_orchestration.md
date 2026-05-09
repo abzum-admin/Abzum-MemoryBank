@@ -145,6 +145,10 @@ The following sections are being designed. This document will be updated as each
 
 ## References
 
+- `strategy/persona_team_v013.md` — 17-persona project team, Hermes v0.13 ProviderProfile config, BV/BP subscription stacks, BA voice runtime
+- `execution/persona_hermes_config.md` — Pattern A (Model-as-Engine) vs Pattern B (CLI-as-Tool cowork) persona hosting
+- `execution/use_case_team_mapping.md` — Which personas join which UCs
+- `personas/` — per-persona files
 - `strategy/two_tier_architecture.md` — Paperclip + project container design
 - `strategy/ai_native_5_tier_model.md` — 5-tier human org model
 - `execution/workflow.md` — Workflow gates, TDD cycle, role definitions

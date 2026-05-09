@@ -82,3 +82,23 @@ Whisper is configured for voice message transcription. Telegram voice messages (
 ```
 
 **Important:** All whisper components are in `/home/node/.openclaw/workspace/` which is persisted via bind mount. Do NOT use `/home/node/bin/` for binaries — that directory is ephemeral in Docker.
+
+---
+
+## Hermes v0.13 — Tenacity Release (2026-05-07)
+
+The agent runtime ships these features that the persona team relies on. Master config & toggle in [`strategy/persona_team_v013.md`](../strategy/persona_team_v013.md); pattern detail in [`execution/persona_hermes_config.md`](../execution/persona_hermes_config.md).
+
+**Multi-agent Kanban**: durable SQLite-backed board with heartbeat, zombie detection, reclaim, per-task retries, hallucination recovery, auto-block on incomplete exit. Workers expose a dedicated `kanban_*` toolset. Drives all per-project task dispatch.
+
+**`/goal` Ralph loop**: runs a goal repeatedly until success criteria met; the Orchestrator's primary verb for non-trivial work.
+
+**Cron `no_agent_watchdog` mode**: schedules the Watcher persona to tail trace streams without spawning a costly LLM agent on each fire.
+
+**`video_analyze` tool**: lets the Motion & Video Designer persona self-review reels.
+
+**xAI Custom Voices TTS**: one-way TTS in Hermes (talks at you, not with you). For interactive client conversations the BA persona uses a separate Pipecat/LiveKit runtime — see persona file.
+
+**ProviderProfile ABC** (`plugins/model-providers/`): pluggable inference providers. Subclass declares `auth_path`, `base_url`, `model_catalog`, `caching_headers`. Each plugin's `__init__.py` calls `providers.register_provider(...)`. Lets us define BV / BP profile bundles per [`exec-persona-hermes-config`](../execution/persona_hermes_config.md).
+
+**Checkpoints v2**: durable mid-run snapshots — relied on by long-running Researcher investigations.

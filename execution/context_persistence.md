@@ -1,3 +1,13 @@
+---
+id: exec-context-persistence
+title: Context Persistence
+summary: 5-layer memory architecture and ByteRover usage
+tags: [execution, memory]
+updated: 2026-05-09
+load_priority: 50
+load_lane: reference
+status: active
+---
 # Context Persistence — Abzum
 ## Memory Stack: Hermes + Hindsight + LLM Wiki + ClickHouse
 **Version 2.0 — 2026-04-13**
@@ -60,11 +70,11 @@ This document defines:
 **One-provider constraint (critical):** Hermes supports exactly ONE external memory provider at a time. Hindsight occupies that slot. LLM Wiki is a Hermes skill (not a provider) and runs alongside Hindsight without consuming the provider slot. ClickHouse is an analytics layer outside Hermes — it receives events via `emit_signal()` hooks, not through the Hermes memory API.
 
 **Built-in files (always active, regardless of provider):**
-- `MEMORY.md` — Felix COO long-term curation, reviewed at each heartbeat session
-- `USER.md` — Vijay (MD) preferences and working style
-- `IDENTITY.md` — Felix Stanley (COO) identity and role
-- `AGENTS.md` — Agent instructions for this workspace
-- `SOUL.md` — Core values and operating principles
+- `memory/long_term.md` — Felix COO long-term curation, reviewed at each heartbeat session
+- `user/vijay.md` — Vijay (MD) preferences and working style
+- `agent/identity.md` — Felix Stanley (COO) identity and role
+- `agent/instructions.md` — Agent instructions for this workspace
+- `agent/soul.md` — Core values and operating principles
 
 ---
 
@@ -841,7 +851,7 @@ Within an active project container, the five-layer system is the source of truth
 | **Layer 2** | TASK_TRACKER.md | Live task status per feature — what's done, in-progress, blocked | Feature lifecycle |
 | **Layer 3** | Inline dispatch context | Per-task agent input — full context injected at subagent launch | Task duration only |
 | **Layer 4** | Hindsight recall + LLM Wiki query | Cross-session episodic memory + procedural SOPs | Permanent (organisational) |
-| **Layer 5** | ClickHouse analytics + MEMORY.md | Performance trends + COO long-term institutional wisdom | Permanent |
+| **Layer 5** | ClickHouse analytics + memory/long_term.md | Performance trends + COO long-term institutional wisdom | Permanent |
 
 **Rule:** Layers 4 and 5 are read at task_start (pre-task pattern). Layer 3 is constructed from Layers 1, 2, 4, 5 and injected as the agent's system prompt. Subagents never read files mid-task — all context is provided inline.
 
@@ -1219,8 +1229,8 @@ HERMES MEMORY SLOTS:
 ┌─────────────────────────────────────────────────────┐
 │  External provider (1 slot only):  HINDSIGHT ✅     │
 │  Built-in skills:                  LLM WIKI ✅      │
-│  Built-in files:                   MEMORY.md ✅     │
-│                                    USER.md ✅       │
+│  Built-in files:                   memory/long_term.md ✅     │
+│                                    user/vijay.md ✅       │
 │  External analytics (not a slot):  CLICKHOUSE ✅    │
 └─────────────────────────────────────────────────────┘
 
@@ -1271,7 +1281,7 @@ These rules are non-negotiable for all agents, at all times.
 
 8. **Subagents receive all context inline.** Don't make subagents read files mid-task. Construct the full context (Layer 1–5) and inject it at dispatch time. Mid-task file reads signal a context provisioning failure.
 
-9. **Text > Brain.** "Memory is limited — if you want to remember something, WRITE IT TO A FILE." (via Hindsight.retain, LLM Wiki.ingest, or MEMORY.md). In-context knowledge evaporates at session end.
+9. **Text > Brain.** "Memory is limited — if you want to remember something, WRITE IT TO A FILE." (via Hindsight.retain, LLM Wiki.ingest, or memory/long_term.md). In-context knowledge evaporates at session end.
 
 10. **The loop closes.** Analytics without action is waste. Every ClickHouse query run by the Analysis Agent must produce either an auto-applied update or a Felix escalation. Insights that are computed but not acted on should not be computed.
 
@@ -1280,9 +1290,9 @@ These rules are non-negotiable for all agents, at all times.
 ## 13. References
 
 - `strategy/agent_orchestration.md` — End-to-end orchestration: 3-layer architecture, agent lifecycle, intake-to-delivery flow
-- `execution/agent_workflow.md` — Workflow gates, TDD cycle, role definitions, model routing
-- `execution/handoff_protocol.md` — Structured handoff formats between agents
-- `operations/agent_watcher/agent_watcher_system.md` — Agent monitoring and 4-level escalation
+- `execution/workflow.md` — Workflow gates, TDD cycle, role definitions, model routing
+- `execution/handoff.md` — Structured handoff formats between agents
+- `operations/services/agent_watcher.md` — Agent monitoring and 4-level escalation
 - [Hindsight GitHub](https://github.com/vectorize-io/hindsight) — MIT licence, 91.4% LongMemEval
 - [LLM Wiki pattern](https://github.com/SamurAIGPT/llm-wiki-agent) — Karpathy, MIT
 - [ClickHouse](https://clickhouse.com) — Open-source columnar OLAP

@@ -1,3 +1,13 @@
+---
+id: res-product-watchlist
+title: Product Watchlist
+summary: Competitive products and tools to track
+tags: [research, competitive]
+updated: 2026-05-09
+load_priority: 35
+load_lane: reference
+status: active
+---
 # Product Watchlist — Abzum Competitive Intelligence
 **Date: 2026-04-01**
 

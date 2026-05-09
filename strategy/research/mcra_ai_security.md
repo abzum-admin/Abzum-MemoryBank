@@ -1,3 +1,13 @@
+---
+id: res-mcra
+title: MCRA AI Security Framework
+summary: MCRA security framework research and applicability to Abzum
+tags: [research, security, mcra]
+updated: 2026-05-09
+load_priority: 40
+load_lane: reference
+status: active
+---
 # MCRA Framework Research — Abzum
 **Date: 2026-04-01**
 

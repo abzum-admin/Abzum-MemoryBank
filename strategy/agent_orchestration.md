@@ -1,3 +1,13 @@
+---
+id: strat-orchestration
+title: Agent Orchestration
+summary: End-to-end orchestration: 3-layer architecture, memory stack, intake-to-delivery flow
+tags: [strategy, agents, orchestration]
+updated: 2026-05-09
+load_priority: 60
+load_lane: context
+status: active
+---
 # End-to-End Agent Orchestration — Abzum
 **Version 0.1 — 2026-04-13 (design in progress)**
 
@@ -32,7 +42,7 @@ Every request flows through three layers plus a persistent memory substrate bene
                             ↓  completion signals + learnings
 ┌─────────────────────────────────────────────────────────────────┐
 │  LAYER 3: MEMORY & LEARNING  (persistent substrate)            │
-│  Hindsight · LLM Wiki · ByteRover · MEMORY.md                 │
+│  Hindsight · LLM Wiki · ByteRover · memory/long_term.md                 │
 │  Hermes (runtime across all layers)                            │
 └─────────────────────────────────────────────────────────────────┘
 ```
@@ -135,12 +145,12 @@ The following sections are being designed. This document will be updated as each
 
 ## References
 
-- `strategy/two_tier_agent_architecture.md` — Paperclip + project container design
-- `strategy/ai_native_org/ai_native_5_tier_org_model.md` — 5-tier human org model
-- `execution/agent_workflow.md` — Workflow gates, TDD cycle, role definitions
+- `strategy/two_tier_architecture.md` — Paperclip + project container design
+- `strategy/ai_native_5_tier_model.md` — 5-tier human org model
+- `execution/workflow.md` — Workflow gates, TDD cycle, role definitions
 - `execution/context_persistence.md` — Updated memory stack (this design)
-- `execution/handoff_protocol.md` — Structured handoff formats
-- `operations/agent_watcher/agent_watcher_system.md` — Agent monitoring + escalation
+- `execution/handoff.md` — Structured handoff formats
+- `operations/services/agent_watcher.md` — Agent monitoring + escalation
 - [Hindsight GitHub](https://github.com/vectorize-io/hindsight) — MIT, 91.4% LongMemEval
 - [LLM Wiki pattern](https://github.com/SamurAIGPT/llm-wiki-agent) — Karpathy, MIT
 

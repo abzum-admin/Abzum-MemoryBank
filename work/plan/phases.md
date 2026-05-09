@@ -1,3 +1,13 @@
+---
+id: work-phases
+title: Phases to First Revenue
+summary: 5-phase roadmap from foundation to first revenue
+tags: [work, plan, phases]
+updated: 2026-05-09
+load_priority: 60
+load_lane: context
+status: active
+---
 # Planning Phases
 
 > **What:** The 5 phases of building Abzum, from planning to first revenue

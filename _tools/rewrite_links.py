@@ -107,6 +107,123 @@ REWRITES: list[tuple[str, str]] = [
     # Diagrams moved
     (r"diagrams/gen_diagram\.py", "assets/diagrams/gen_diagram.py"),
     (r"diagrams/hindsight-clickhouse-flow\.svg", "assets/diagrams/hindsight-clickhouse-flow.svg"),
+
+    # === 2026-05-10 Heavy restructure: numbered top-level company-shaped tree ===
+    # Order matters — more-specific first.
+
+    # personas/ → 02-org/02-ai-systems/* and 02-org/04-platform-orchestration/*
+    (r"personas/orchestration/orchestrator\.md", "02-org/04-platform-orchestration/01-orchestration/orchestrator.md"),
+    (r"personas/orchestration/watcher\.md", "02-org/04-platform-orchestration/01-orchestration/watcher.md"),
+    (r"personas/product/triage_intake\.md", "02-org/02-ai-systems/02-project-delivery/triage_intake.md"),
+    (r"personas/product/business_analyst\.md", "02-org/02-ai-systems/02-project-delivery/_legacy_business_analyst.md"),
+    (r"personas/product/planner\.md", "02-org/02-ai-systems/02-project-delivery/planner.md"),
+    (r"personas/engineering/architect\.md", "02-org/02-ai-systems/01-engineering/architect.md"),
+    (r"personas/engineering/senior_coder\.md", "02-org/02-ai-systems/01-engineering/senior_coder.md"),
+    (r"personas/engineering/junior_coder\.md", "02-org/02-ai-systems/01-engineering/junior_coder.md"),
+    (r"personas/engineering/tester\.md", "02-org/02-ai-systems/01-engineering/tester.md"),
+    (r"personas/engineering/security\.md", "02-org/02-ai-systems/01-engineering/security.md"),
+    (r"personas/engineering/devops\.md", "02-org/02-ai-systems/01-engineering/devops.md"),
+    (r"personas/engineering/infrastructure_engineer\.md", "02-org/02-ai-systems/01-engineering/infrastructure_engineer.md"),
+    (r"personas/design/interface_designer\.md", "02-org/02-ai-systems/03-design/interface_designer.md"),
+    (r"personas/design/brand_designer\.md", "02-org/02-ai-systems/03-design/brand_designer.md"),
+    (r"personas/design/motion_designer\.md", "02-org/02-ai-systems/03-design/motion_designer.md"),
+    (r"personas/knowledge/researcher\.md", "02-org/02-ai-systems/04-knowledge-intelligence/researcher.md"),
+    (r"personas/knowledge/tech_writer\.md", "02-org/02-ai-systems/04-knowledge-intelligence/tech_writer.md"),
+    (r"personas/README\.md", "02-org/02-ai-systems/_personas_readme.md"),
+
+    # strategy/ → 08-strategy/ and 07-research/
+    (r"strategy/master_plan\.md", "08-strategy/master_plan.md"),
+    (r"strategy/agent_orchestration\.md", "08-strategy/agent_orchestration.md"),
+    (r"strategy/two_tier_architecture\.md", "08-strategy/two_tier_architecture.md"),
+    (r"strategy/persona_team_v013\.md", "08-strategy/persona_team_v013.md"),
+    (r"strategy/ai_native_org_overview\.md", "08-strategy/ai_native_org_overview.md"),
+    (r"strategy/ai_native_org_context\.md", "08-strategy/ai_native_org_context.md"),
+    (r"strategy/ai_native_5_tier_model\.md", "08-strategy/ai_native_5_tier_model.md"),
+    (r"strategy/agent_kubernetes\.md", "08-strategy/agent_kubernetes.md"),
+    (r"strategy/crm_delivery\.md", "08-strategy/crm_delivery.md"),
+    (r"strategy/research/ai_monitoring\.md", "07-research/ai-monitoring/ai_monitoring.md"),
+    (r"strategy/research/hermes_space_agents\.md", "07-research/hermes-space-agents/hermes_space_agents.md"),
+    (r"strategy/research/mcra_ai_security\.md", "07-research/mcra-ai-security/mcra_ai_security.md"),
+    (r"strategy/research/product_watchlist\.md", "07-research/product-watchlist/product_watchlist.md"),
+
+    # execution/ → 05-process/
+    (r"execution/workflow\.md", "05-process/workflow_superpowers.md"),
+    (r"execution/tdd\.md", "05-process/tdd.md"),
+    (r"execution/handoff\.md", "05-process/handoff.md"),
+    (r"execution/capabilities\.md", "05-process/capabilities.md"),
+    (r"execution/project_management\.md", "05-process/kanban_and_pm.md"),
+    (r"execution/skill_matrix\.md", "05-process/skill_matrix.md"),
+    (r"execution/company_framework\.md", "05-process/company_framework.md"),
+    (r"execution/agent_scripting\.md", "05-process/agent_scripting.md"),
+    (r"execution/context_persistence\.md", "05-process/memory_protocol.md"),
+    (r"execution/persona_hermes_config\.md", "05-process/persona_hermes_config.md"),
+    (r"execution/use_case_team_mapping\.md", "05-process/use_case_team_mapping.md"),
+
+    # operations/ → 06-infrastructure/*
+    (r"operations/infrastructure/azure\.md", "06-infrastructure/01-cloud/azure.md"),
+    (r"operations/infrastructure/data\.md", "06-infrastructure/01-cloud/data.md"),
+    (r"operations/infrastructure/vps\.md", "06-infrastructure/01-cloud/vps.md"),
+    (r"operations/infrastructure/docker\.md", "06-infrastructure/01-cloud/docker.md"),
+    (r"operations/infrastructure/doppler\.md", "06-infrastructure/03-services/doppler.md"),
+    (r"operations/security/ai_framework\.md", "06-infrastructure/02-security/ai_framework.md"),
+    (r"operations/security/stack\.md", "06-infrastructure/02-security/stack.md"),
+    (r"operations/security/compliance\.md", "06-infrastructure/02-security/compliance.md"),
+    (r"operations/security/compliance_roadmap\.md", "06-infrastructure/02-security/compliance_roadmap.md"),
+    (r"operations/services/email\.md", "06-infrastructure/03-services/email.md"),
+    (r"operations/services/ollama\.md", "06-infrastructure/03-services/ollama.md"),
+    (r"operations/services/hermes_local\.md", "06-infrastructure/03-services/hermes_local.md"),
+    (r"operations/services/memorybank_git_sync\.md", "06-infrastructure/03-services/memorybank_git_sync.md"),
+    (r"operations/services/agent_watcher\.md", "06-infrastructure/03-services/agent_watcher.md"),
+    (r"operations/procedures/setup_app\.md", "06-infrastructure/04-procedures/setup_app.md"),
+    (r"operations/procedures/deploy_service\.md", "06-infrastructure/04-procedures/deploy_service.md"),
+    (r"operations/procedures/gateway_boot\.md", "06-infrastructure/04-procedures/gateway_boot.md"),
+    (r"operations/procedures/gateway_stop\.md", "06-infrastructure/04-procedures/gateway_stop.md"),
+
+    # agent/ split: Felix → 02-org/01-executive/felix-caio/; tools → 09-knowledge/
+    (r"agent/soul\.md", "02-org/01-executive/felix-caio/soul.md"),
+    (r"agent/identity\.md", "02-org/01-executive/felix-caio/identity.md"),
+    (r"agent/instructions\.md", "02-org/01-executive/felix-caio/instructions.md"),
+    (r"agent/heartbeat\.md", "02-org/01-executive/felix-caio/heartbeat.md"),
+    (r"agent/tools\.md", "09-knowledge/agent_tooling_inventory.md"),
+
+    # company/ → 01-identity/ and 02-org/01-executive/felix-caio/
+    (r"company/about\.md", "01-identity/company_about.md"),
+    (r"company/use_cases\.md", "03-services/legacy_top5_priority.md"),
+    (r"company/team/felix\.md", "02-org/01-executive/felix-caio/role.md"),
+    (r"company/team/vijay\.md", "12-private/company_team_vijay.md"),
+
+    # user/ → 12-private/
+    (r"user/vijay\.md", "12-private/vijay.md"),
+
+    # research/ → 07-research/hermes-hindsight/
+    (r"research/hermes_hindsight/summary\.md", "07-research/hermes-hindsight/summary.md"),
+    (r"research/hermes_hindsight/implementation_guide\.md", "07-research/hermes-hindsight/implementation_guide.md"),
+    (r"research/hermes_hindsight/technical_reference\.md", "07-research/hermes-hindsight/technical_reference.md"),
+    (r"research/hermes_hindsight/plan_of_action\.md", "07-research/hermes-hindsight/plan_of_action.md"),
+    (r"research/hermes_hindsight/analysis\.md", "07-research/hermes-hindsight/analysis.md"),
+
+    # memory/ → 10-memory/
+    (r"memory/long_term\.md", "10-memory/long_term.md"),
+    (r"memory/milestones/context_tree_v1_0\.md", "10-memory/milestones/context_tree_v1_0.md"),
+
+    # work/ → 11-work/
+    (r"work/registry\.json", "11-work/registry.json"),
+    (r"work/registry\.md", "11-work/registry.md"),
+    (r"work/actions\.md", "11-work/actions.md"),
+    (r"work/decisions\.md", "11-work/decisions.md"),
+    (r"work/blockers\.md", "11-work/blockers.md"),
+    (r"work/operations_log\.md", "11-work/operations_log.md"),
+    (r"work/plan/phases\.md", "11-work/plan/phases.md"),
+    (r"work/plan/dynamic_agent_provisioning\.md", "11-work/plan/dynamic_agent_provisioning.md"),
+
+    # assets/ → 99-assets/
+    (r"assets/abzum-logo\.svg", "99-assets/abzum-logo.svg"),
+    (r"assets/diagrams/", "99-assets/diagrams/"),
+
+    # Root files → 00-meta/ or 01-identity/
+    # NOTE: leave bare `now.md` alone if at root reference level inside identity/; only fix relative refs from outside.
+    # We intentionally don't rewrite README.md/CONVENTIONS.md/START_HERE.md path patterns globally because they're rare
+    # and manual fix is safer.
 ]
 
 

@@ -6,7 +6,7 @@ import json
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
-WORK = REPO_ROOT / "work"
+WORK = REPO_ROOT / "11-work"
 REGISTRY = WORK / "registry.json"
 
 HEADER = "<!-- generated, do not edit — see _tools/gen_work_views.py -->"

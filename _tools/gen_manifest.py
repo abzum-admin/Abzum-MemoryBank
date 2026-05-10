@@ -108,7 +108,8 @@ def main() -> None:
         "source_fingerprint": fingerprint(entries),
     }
 
-    out = REPO_ROOT / "_manifest.json"
+    out = REPO_ROOT / "00-meta" / "_manifest.json"
+    out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
     print(f"Wrote {out} with {len(entries)} entries, {manifest['total_tokens']} tokens.")
 

@@ -20,7 +20,7 @@ report() { echo "FAIL: $*"; fail=1; }
 ok()     { echo "PASS: $*"; }
 
 echo "== 1. Phantom file references =="
-phantom_pattern='(\bMEMORY\.md\b|\bABZUM\.md\b|\bACTIVE_TASKS\.md\b|\bBOOTSTRAP\.md\b|\bMASTER_INDEX\.md\b|process/_index\.md)'
+phantom_pattern='(\bMEMORY\.md\b|\bABZUM\.md\b|\bACTIVE_TASKS\.md\b|\bBOOTSTRAP\.md\b|\bMASTER_INDEX\.md\b)'
 hits=$(grep -rln -E "$phantom_pattern" --include='*.md' --exclude-dir=.git --exclude-dir=_tools --exclude-dir=research . 2>/dev/null || true)
 if [[ -n "$hits" ]]; then
   report "Phantom references found:"; echo "$hits"

@@ -1,0 +1,252 @@
+{
+  "version": 2,
+  "generated_at": "2026-05-10T01:19:37.000Z",
+  "active_context": [
+    {
+      "id": "now",
+      "path": "01-identity\\now.md",
+      "tokens": 965,
+      "load_priority": 95,
+      "load_lane": "summary",
+      "title": "Now \u2014 Current State"
+    },
+    {
+      "id": "agent-instructions",
+      "path": "02-org\\01-executive\\felix-caio\\instructions.md",
+      "tokens": 981,
+      "load_priority": 88,
+      "load_lane": "context",
+      "title": "Agent Operating Instructions"
+    },
+    {
+      "id": "agent-soul",
+      "path": "02-org\\01-executive\\felix-caio\\soul.md",
+      "tokens": 542,
+      "load_priority": 85,
+      "load_lane": "context",
+      "title": "Felix Stanley \u2014 Soul"
+    },
+    {
+      "id": "agent-identity",
+      "path": "02-org\\01-executive\\felix-caio\\identity.md",
+      "tokens": 254,
+      "load_priority": 80,
+      "load_lane": "context",
+      "title": "Felix Stanley \u2014 Identity Card"
+    },
+    {
+      "id": "co-about",
+      "path": "01-identity\\company_about.md",
+      "tokens": 677,
+      "load_priority": 70,
+      "load_lane": "context",
+      "title": "About Abzum"
+    },
+    {
+      "id": "mem-long-term",
+      "path": "10-memory\\long_term.md",
+      "tokens": 388,
+      "load_priority": 70,
+      "load_lane": "summary",
+      "title": "Long-Term Memory"
+    },
+    {
+      "id": "co-use-cases",
+      "path": "03-services\\legacy_top5_priority.md",
+      "tokens": 474,
+      "load_priority": 65,
+      "load_lane": "context",
+      "title": "Top 5 Priority Use Cases"
+    },
+    {
+      "id": "exec-workflow",
+      "path": "05-process\\workflow_superpowers.md",
+      "tokens": 3058,
+      "load_priority": 65,
+      "load_lane": "context",
+      "title": "Agent Workflow"
+    },
+    {
+      "id": "strat-master-plan",
+      "path": "08-strategy\\master_plan.md",
+      "tokens": 1562,
+      "load_priority": 65,
+      "load_lane": "context",
+      "title": "AI Company Master Plan"
+    },
+    {
+      "id": "strat-orchestration",
+      "path": "08-strategy\\agent_orchestration.md",
+      "tokens": 2312,
+      "load_priority": 60,
+      "load_lane": "context",
+      "title": "Agent Orchestration"
+    },
+    {
+      "id": "strat-ai-native-org",
+      "path": "08-strategy\\ai_native_org_overview.md",
+      "tokens": 580,
+      "load_priority": 60,
+      "load_lane": "context",
+      "title": "AI-Native Org Structure (Overview)"
+    },
+    {
+      "id": "strat-persona-v013",
+      "path": "08-strategy\\persona_team_v013.md",
+      "tokens": 3664,
+      "load_priority": 60,
+      "load_lane": "context",
+      "title": "Persona Team \u2014 Hermes v0.13"
+    },
+    {
+      "id": "strat-two-tier",
+      "path": "08-strategy\\two_tier_architecture.md",
+      "tokens": 3148,
+      "load_priority": 60,
+      "load_lane": "context",
+      "title": "Two-Tier Agent Architecture"
+    },
+    {
+      "id": "work-phases",
+      "path": "11-work\\plan\\phases.md",
+      "tokens": 1108,
+      "load_priority": 60,
+      "load_lane": "context",
+      "title": "Phases to First Revenue"
+    },
+    {
+      "id": "exec-handoff",
+      "path": "05-process\\handoff.md",
+      "tokens": 1182,
+      "load_priority": 55,
+      "load_lane": "context",
+      "title": "Handoff Protocol"
+    },
+    {
+      "id": "exec-tdd",
+      "path": "05-process\\tdd.md",
+      "tokens": 1243,
+      "load_priority": 55,
+      "load_lane": "context",
+      "title": "TDD Cycle"
+    },
+    {
+      "id": "exec-uc-team-mapping",
+      "path": "05-process\\use_case_team_mapping.md",
+      "tokens": 2212,
+      "load_priority": 55,
+      "load_lane": "context",
+      "title": "Use Case \u2192 Persona Team Mapping"
+    },
+    {
+      "id": "ops-azure",
+      "path": "06-infrastructure\\01-cloud\\azure.md",
+      "tokens": 791,
+      "load_priority": 55,
+      "load_lane": "context",
+      "title": "Azure Architecture"
+    },
+    {
+      "id": "strat-agent-k8s",
+      "path": "08-strategy\\agent_kubernetes.md",
+      "tokens": 289,
+      "load_priority": 55,
+      "load_lane": "context",
+      "title": "Agent Kubernetes Model"
+    },
+    {
+      "id": "strat-5-tier",
+      "path": "08-strategy\\ai_native_5_tier_model.md",
+      "tokens": 422,
+      "load_priority": 55,
+      "load_lane": "context",
+      "title": "AI-Native 5-Tier Org Model"
+    },
+    {
+      "id": "co-felix",
+      "path": "02-org\\01-executive\\felix-caio\\role.md",
+      "tokens": 493,
+      "load_priority": 50,
+      "load_lane": "context",
+      "title": "Felix Stanley (COO)"
+    },
+    {
+      "id": "exec-capabilities",
+      "path": "05-process\\capabilities.md",
+      "tokens": 2104,
+      "load_priority": 50,
+      "load_lane": "context",
+      "title": "Agent Capabilities"
+    },
+    {
+      "id": "exec-company-framework",
+      "path": "05-process\\company_framework.md",
+      "tokens": 1732,
+      "load_priority": 50,
+      "load_lane": "context",
+      "title": "AI Company Framework"
+    },
+    {
+      "id": "strat-ai-native-org-context",
+      "path": "08-strategy\\ai_native_org_context.md",
+      "tokens": 144,
+      "load_priority": 50,
+      "load_lane": "context",
+      "title": "AI-Native Org Context"
+    },
+    {
+      "id": "exec-agent-scripting",
+      "path": "05-process\\agent_scripting.md",
+      "tokens": 275,
+      "load_priority": 45,
+      "load_lane": "context",
+      "title": "Agent Scripting Intelligence"
+    },
+    {
+      "id": "exec-pm",
+      "path": "05-process\\kanban_and_pm.md",
+      "tokens": 1075,
+      "load_priority": 45,
+      "load_lane": "context",
+      "title": "Project Management Methodology"
+    },
+    {
+      "id": "exec-skill-matrix",
+      "path": "05-process\\skill_matrix.md",
+      "tokens": 821,
+      "load_priority": 45,
+      "load_lane": "context",
+      "title": "Skill Matrix"
+    },
+    {
+      "id": "ops-data",
+      "path": "06-infrastructure\\01-cloud\\data.md",
+      "tokens": 708,
+      "load_priority": 45,
+      "load_lane": "context",
+      "title": "Data Architecture"
+    },
+    {
+      "id": "ops-sec-ai-framework",
+      "path": "06-infrastructure\\02-security\\ai_framework.md",
+      "tokens": 2723,
+      "load_priority": 45,
+      "load_lane": "context",
+      "title": "AI Security Framework"
+    },
+    {
+      "id": "ops-sec-stack",
+      "path": "06-infrastructure\\02-security\\stack.md",
+      "tokens": 1011,
+      "load_priority": 45,
+      "load_lane": "context",
+      "title": "Security Stack"
+    }
+  ],
+  "lane_tokens": {
+    "context": 35585,
+    "summary": 1353
+  },
+  "total_tokens": 36938,
+  "source_fingerprint": "a918bb1822ed832af61b40b3f84cbb7bea83f2c0f115f6368a01f822a808d5ad"
+}

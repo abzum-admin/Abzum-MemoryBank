@@ -8,6 +8,7 @@
 - `01-identity/` — see `01-identity/_index.md`
 - `02-org/` — see `02-org/_index.md`
 - `03-services/` — see `03-services/_index.md`
+- `04-products/` — see `04-products/_index.md`
 - `05-process/` — see `05-process/_index.md`
 - `06-infrastructure/` — see `06-infrastructure/_index.md`
 - `07-research/` — see `07-research/_index.md`

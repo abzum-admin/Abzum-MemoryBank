@@ -2,7 +2,7 @@
 
 # Work Registry
 
-Source of truth: `11-work/registry.json` (159 entries)
+Source of truth: `work/registry.json` (184 entries)
 
 ## Actions
 
@@ -80,6 +80,12 @@ Source of truth: `11-work/registry.json` (159 entries)
 | A70 | Define Hybrid Project Management Methodology for AI Agent Teams | P1 | 3 | pending | Felix | ['A50', 'A62', 'A67', 'A68', 'A47'] |
 | A71 | Implement Two-Tier Agent Architecture (Paperclip + Project Containers) | P1 | 2-3 | pending | Felix | ['A41', 'A42', 'A43', 'A49', 'A59', 'A66'] |
 | A72 | Research Best Jira / Mission Control Equivalent for AI Agents | P1 | 3 | pending | Felix | ['A43', 'A44', 'A47'] |
+| A73 | Build Abzum InterACT PoC (voice-activated dynamic CRM) | P1 | 3 | pending | Felix | ['A41', 'A66', 'A47', 'A75'] |
+| A74 | Migrate active ByteRover content to LLM Wiki + Hindsight + GitHub backup | P1 | 2 | pending | Felix | ['A41'] |
+| A75 | Build Abzum ReQuire v1 (productize CEA voice + mockup runtime, internal-use mode) | P1 | 3 | pending | Felix | ['A41'] |
+| A76 | Fill in 26 persona/role stubs from 2026-05-10 restructure | P2 | 3 | pending | Vijay+Felix | — |
+| A77 | Set hourly rate + first-customer pricing for services catalogue | P1 | 4 | decision_required | Vijay | ['A05'] |
+| A78 | Create remaining service .md files (per-service pages under 03-services/) | P2 | 3 | pending | Felix | — |
 
 ## Blockers
 
@@ -120,6 +126,12 @@ Source of truth: `11-work/registry.json` (159 entries)
 | D13 | Shared Comms Pipeline Agent until 10+ customers | 2026-04-01 | Simplicity before scale | Vijay |
 | D14 | Work tree structure in ByteRover for planning | 2026-04-01 | Living document for actions, decisions, blockers | Vijay |
 | D15 | Context tree access: Vijay L4, Team L2 | 2026-04-01 | Clearance model from Access Control Framework | Vijay |
+| D16 | Replace ByteRover with Hindsight + LLM Wiki + GitHub backup; supersedes D05 | 2026-05-10 | Single-provider clarity, 91.4% LongMemEval coverage, GitHub-native backup, ByteRover already flagged deprecated in agent_orchestration.md but contradicted in 3 other files | Vijay+Felix |
+| D17 | Restructure repo into numbered company-shaped tree (00-meta..99-assets) | 2026-05-10 | Function-shaped folders replaced with company-shaped tree mirroring real-org structure; agent-first navigation; click-link mermaid org chart | Vijay+Felix |
+| D18 | Drop CRM as anchor product; introduce Abzum InterACT (voice-activated dynamic multi-tenant CRM) as flagship plus Abzum ReQuire (requirements elicitation product) | 2026-05-10 | CRM becomes one of many services. New anchor products are voice-activated, real-time-rendering, multi-tenant CRM (InterACT) plus a productized requirements elicitation tool (ReQuire) | Vijay |
+| D19 | All-AI exec layer: Felix repositions to CAIO; CDO + CSCO are new AI agents under Vijay (CEO/Founder, human) | 2026-05-10 | Reflects 95% AI-agent goal at exec level | Vijay |
+| D20 | Single client-facing AI persona = Client Engagement Agent (merges BA + Account Manager + Client Comms) | 2026-05-10 | User preference: one AI agent for all client communication, paired with human Delivery Manager; supersedes standalone BA persona | Vijay |
+| D21 | Pricing model: Hourly + per-project estimate (drops legacy <=$15K rule) | 2026-05-10 | UC-23 ranges to $50K; rigid cap discouraged high-value engagements | Vijay |
 
 ## Use Cases
 
@@ -142,6 +154,18 @@ Source of truth: `11-work/registry.json` (159 entries)
 | UC-27 | Production Incident Response | Severity-graded response. DevOps first responder, Senior Coder root-cause, Architect for structural fixes, Tech Writer postmortem. |
 | UC-28 | Ongoing Maintenance / On-call | Continuous engagement keeping a deployed system patched and healthy. DevOps + Junior Coder + Tester on ongoing Kanban. |
 | UC-29 | Explainer / Demo Reel Production | Product demo video or social short. BA → Tech Writer (script) → Brand → Motion. |
+| UC-30 | Abzum InterACT — Tenant Deployment | Per-tenant deployment of the Abzum InterACT voice-activated dynamic CRM product (see 04-products/interact/). v1 service. Setup fee + monthly hosting. |
+| UC-31 | Abzum ReQuire — Tenant Deployment | Per-tenant deployment of the Abzum ReQuire requirements elicitation product (see 04-products/require/). v1 service. Setup fee + monthly hosting + per-discovery-call fee. |
+| UC-32 | Voice Agent Deployment for Clients | Productize the BA voice stack (Pipecat / LiveKit + Recall.ai + Gemini Flash Live or Grok) as customer-service voice agents, IVR replacements, sales-intake bots. v1.5. |
+| UC-33 | AI Compliance / Data Governance Audit | Productize A65 Customer Data Compliance Intake into a sellable audit. GDPR / SOC 2 / HIPAA / NZ Privacy gap analysis. v1.5. |
+| UC-34 | Workflow Extraction / Automation Advisory | BA + Planner deep-dive on client processes producing prioritized automation roadmap. Funnel into UC-06 BPA. v1.5. |
+| UC-35 | AI Content Generation at Scale | Researcher + Tech Writer + Brand Designer monthly content retainer. Blog packs, emails, social, product docs. v1.5. |
+| UC-37 | AI Bookkeeping / Tax Prep Automation | Build on UC-06 BPA Finance + UC-16 Integration. Turnkey AI bookkeeper for NZ-AU SMBs. v2. |
+| UC-38 | Agent Observability SaaS | Productize Watcher + agent_watcher infra into a thin SaaS for clients running their own agents. v3+. |
+| UC-39 | QA Automation as a Service | Bundle Tester persona + Playwright MCP for client codebases. v3+. |
+| UC-40 | AI-Native BI / Reporting Automation | Productize A47 BI/WorkIQ Intelligence Taxonomy + ClickHouse pipeline into client BI dashboards with anomaly alerts. v3+. |
+| UC-41 | AI Fine-Tuning / Custom Training | Train custom small models on client proprietary data. v3+ (defer until first customer asks). |
+| UC-42 | Prompt-Engineering Training & Toolkit | Hands-on workshop + custom prompt library licensing. v3+. |
 
 ## Operations Log
 
@@ -192,3 +216,4 @@ Source of truth: `11-work/registry.json` (159 entries)
 | O44 | 2026-04-04 | Hybrid Project Management Methodology defined (A70) | Felix | Kanban default + Scrum for enterprise + Waterfall for compliance |
 | O45 | 2026-04-05 | Two-Tier Agent Architecture proposal received (A71) | Vijay | Paperclip global + per-project containers; enterprise-grade |
 | O46 | 2026-05-10 | Hermes v0.13 Persona Team landed | Vijay+Felix | 17 personas across 5 disciplines (orchestration/product/engineering/design/knowledge); BV $40 + BP $50 subscription stacks; BA voice = Gemini 3.1 Flash Live (BV) / Grok voice-think-fast-1.0 (BP); 9 new use cases UC-21..UC-29; canonical Pattern A vs Pattern B persona-hosting docs |
+| O47 | 2026-05-10 | Repo restructured into numbered company-shaped tree | Vijay+Felix | Heavy reorg: 89 files moved across 14 numbered folders (00-meta..99-assets); 26 new persona/role stubs (4 AI exec + 10 Paperclip-11 + 4 human-delivery + 3 business-ops + 3 platform sub-team + 4 K&I new + Project Manager); CEA replaces BA; Abzum InterACT + Abzum ReQuire flagship products; services catalogue with click-links; ByteRover deprecated in favour of Hindsight + LLM Wiki + GitHub backup; 13 new use cases UC-30..UC-42; mermaid org chart with click-links; 6 new decisions D16-D21 |

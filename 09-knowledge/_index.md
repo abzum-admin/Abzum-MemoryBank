@@ -6,5 +6,5 @@
 
 | File | Title | Summary |
 |---|---|---|
-| `agent_tooling_inventory.md` | Agent Tools & Local Setup | ByteRover memory, Whisper, fallback flat-files, skills inventory |
+| `agent_tooling_inventory.md` | Agent Tooling Inventory | Hindsight + LLM Wiki memory (primary), ByteRover (legacy), Whisper, skills inventory |
 

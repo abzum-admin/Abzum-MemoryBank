@@ -85,6 +85,12 @@ def walk(root: Path) -> None:
         if not any(folder.rglob("*.md")):
             continue
         out = folder / "_index.md"
+        # Skip curated indexes (preserve hand-written content like mermaid charts)
+        if out.exists():
+            head = out.read_text(encoding="utf-8")[:200]
+            if "<!-- curated" in head or "DO NOT regenerate" in head:
+                print(f"SKIPPED (curated): {out.relative_to(root)}")
+                continue
         out.write_text(gen_for(folder) + "\n", encoding="utf-8")
         print(f"Wrote {out.relative_to(root)}")
 

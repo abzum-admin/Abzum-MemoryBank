@@ -2,7 +2,7 @@
 
 # Actions (Active)
 
-All non-completed actions from `11-work/registry.json`. 68 of 72 entries.
+All non-completed actions from `work/registry.json`. 74 of 78 entries.
 
 | ID | Title | Pri | Phase | Status | Owner | Depends |
 |---|---|---|---|---|---|---|
@@ -74,3 +74,9 @@ All non-completed actions from `11-work/registry.json`. 68 of 72 entries.
 | A70 | Define Hybrid Project Management Methodology for AI Agent Teams | P1 | 3 | pending | Felix | ['A50', 'A62', 'A67', 'A68', 'A47'] |
 | A71 | Implement Two-Tier Agent Architecture (Paperclip + Project Containers) | P1 | 2-3 | pending | Felix | ['A41', 'A42', 'A43', 'A49', 'A59', 'A66'] |
 | A72 | Research Best Jira / Mission Control Equivalent for AI Agents | P1 | 3 | pending | Felix | ['A43', 'A44', 'A47'] |
+| A73 | Build Abzum InterACT PoC (voice-activated dynamic CRM) | P1 | 3 | pending | Felix | ['A41', 'A66', 'A47', 'A75'] |
+| A74 | Migrate active ByteRover content to LLM Wiki + Hindsight + GitHub backup | P1 | 2 | pending | Felix | ['A41'] |
+| A75 | Build Abzum ReQuire v1 (productize CEA voice + mockup runtime, internal-use mode) | P1 | 3 | pending | Felix | ['A41'] |
+| A76 | Fill in 26 persona/role stubs from 2026-05-10 restructure | P2 | 3 | pending | Vijay+Felix | — |
+| A77 | Set hourly rate + first-customer pricing for services catalogue | P1 | 4 | decision_required | Vijay | ['A05'] |
+| A78 | Create remaining service .md files (per-service pages under 03-services/) | P2 | 3 | pending | Felix | — |

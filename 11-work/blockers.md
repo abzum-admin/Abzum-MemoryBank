@@ -2,7 +2,7 @@
 
 # Blockers
 
-4 entries from `11-work/registry.json`.
+4 entries from `work/registry.json`.
 
 | ID | Title | Blocks | Owner | Status |
 |---|---|---|---|---|

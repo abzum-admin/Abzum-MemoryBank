@@ -1,24 +1,42 @@
 ---
 id: strat-master-plan
 title: AI Company Master Plan
-summary: Comprehensive multi-phase strategy for Abzum
+summary: Comprehensive multi-phase strategy for Abzum — anchor products + services catalogue + 95% AI-agent organisation
 tags: [strategy, plan]
-updated: 2026-05-09
+updated: 2026-05-10
 load_priority: 65
 load_lane: context
 status: active
+related: [strat-persona-v013, product-interact, product-require, services-pricing]
 ---
 # AI Company Master Plan — Abzum New Zealand Limited
-**Version 1.0 — 2026-04-01**
+**Version 2.0 — 2026-05-10**
+
+> **Version 2.0 changelog (2026-05-10):**
+> - **Anchor product changed**: was "Custom CRM Build" (UC-01); now **Abzum InterACT** (voice-activated dynamic CRM, multi-tenant) + **Abzum ReQuire** (productized requirements elicitation). CRM Build remains as one of many services. (D18)
+> - **Memory stack changed**: ByteRover deprecated; primary stack is Hindsight (long-term) + LLM Wiki (procedural) + GitHub backup. (D16)
+> - **Exec layer = all-AI**: Felix repositions to CAIO; CDO + CSCO are new AI agents under Vijay. (D19)
+> - **Single client-facing AI persona**: BA folded into Client Engagement Agent (CEA). (D20)
+> - **Pricing model**: Hourly + per-project estimate (drops legacy ≤$15K rule). (D21)
+> - **Repo restructured** into numbered company-shaped tree (00-meta..99-assets). (D17)
 
 ---
 
 ## Executive Summary
 
-Build an AI-first software engineering company using **Paperclip AI** as the orchestration backbone, powered by **Superpowers** workflow principles, with a multi-tier model strategy within a **~$30/month budget**.
+Build a **95% AI-agent software engineering company** with two flagship products and a tiered services catalogue:
 
-> **Orchestration design:** See `08-strategy/agent_orchestration.md` for the full end-to-end agent orchestration architecture — 3-layer hierarchy, memory stack (Hermes + Hindsight + LLM Wiki), and agent lifecycle.
-> **Memory stack:** Hermes (runtime) + Hindsight (episodic/semantic/client memory) + LLM Wiki (procedural/SOPs) + ByteRover (cross-project patterns). See `05-process/memory_protocol.md`.
+- **Anchor products** (`04-products/`):
+  - **[Abzum InterACT](../04-products/interact/_index.md)** — voice-activated dynamic CRM, multi-tenant with parent-child hierarchy
+  - **[Abzum ReQuire](../04-products/require/_index.md)** — requirements elicitation product (used internally + sold to clients)
+- **Services catalogue** (`03-services/`): 17 v1 services + 4 v1.5 + 6 v3+; tiered pricing (Starter / Standard / Premium scope examples) on a hourly-plus-estimate model
+- **Org**: 1 human CEO (Vijay) + 4 AI execs (Felix CAIO / CDO / CSCO) + 19 L2 AI personas across Engineering / Project Delivery / Design / Knowledge & Intelligence + 4 future human L3 hires + 12 Tier-1 platform meta-agents + 3 business-ops + 3 future divisions = **43 roles**
+- **Runtime**: Hermes v0.13 (Tenacity Release) + Pipecat / LiveKit voice + Gemini 3.1 Flash Live (BV) / Grok voice-think-fast-1.0 (BP) for voice + Claude Pro / OpenCode Go subscriptions
+- **Memory**: Hindsight (episodic + semantic) + LLM Wiki (procedural + decisions) + ClickHouse (analytics) + GitHub (backup)
+- **Cost basis**: $40/mo Best-Value subscription stack OR $50/mo Best-Performance (per [`persona_team_v013.md`](persona_team_v013.md))
+
+> **Orchestration design:** See [`agent_orchestration.md`](agent_orchestration.md) for the full 3-layer hierarchy, memory stack, and agent lifecycle.
+> **Memory stack:** Hindsight + LLM Wiki + ClickHouse (was: + ByteRover; **deprecated 2026-05-10 per D16**). See [`05-process/memory_protocol.md`](../05-process/memory_protocol.md).
 
 ---
 

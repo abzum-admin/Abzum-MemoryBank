@@ -1,11 +1,11 @@
 {
   "version": 2,
-  "generated_at": "2026-05-10T01:19:37.000Z",
+  "generated_at": "2026-05-10T01:43:20.000Z",
   "active_context": [
     {
       "id": "now",
       "path": "01-identity\\now.md",
-      "tokens": 965,
+      "tokens": 1337,
       "load_priority": 95,
       "load_lane": "summary",
       "title": "Now \u2014 Current State"
@@ -13,7 +13,7 @@
     {
       "id": "agent-instructions",
       "path": "02-org\\01-executive\\felix-caio\\instructions.md",
-      "tokens": 981,
+      "tokens": 1008,
       "load_priority": 88,
       "load_lane": "context",
       "title": "Agent Operating Instructions"
@@ -21,7 +21,7 @@
     {
       "id": "agent-soul",
       "path": "02-org\\01-executive\\felix-caio\\soul.md",
-      "tokens": 542,
+      "tokens": 548,
       "load_priority": 85,
       "load_lane": "context",
       "title": "Felix Stanley \u2014 Soul"
@@ -29,23 +29,39 @@
     {
       "id": "agent-identity",
       "path": "02-org\\01-executive\\felix-caio\\identity.md",
-      "tokens": 254,
+      "tokens": 291,
       "load_priority": 80,
       "load_lane": "context",
-      "title": "Felix Stanley \u2014 Identity Card"
+      "title": "Felix Stanley \u2014 Identity Card (CAIO)"
     },
     {
       "id": "co-about",
       "path": "01-identity\\company_about.md",
-      "tokens": 677,
+      "tokens": 678,
       "load_priority": 70,
       "load_lane": "context",
       "title": "About Abzum"
     },
     {
+      "id": "persona-felix-caio-role",
+      "path": "02-org\\01-executive\\felix-caio\\role.md",
+      "tokens": 649,
+      "load_priority": 70,
+      "load_lane": "context",
+      "title": "Felix Stanley \u2014 CAIO Role"
+    },
+    {
+      "id": "persona-vijay-ceo",
+      "path": "02-org\\01-executive\\vijay_ceo_founder.md",
+      "tokens": 906,
+      "load_priority": 70,
+      "load_lane": "context",
+      "title": "Vijay Tilak \u2014 CEO & Founder"
+    },
+    {
       "id": "mem-long-term",
       "path": "10-memory\\long_term.md",
-      "tokens": 388,
+      "tokens": 389,
       "load_priority": 70,
       "load_lane": "summary",
       "title": "Long-Term Memory"
@@ -61,7 +77,7 @@
     {
       "id": "exec-workflow",
       "path": "05-process\\workflow_superpowers.md",
-      "tokens": 3058,
+      "tokens": 3057,
       "load_priority": 65,
       "load_lane": "context",
       "title": "Agent Workflow"
@@ -69,15 +85,31 @@
     {
       "id": "strat-master-plan",
       "path": "08-strategy\\master_plan.md",
-      "tokens": 1562,
+      "tokens": 2053,
       "load_priority": 65,
       "load_lane": "context",
       "title": "AI Company Master Plan"
     },
     {
+      "id": "persona-cdo",
+      "path": "02-org\\01-executive\\cdo_chief_delivery_officer.md",
+      "tokens": 1129,
+      "load_priority": 60,
+      "load_lane": "context",
+      "title": "CDO \u2014 Chief Delivery Officer"
+    },
+    {
+      "id": "persona-csco",
+      "path": "02-org\\01-executive\\csco_chief_security_compliance_officer.md",
+      "tokens": 1119,
+      "load_priority": 60,
+      "load_lane": "context",
+      "title": "CSCO \u2014 Chief Security & Compliance Officer"
+    },
+    {
       "id": "strat-orchestration",
       "path": "08-strategy\\agent_orchestration.md",
-      "tokens": 2312,
+      "tokens": 2320,
       "load_priority": 60,
       "load_lane": "context",
       "title": "Agent Orchestration"
@@ -93,7 +125,7 @@
     {
       "id": "strat-persona-v013",
       "path": "08-strategy\\persona_team_v013.md",
-      "tokens": 3664,
+      "tokens": 3768,
       "load_priority": 60,
       "load_lane": "context",
       "title": "Persona Team \u2014 Hermes v0.13"
@@ -101,7 +133,7 @@
     {
       "id": "strat-two-tier",
       "path": "08-strategy\\two_tier_architecture.md",
-      "tokens": 3148,
+      "tokens": 3155,
       "load_priority": 60,
       "load_lane": "context",
       "title": "Two-Tier Agent Architecture"
@@ -115,9 +147,17 @@
       "title": "Phases to First Revenue"
     },
     {
+      "id": "services-pricing",
+      "path": "03-services\\pricing.md",
+      "tokens": 981,
+      "load_priority": 55,
+      "load_lane": "context",
+      "title": "Pricing Model"
+    },
+    {
       "id": "exec-handoff",
       "path": "05-process\\handoff.md",
-      "tokens": 1182,
+      "tokens": 1183,
       "load_priority": 55,
       "load_lane": "context",
       "title": "Handoff Protocol"
@@ -133,7 +173,7 @@
     {
       "id": "exec-uc-team-mapping",
       "path": "05-process\\use_case_team_mapping.md",
-      "tokens": 2212,
+      "tokens": 2224,
       "load_priority": 55,
       "load_lane": "context",
       "title": "Use Case \u2192 Persona Team Mapping"
@@ -161,14 +201,6 @@
       "load_priority": 55,
       "load_lane": "context",
       "title": "AI-Native 5-Tier Org Model"
-    },
-    {
-      "id": "co-felix",
-      "path": "02-org\\01-executive\\felix-caio\\role.md",
-      "tokens": 493,
-      "load_priority": 50,
-      "load_lane": "context",
-      "title": "Felix Stanley (COO)"
     },
     {
       "id": "exec-capabilities",
@@ -221,7 +253,7 @@
     {
       "id": "ops-data",
       "path": "06-infrastructure\\01-cloud\\data.md",
-      "tokens": 708,
+      "tokens": 714,
       "load_priority": 45,
       "load_lane": "context",
       "title": "Data Architecture"
@@ -244,9 +276,9 @@
     }
   ],
   "lane_tokens": {
-    "context": 35585,
-    "summary": 1353
+    "context": 40575,
+    "summary": 1726
   },
-  "total_tokens": 36938,
-  "source_fingerprint": "a918bb1822ed832af61b40b3f84cbb7bea83f2c0f115f6368a01f822a808d5ad"
+  "total_tokens": 42301,
+  "source_fingerprint": "f2e29023b1445806097766c91a717a2eb1ea7e722833828277574766fd1d3f55"
 }

@@ -1,25 +1,31 @@
 ---
-id: co-felix
-title: Felix Stanley (COO)
-summary: Felix Stanley's profile, role, and background
-tags: [team, felix]
-updated: 2026-05-09
-load_priority: 50
+id: persona-felix-caio-role
+title: Felix Stanley — CAIO Role
+summary: Felix's role definition as Chief AI Officer (Tier 1 exec). Owns agent architecture, model selection, AI governance, orchestration. Repositioned from COO 2026-05-10.
+tags: [persona, executive, exec, caio, felix, tier-1]
+updated: 2026-05-10
+load_priority: 70
 load_lane: context
 status: active
+discipline: executive
+tier: 1
+reports_to: persona-vijay-ceo
+manages: [persona-orchestrator, persona-watcher, persona-router, persona-cost-optimizer, persona-provisioning, persona-project-allocator, persona-strategy-meta, persona-monitoring-audit, persona-compliance-meta, persona-rbac, persona-memory-manager]
+related: [agent-soul, agent-identity, agent-instructions, persona-cdo, persona-csco]
 ---
-# Team Member — Felix Stanley
+# Felix Stanley — Chief AI Officer (CAIO)
 
 ## Identity
 
 | Field | Value |
 |-------|-------|
 | **Name** | Felix Stanley |
-| **Title** | Chief Operating Officer (COO) |
+| **Title** | Chief AI Officer (CAIO) |
 | **Company** | Abzum New Zealand Limited |
 | **Email** | felix.stanley@abzum.com |
 | **Emoji** | 🦊 |
 | **Persona** | Sharp, efficient, resourceful — keeps the machine running |
+| **Reports to** | Vijay Tilak (CEO/Founder) |
 
 ---
 

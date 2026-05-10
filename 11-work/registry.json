@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "updated": "2026-05-10",
   "namespaces": {
     "A##": "Action",
@@ -81,7 +81,13 @@
     {"id": "A69", "title": "Implement Dynamic Agent Provisioning System", "priority": "P1", "phase": 3, "status": "pending", "owner": "Felix", "depends_on": ["A43", "A49", "A50", "A54", "A62", "A67", "A68", "A45", "A51", "A42"]},
     {"id": "A70", "title": "Define Hybrid Project Management Methodology for AI Agent Teams", "priority": "P1", "phase": 3, "status": "pending", "owner": "Felix", "depends_on": ["A50", "A62", "A67", "A68", "A47"]},
     {"id": "A71", "title": "Implement Two-Tier Agent Architecture (Paperclip + Project Containers)", "priority": "P1", "phase": "2-3", "status": "pending", "owner": "Felix", "depends_on": ["A41", "A42", "A43", "A49", "A59", "A66"]},
-    {"id": "A72", "title": "Research Best Jira / Mission Control Equivalent for AI Agents", "priority": "P1", "phase": 3, "status": "pending", "owner": "Felix", "depends_on": ["A43", "A44", "A47"]}
+    {"id": "A72", "title": "Research Best Jira / Mission Control Equivalent for AI Agents", "priority": "P1", "phase": 3, "status": "pending", "owner": "Felix", "depends_on": ["A43", "A44", "A47"]},
+    {"id": "A73", "title": "Build Abzum InterACT PoC (voice-activated dynamic CRM)", "priority": "P1", "phase": 3, "status": "pending", "owner": "Felix", "depends_on": ["A41", "A66", "A47", "A75"]},
+    {"id": "A74", "title": "Migrate active ByteRover content to LLM Wiki + Hindsight + GitHub backup", "priority": "P1", "phase": 2, "status": "pending", "owner": "Felix", "depends_on": ["A41"]},
+    {"id": "A75", "title": "Build Abzum ReQuire v1 (productize CEA voice + mockup runtime, internal-use mode)", "priority": "P1", "phase": 3, "status": "pending", "owner": "Felix", "depends_on": ["A41"]},
+    {"id": "A76", "title": "Fill in 26 persona/role stubs from 2026-05-10 restructure", "priority": "P2", "phase": 3, "status": "pending", "owner": "Vijay+Felix", "depends_on": []},
+    {"id": "A77", "title": "Set hourly rate + first-customer pricing for services catalogue", "priority": "P1", "phase": 4, "status": "decision_required", "owner": "Vijay", "depends_on": ["A05"]},
+    {"id": "A78", "title": "Create remaining service .md files (per-service pages under 03-services/)", "priority": "P2", "phase": 3, "status": "pending", "owner": "Felix", "depends_on": []}
   ],
   "blockers": [
     {"id": "B01", "title": "Vijay has not answered 6 blocker decisions (P01-P06)", "blocks": "Phase 0 completion, all downstream phases", "owner": "Vijay", "status": "open"},
@@ -112,7 +118,13 @@
     {"id": "D12", "title": "Gatekeeper comms model - Comms Pipeline Agent", "date": "2026-04-01", "rationale": "Brand, compliance, and relationship protection", "owner": "Vijay"},
     {"id": "D13", "title": "Shared Comms Pipeline Agent until 10+ customers", "date": "2026-04-01", "rationale": "Simplicity before scale", "owner": "Vijay"},
     {"id": "D14", "title": "Work tree structure in ByteRover for planning", "date": "2026-04-01", "rationale": "Living document for actions, decisions, blockers", "owner": "Vijay"},
-    {"id": "D15", "title": "Context tree access: Vijay L4, Team L2", "date": "2026-04-01", "rationale": "Clearance model from Access Control Framework", "owner": "Vijay"}
+    {"id": "D15", "title": "Context tree access: Vijay L4, Team L2", "date": "2026-04-01", "rationale": "Clearance model from Access Control Framework", "owner": "Vijay"},
+    {"id": "D16", "title": "Replace ByteRover with Hindsight + LLM Wiki + GitHub backup; supersedes D05", "date": "2026-05-10", "rationale": "Single-provider clarity, 91.4% LongMemEval coverage, GitHub-native backup, ByteRover already flagged deprecated in agent_orchestration.md but contradicted in 3 other files", "owner": "Vijay+Felix"},
+    {"id": "D17", "title": "Restructure repo into numbered company-shaped tree (00-meta..99-assets)", "date": "2026-05-10", "rationale": "Function-shaped folders replaced with company-shaped tree mirroring real-org structure; agent-first navigation; click-link mermaid org chart", "owner": "Vijay+Felix"},
+    {"id": "D18", "title": "Drop CRM as anchor product; introduce Abzum InterACT (voice-activated dynamic multi-tenant CRM) as flagship plus Abzum ReQuire (requirements elicitation product)", "date": "2026-05-10", "rationale": "CRM becomes one of many services. New anchor products are voice-activated, real-time-rendering, multi-tenant CRM (InterACT) plus a productized requirements elicitation tool (ReQuire)", "owner": "Vijay"},
+    {"id": "D19", "title": "All-AI exec layer: Felix repositions to CAIO; CDO + CSCO are new AI agents under Vijay (CEO/Founder, human)", "date": "2026-05-10", "rationale": "Reflects 95% AI-agent goal at exec level", "owner": "Vijay"},
+    {"id": "D20", "title": "Single client-facing AI persona = Client Engagement Agent (merges BA + Account Manager + Client Comms)", "date": "2026-05-10", "rationale": "User preference: one AI agent for all client communication, paired with human Delivery Manager; supersedes standalone BA persona", "owner": "Vijay"},
+    {"id": "D21", "title": "Pricing model: Hourly + per-project estimate (drops legacy <=$15K rule)", "date": "2026-05-10", "rationale": "UC-23 ranges to $50K; rigid cap discouraged high-value engagements", "owner": "Vijay"}
   ],
   "use_cases": [
     {"id": "UC-01", "title": "Custom CRM Build", "description": "Anchor product. ~$15K, 2-4 week delivery. Positioning: intelligent business operating system."},
@@ -131,7 +143,19 @@
     {"id": "UC-26", "title": "Code/Security Audit on Existing Codebase", "description": "Client provides codebase; Abzum audits vulnerabilities, code quality, architectural risk. Researcher + Senior Coder + Security."},
     {"id": "UC-27", "title": "Production Incident Response", "description": "Severity-graded response. DevOps first responder, Senior Coder root-cause, Architect for structural fixes, Tech Writer postmortem."},
     {"id": "UC-28", "title": "Ongoing Maintenance / On-call", "description": "Continuous engagement keeping a deployed system patched and healthy. DevOps + Junior Coder + Tester on ongoing Kanban."},
-    {"id": "UC-29", "title": "Explainer / Demo Reel Production", "description": "Product demo video or social short. BA → Tech Writer (script) → Brand → Motion."}
+    {"id": "UC-29", "title": "Explainer / Demo Reel Production", "description": "Product demo video or social short. BA → Tech Writer (script) → Brand → Motion."},
+    {"id": "UC-30", "title": "Abzum InterACT — Tenant Deployment", "description": "Per-tenant deployment of the Abzum InterACT voice-activated dynamic CRM product (see 04-products/interact/). v1 service. Setup fee + monthly hosting."},
+    {"id": "UC-31", "title": "Abzum ReQuire — Tenant Deployment", "description": "Per-tenant deployment of the Abzum ReQuire requirements elicitation product (see 04-products/require/). v1 service. Setup fee + monthly hosting + per-discovery-call fee."},
+    {"id": "UC-32", "title": "Voice Agent Deployment for Clients", "description": "Productize the BA voice stack (Pipecat / LiveKit + Recall.ai + Gemini Flash Live or Grok) as customer-service voice agents, IVR replacements, sales-intake bots. v1.5."},
+    {"id": "UC-33", "title": "AI Compliance / Data Governance Audit", "description": "Productize A65 Customer Data Compliance Intake into a sellable audit. GDPR / SOC 2 / HIPAA / NZ Privacy gap analysis. v1.5."},
+    {"id": "UC-34", "title": "Workflow Extraction / Automation Advisory", "description": "BA + Planner deep-dive on client processes producing prioritized automation roadmap. Funnel into UC-06 BPA. v1.5."},
+    {"id": "UC-35", "title": "AI Content Generation at Scale", "description": "Researcher + Tech Writer + Brand Designer monthly content retainer. Blog packs, emails, social, product docs. v1.5."},
+    {"id": "UC-37", "title": "AI Bookkeeping / Tax Prep Automation", "description": "Build on UC-06 BPA Finance + UC-16 Integration. Turnkey AI bookkeeper for NZ-AU SMBs. v2."},
+    {"id": "UC-38", "title": "Agent Observability SaaS", "description": "Productize Watcher + agent_watcher infra into a thin SaaS for clients running their own agents. v3+."},
+    {"id": "UC-39", "title": "QA Automation as a Service", "description": "Bundle Tester persona + Playwright MCP for client codebases. v3+."},
+    {"id": "UC-40", "title": "AI-Native BI / Reporting Automation", "description": "Productize A47 BI/WorkIQ Intelligence Taxonomy + ClickHouse pipeline into client BI dashboards with anomaly alerts. v3+."},
+    {"id": "UC-41", "title": "AI Fine-Tuning / Custom Training", "description": "Train custom small models on client proprietary data. v3+ (defer until first customer asks)."},
+    {"id": "UC-42", "title": "Prompt-Engineering Training & Toolkit", "description": "Hands-on workshop + custom prompt library licensing. v3+."}
   ],
   "operations_log": [
     {"id": "O01", "date": "2026-04-01", "title": "BIMemoryBank Architecture received", "owner": "Vijay", "significance": "Foundation for centralized BI memory bank"},
@@ -178,6 +202,7 @@
     {"id": "O43", "date": "2026-04-04", "title": "Dynamic Agent Provisioning Plan created (A69)", "owner": "Felix", "significance": "Agent Kubernetes vision: right agents/size/cost/time"},
     {"id": "O44", "date": "2026-04-04", "title": "Hybrid Project Management Methodology defined (A70)", "owner": "Felix", "significance": "Kanban default + Scrum for enterprise + Waterfall for compliance"},
     {"id": "O45", "date": "2026-04-05", "title": "Two-Tier Agent Architecture proposal received (A71)", "owner": "Vijay", "significance": "Paperclip global + per-project containers; enterprise-grade"},
-    {"id": "O46", "date": "2026-05-10", "title": "Hermes v0.13 Persona Team landed", "owner": "Vijay+Felix", "significance": "17 personas across 5 disciplines (orchestration/product/engineering/design/knowledge); BV $40 + BP $50 subscription stacks; BA voice = Gemini 3.1 Flash Live (BV) / Grok voice-think-fast-1.0 (BP); 9 new use cases UC-21..UC-29; canonical Pattern A vs Pattern B persona-hosting docs"}
+    {"id": "O46", "date": "2026-05-10", "title": "Hermes v0.13 Persona Team landed", "owner": "Vijay+Felix", "significance": "17 personas across 5 disciplines (orchestration/product/engineering/design/knowledge); BV $40 + BP $50 subscription stacks; BA voice = Gemini 3.1 Flash Live (BV) / Grok voice-think-fast-1.0 (BP); 9 new use cases UC-21..UC-29; canonical Pattern A vs Pattern B persona-hosting docs"},
+    {"id": "O47", "date": "2026-05-10", "title": "Repo restructured into numbered company-shaped tree", "owner": "Vijay+Felix", "significance": "Heavy reorg: 89 files moved across 14 numbered folders (00-meta..99-assets); 26 new persona/role stubs (4 AI exec + 10 Paperclip-11 + 4 human-delivery + 3 business-ops + 3 platform sub-team + 4 K&I new + Project Manager); CEA replaces BA; Abzum InterACT + Abzum ReQuire flagship products; services catalogue with click-links; ByteRover deprecated in favour of Hindsight + LLM Wiki + GitHub backup; 13 new use cases UC-30..UC-42; mermaid org chart with click-links; 6 new decisions D16-D21"}
   ]
 }

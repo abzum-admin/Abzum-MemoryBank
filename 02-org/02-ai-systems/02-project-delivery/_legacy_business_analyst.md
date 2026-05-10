@@ -1,17 +1,22 @@
 ---
-id: persona-business-analyst
-title: Business Analyst (Realtime Voice + Mockup)
-summary: Joins client Meet calls, talks in real time, generates UI mockups live, captures budget and scope, produces requirements doc
-tags: [persona, product, voice, ba]
+id: persona-business-analyst-legacy
+title: Business Analyst (LEGACY — superseded by Client Engagement Agent)
+summary: ARCHIVED 2026-05-10. Scope absorbed into the Client Engagement Agent (CEA) which adds Account Manager + Client Comms responsibilities.
+tags: [persona, product, voice, ba, archived]
 updated: 2026-05-10
-load_priority: 50
+load_priority: 10
 load_lane: reference
-status: active
-discipline: product
-tier: 1
-related: [strat-persona-v013, exec-persona-hermes-config]
+status: archived
+related: [persona-client-engagement-agent]
 ---
-# Business Analyst — Realtime Voice + Mockup
+
+> ## ⚠️ ARCHIVED 2026-05-10
+>
+> This persona was superseded by the **[Client Engagement Agent (CEA)](client_engagement_agent.md)**. The CEA absorbs the BA's discovery + voice runtime + mockup capabilities and adds Account Manager + Client Communication scope. All references should point at the CEA.
+>
+> Original content preserved below for migration history.
+
+# Business Analyst — Realtime Voice + Mockup (legacy content)
 
 ## Function
 The BA joins Google Meet (or Zoom / Teams) calls with clients, conducts a real-time discovery conversation — listening, asking probing questions, generating UI mockups live during the call, capturing budget and scope — and produces a structured requirements document handed to the Planner. **Critical separation**: the BA runtime lives outside Hermes (Pipecat or LiveKit Agents) because Hermes' xAI Custom Voices TTS is a one-way speaker; client conversations require a bidirectional realtime model.

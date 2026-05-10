@@ -32,3 +32,9 @@
 | D13 | Shared Comms Pipeline Agent until 10+ customers | 2026-04-01 | Simplicity before scale | Vijay |
 | D14 | Work tree structure in ByteRover for planning | 2026-04-01 | Living document for actions, decisions, blockers | Vijay |
 | D15 | Context tree access: Vijay L4, Team L2 | 2026-04-01 | Clearance model from Access Control Framework | Vijay |
+| D16 | Replace ByteRover with Hindsight + LLM Wiki + GitHub backup; supersedes D05 | 2026-05-10 | Single-provider clarity, 91.4% LongMemEval coverage, GitHub-native backup, ByteRover already flagged deprecated in agent_orchestration.md but contradicted in 3 other files | Vijay+Felix |
+| D17 | Restructure repo into numbered company-shaped tree (00-meta..99-assets) | 2026-05-10 | Function-shaped folders replaced with company-shaped tree mirroring real-org structure; agent-first navigation; click-link mermaid org chart | Vijay+Felix |
+| D18 | Drop CRM as anchor product; introduce Abzum InterACT (voice-activated dynamic multi-tenant CRM) as flagship plus Abzum ReQuire (requirements elicitation product) | 2026-05-10 | CRM becomes one of many services. New anchor products are voice-activated, real-time-rendering, multi-tenant CRM (InterACT) plus a productized requirements elicitation tool (ReQuire) | Vijay |
+| D19 | All-AI exec layer: Felix repositions to CAIO; CDO + CSCO are new AI agents under Vijay (CEO/Founder, human) | 2026-05-10 | Reflects 95% AI-agent goal at exec level | Vijay |
+| D20 | Single client-facing AI persona = Client Engagement Agent (merges BA + Account Manager + Client Comms) | 2026-05-10 | User preference: one AI agent for all client communication, paired with human Delivery Manager; supersedes standalone BA persona | Vijay |
+| D21 | Pricing model: Hourly + per-project estimate (drops legacy <=$15K rule) | 2026-05-10 | UC-23 ranges to $50K; rigid cap discouraged high-value engagements | Vijay |

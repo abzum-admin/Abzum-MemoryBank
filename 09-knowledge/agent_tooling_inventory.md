@@ -1,17 +1,34 @@
 ---
-id: agent-tools
-title: Agent Tools & Local Setup
-summary: ByteRover memory, Whisper, fallback flat-files, skills inventory
-tags: [agent, tools]
-updated: 2026-05-09
+id: agent-tooling-inventory
+title: Agent Tooling Inventory
+summary: Hindsight + LLM Wiki memory (primary), ByteRover (legacy), Whisper, skills inventory
+tags: [agent, tools, knowledge]
+updated: 2026-05-10
 load_priority: 60
 load_lane: reference
 status: active
+related: [strat-orchestration, exec-memory-protocol]
 ---
-# 09-knowledge/agent_tooling_inventory.md - Local Notes
+# Agent Tooling Inventory
 
-## ByteRover Memory System (Primary)
-ByteRover is the persistent memory system for Abzum's project context. Full integration is now active:
+> **2026-05-10 — Memory stack swap**: ByteRover is **deprecated as primary** per decision **D16** in `11-work/registry.json`. New primary stack: **Hindsight** (long-term episodic + semantic, 91.4% LongMemEval coverage) + **LLM Wiki** (procedural + decisions, markdown in git) + **GitHub backup**. ByteRover content is being migrated under action **A74**; legacy notes preserved at `06-infrastructure/05-memory-stack/legacy_byterover.md` (to be created). Section below remains for migration-history reference only.
+
+## Memory Stack — Primary (post 2026-05-10)
+
+| Layer | System | Stores | Status |
+|---|---|---|---|
+| **Long-term episodic + semantic** | Hindsight (Vectorize.io, MIT) | World / Experience / Opinion / Observation networks; PostgreSQL + pgvector | Migration in flight (A74) |
+| **Procedural + decisions** | LLM Wiki (Karpathy pattern) | `entities/`, `concepts/`, `procedures/`, `decisions/`, `syntheses/` — markdown in git | New |
+| **Analytics layer** | ClickHouse (Apache 2.0) | Structured signal events, BI feedback | Existing |
+| **Backup** | GitHub | LLM Wiki branches + Hindsight snapshots | Replaces ByteRover Git Sync |
+
+See [`08-strategy/agent_orchestration.md`](../08-strategy/agent_orchestration.md) §Memory Stack for full spec.
+
+## ByteRover Memory System (LEGACY — being migrated out)
+
+> ⚠️ **Status: deprecated 2026-05-10** (D16). Notes below preserved for migration history (A74). Do not depend on ByteRover for new agent work.
+
+ByteRover was the persistent memory system for Abzum's project context. Full integration was active until D16:
 
 **Components installed:**
 - ByteRover CLI (`/home/node/.openclaw/workspace/node_modules/.bin/brv`) — v2.5.1

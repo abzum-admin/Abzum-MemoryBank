@@ -9,7 +9,7 @@ load_lane: summary
 status: active
 ---
 # NOW — Current State
-**Updated: 2026-05-10**
+**Updated: 2026-05-10 (afternoon)**
 
 ---
 
@@ -17,9 +17,16 @@ status: active
 
 | Task | Status | Doc |
 |---|---|---|
-| Hermes v0.13 Persona Team landed (O46) | ✅ Done | [08-strategy/persona_team_v013.md](../08-strategy/persona_team_v013.md) · [personas/](personas/) · [05-process/persona_hermes_config.md](../05-process/persona_hermes_config.md) · [05-process/use_case_team_mapping.md](../05-process/use_case_team_mapping.md) |
-| BA voice runtime decided: Gemini 3.1 Flash Live (BV) / Grok voice-think-fast-1.0 (BP) | ✅ Done | [02-org/02-ai-systems/02-project-delivery/_legacy_business_analyst.md](../02-org/02-ai-systems/02-project-delivery/_legacy_business_analyst.md) |
-| 9 new use cases UC-21..UC-29 added to registry | ✅ Done | [11-work/registry.json](11-work/registry.json) |
+| Repo restructured into numbered company-shaped tree (O47, D17) | ✅ Done | [02-org/_index.md](../02-org/_index.md) · [03-services/_index.md](../03-services/_index.md) · [04-products/_index.md](../04-products/_index.md) |
+| New flagship products: Abzum InterACT + Abzum ReQuire (D18) | ✅ Done | [04-products/interact/_index.md](../04-products/interact/_index.md) · [04-products/require/_index.md](../04-products/require/_index.md) |
+| Client Engagement Agent (CEA) — supersedes BA + Account Manager + Client Comms (D20) | ✅ Done | [02-org/02-ai-systems/02-project-delivery/client_engagement_agent.md](../02-org/02-ai-systems/02-project-delivery/client_engagement_agent.md) |
+| All-AI exec layer: Felix→CAIO, CDO + CSCO new AI exec stubs (D19) | ✅ Done | [02-org/01-executive/](../02-org/01-executive/) |
+| ByteRover deprecated; Hindsight + LLM Wiki + GitHub backup as primary (D16) | ✅ Done (deprecation noted) | [09-knowledge/agent_tooling_inventory.md](../09-knowledge/agent_tooling_inventory.md) |
+| Services catalogue with click-links + pricing model (D21) | ✅ Done | [03-services/_index.md](../03-services/_index.md) · [03-services/pricing.md](../03-services/pricing.md) |
+| 13 new use cases UC-30..UC-42; 6 new decisions D16-D21; 6 new actions A73-A78 | ✅ Done | [11-work/registry.json](../11-work/registry.json) |
+| Hermes v0.13 Persona Team landed (O46) | ✅ Done | [08-strategy/persona_team_v013.md](../08-strategy/persona_team_v013.md) · [05-process/persona_hermes_config.md](../05-process/persona_hermes_config.md) · [05-process/use_case_team_mapping.md](../05-process/use_case_team_mapping.md) |
+| BA voice runtime decided: Gemini 3.1 Flash Live (BV) / Grok voice-think-fast-1.0 (BP) | ✅ Done | [02-org/02-ai-systems/02-project-delivery/client_engagement_agent.md](../02-org/02-ai-systems/02-project-delivery/client_engagement_agent.md) |
+| 9 new use cases UC-21..UC-29 added | ✅ Done | [11-work/registry.json](../11-work/registry.json) |
 
 ---
 

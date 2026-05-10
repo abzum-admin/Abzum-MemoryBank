@@ -56,3 +56,20 @@ Ongoing project tracking and orchestration during execution. Watches the Kanban 
 ## References
 - [`05-process/kanban_and_pm.md`](../../../05-process/kanban_and_pm.md)
 - [`08-strategy/persona_team_v013.md`](../../../08-strategy/persona_team_v013.md) — needs PM added
+
+---
+
+<!-- backlinks-start -->
+
+## Referenced by
+
+- [Cdo Chief Delivery Officer](../../01-executive/cdo_chief_delivery_officer.md)
+- [Client Engagement Agent](client_engagement_agent.md)
+- [Planner](planner.md)
+- [Orchestrator](../../04-platform-orchestration/01-orchestration/orchestrator.md)
+- [Watcher](../../04-platform-orchestration/01-orchestration/watcher.md)
+- [Pricing](../../../03-services/pricing.md)
+- [Kanban And Pm](../../../05-process/kanban_and_pm.md)
+- [Persona Team V013](../../../08-strategy/persona_team_v013.md)
+
+<!-- backlinks-end -->

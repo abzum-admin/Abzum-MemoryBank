@@ -45,3 +45,17 @@ Maintains the company's institutional knowledge as a living graph. Curates Hinds
 ## References
 - [`06-infrastructure/05-memory-stack/`](../../../../06-infrastructure/05-memory-stack/) (to be created)
 - [`07-research/hermes-hindsight/`](../../../../07-research/hermes-hindsight/)
+
+---
+
+<!-- backlinks-start -->
+
+## Referenced by
+
+- [Learning Agent](learning_agent.md)
+- [Search Retrieval Agent](search_retrieval_agent.md)
+- [Memory Manager](../../04-platform-orchestration/03-governance/memory_manager.md)
+- [Llm Wiki](../../../06-infrastructure/05-memory-stack/llm_wiki.md)
+- [Overview](../../../06-infrastructure/05-memory-stack/overview.md)
+
+<!-- backlinks-end -->

@@ -27,3 +27,17 @@ Given a routed request, picks the persona team to staff it (using `05-process/us
 ## References
 - [`05-process/use_case_team_mapping.md`](../../../05-process/use_case_team_mapping.md)
 - [`08-strategy/agent_orchestration.md`](../../../08-strategy/agent_orchestration.md)
+
+---
+
+<!-- backlinks-start -->
+
+## Referenced by
+
+- [Orchestrator](orchestrator.md)
+- [Router](router.md)
+- [Cost Optimizer](../02-cost-and-routing/cost_optimizer.md)
+- [Use Case Team Mapping](../../../05-process/use_case_team_mapping.md)
+- [Agent Orchestration](../../../08-strategy/agent_orchestration.md)
+
+<!-- backlinks-end -->

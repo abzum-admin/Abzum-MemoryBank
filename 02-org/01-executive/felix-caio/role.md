@@ -79,3 +79,23 @@ related: [agent-soul, agent-identity, agent-instructions, persona-cdo, persona-c
 
 *Prepared by: Felix Stanley, COO — Abzum New Zealand Limited*
 *Date: 2026-04-01*
+
+---
+
+<!-- backlinks-start -->
+
+## Referenced by
+
+- [Start Here](../../../00-meta/START_HERE.md)
+- [Cdo Chief Delivery Officer](../cdo_chief_delivery_officer.md)
+- [Csco Chief Security Compliance Officer](../csco_chief_security_compliance_officer.md)
+- [Identity](identity.md)
+- [Instructions](instructions.md)
+- [Vijay Ceo Founder](../vijay_ceo_founder.md)
+- [Principal Engineer](../../03-human-delivery/principal_engineer.md)
+- [Solution Architect](../../03-human-delivery/solution_architect.md)
+- [Strategy Meta](../../04-platform-orchestration/01-orchestration/strategy_meta.md)
+- [Model Routing](../../04-platform-orchestration/02-cost-and-routing/model_routing.md)
+- [Hr Talent](../../05-business-ops/hr_talent.md)
+
+<!-- backlinks-end -->

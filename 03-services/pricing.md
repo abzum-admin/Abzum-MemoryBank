@@ -81,3 +81,32 @@ These are itemised separately in invoices for transparency.
 - [`08-strategy/persona_team_v013.md`](../08-strategy/persona_team_v013.md) — BV/BP subscription stacks (Abzum's own cost basis)
 - A55 Customer Project Estimation & Job Costing System
 - A56 Estimation Variance → BI Signals pipeline
+
+---
+
+<!-- backlinks-start -->
+
+## Referenced by
+
+- [Now](../01-identity/now.md)
+- [Positioning](../01-identity/positioning.md)
+- [Ai Chatbot](01-build/ai_chatbot.md)
+- [Crm Build](01-build/crm_build.md)
+- [Crm Migration](01-build/crm_migration.md)
+- [Interact Deploy](01-build/interact_deploy.md)
+- [Require Deploy](01-build/require_deploy.md)
+- [Saas Internal Tool](01-build/saas_internal_tool.md)
+- [System Integration](01-build/system_integration.md)
+- [Website](01-build/website.md)
+- [Business Process Automation](02-automation/business_process_automation.md)
+- [Code Security Audit](03-audit-advisory/code_security_audit.md)
+- [Explainer Demo Reel](04-creative-content/explainer_demo_reel.md)
+- [Marketing Campaign](04-creative-content/marketing_campaign.md)
+- [Pitch Deck](04-creative-content/pitch_deck.md)
+- [Research Document](05-research-knowledge/research_document.md)
+- [Incident Response](06-managed-ongoing/incident_response.md)
+- [Maintenance On Call](06-managed-ongoing/maintenance_on_call.md)
+- [Master Plan](../08-strategy/master_plan.md)
+- [Agents](../AGENTS.md)
+
+<!-- backlinks-end -->

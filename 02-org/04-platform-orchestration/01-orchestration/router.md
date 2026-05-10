@@ -27,3 +27,15 @@ Routes incoming requests to the appropriate project container after Triage class
 
 ## References
 - [`08-strategy/agent_orchestration.md`](../../../08-strategy/agent_orchestration.md) — Paperclip Meta-Layer §11 meta-agents
+
+---
+
+<!-- backlinks-start -->
+
+## Referenced by
+
+- [Orchestrator](orchestrator.md)
+- [Project Allocator](project_allocator.md)
+- [Agent Orchestration](../../../08-strategy/agent_orchestration.md)
+
+<!-- backlinks-end -->

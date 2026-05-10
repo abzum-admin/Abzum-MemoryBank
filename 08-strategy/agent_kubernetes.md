@@ -32,3 +32,14 @@ Agents provisioned on demand; scaled to match project requirements; right agents
 - **compute_unit**: Agents are the compute unit in Abzum [project]
 - **provisioning_model**: Agents are provisioned on demand [project]
 - **optimization_goal**: Goal is right agents, right size, right cost, right time [project]
+
+---
+
+<!-- backlinks-start -->
+
+## Referenced by
+
+- [Plan Of Action](../07-research/hermes-hindsight/plan_of_action.md)
+- [Ai Native Org Overview](ai_native_org_overview.md)
+
+<!-- backlinks-end -->

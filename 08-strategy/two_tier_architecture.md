@@ -285,3 +285,19 @@ abzum.cloud  (76.13.213.212 — KVM 2, Ubuntu 24.04, 8GB RAM)
 *Owner: Felix Stanley (COO)*
 *Version 1.0 — 2026-04-14*
 *Supersedes: v0.1 stub (2026-04-05)*
+
+---
+
+<!-- backlinks-start -->
+
+## Referenced by
+
+- [ Personas Readme](../02-org/02-ai-systems/_personas_readme.md)
+- [Orchestrator](../02-org/04-platform-orchestration/01-orchestration/orchestrator.md)
+- [Provisioning](../02-org/04-platform-orchestration/01-orchestration/provisioning.md)
+- [Rbac](../02-org/04-platform-orchestration/03-governance/rbac.md)
+- [Vps Team](../02-org/04-platform-orchestration/04-vps-orchestration/vps_team.md)
+- [Plan Of Action](../07-research/hermes-hindsight/plan_of_action.md)
+- [Persona Team V013](persona_team_v013.md)
+
+<!-- backlinks-end -->

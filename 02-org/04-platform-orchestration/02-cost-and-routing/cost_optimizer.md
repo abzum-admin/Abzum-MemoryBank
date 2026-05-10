@@ -27,3 +27,19 @@ Sets model-selection policy across the org: when to use BV stack vs BP stack, wh
 ## References
 - [`08-strategy/persona_team_v013.md`](../../../08-strategy/persona_team_v013.md) — BV / BP subscription stacks
 - [`05-process/persona_hermes_config.md`](../../../05-process/persona_hermes_config.md)
+
+---
+
+<!-- backlinks-start -->
+
+## Referenced by
+
+- [Learning Agent](../../02-ai-systems/04-knowledge-intelligence/learning_agent.md)
+- [Project Allocator](../01-orchestration/project_allocator.md)
+- [Strategy Meta](../01-orchestration/strategy_meta.md)
+- [Model Routing](model_routing.md)
+- [Finance Billing](../../05-business-ops/finance_billing.md)
+- [Persona Hermes Config](../../../05-process/persona_hermes_config.md)
+- [Persona Team V013](../../../08-strategy/persona_team_v013.md)
+
+<!-- backlinks-end -->

@@ -55,3 +55,18 @@ watcher:
 - [`06-infrastructure/03-services/agent_watcher.md`](../../../06-infrastructure/03-services/agent_watcher.md) — Watcher service spec + 4-level escalation ladder
 - [`08-strategy/agent_orchestration.md`](../../../08-strategy/agent_orchestration.md)
 - [`08-strategy/persona_team_v013.md`](../../../08-strategy/persona_team_v013.md)
+
+---
+
+<!-- backlinks-start -->
+
+## Referenced by
+
+- [Project Manager](../../02-ai-systems/02-project-delivery/project_manager.md)
+- [Monitoring Audit](monitoring_audit.md)
+- [Sre Team](../06-sre/sre_team.md)
+- [Agent Watcher](../../../06-infrastructure/03-services/agent_watcher.md)
+- [Agent Orchestration](../../../08-strategy/agent_orchestration.md)
+- [Persona Team V013](../../../08-strategy/persona_team_v013.md)
+
+<!-- backlinks-end -->

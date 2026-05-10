@@ -58,3 +58,20 @@ profiles:
 - [`08-strategy/two_tier_architecture.md`](../../../08-strategy/two_tier_architecture.md) — Tier 1 role definition
 - [`08-strategy/persona_team_v013.md`](../../../08-strategy/persona_team_v013.md) — Master persona table
 - [`05-process/persona_hermes_config.md`](../../../05-process/persona_hermes_config.md) — Hermes config patterns
+
+---
+
+<!-- backlinks-start -->
+
+## Referenced by
+
+- [Project Manager](../../02-ai-systems/02-project-delivery/project_manager.md)
+- [Project Allocator](project_allocator.md)
+- [Router](router.md)
+- [Persona Hermes Config](../../../05-process/persona_hermes_config.md)
+- [Agent Orchestration](../../../08-strategy/agent_orchestration.md)
+- [Persona Team V013](../../../08-strategy/persona_team_v013.md)
+- [Two Tier Architecture](../../../08-strategy/two_tier_architecture.md)
+- [Agents](../../../AGENTS.md)
+
+<!-- backlinks-end -->

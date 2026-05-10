@@ -27,3 +27,16 @@ Enforces compliance across all project containers — runs the customer-data com
 ## References
 - [`06-infrastructure/02-security/compliance.md`](../../../06-infrastructure/02-security/compliance.md)
 - [`06-infrastructure/02-security/compliance_roadmap.md`](../../../06-infrastructure/02-security/compliance_roadmap.md)
+
+---
+
+<!-- backlinks-start -->
+
+## Referenced by
+
+- [Csco Chief Security Compliance Officer](../../01-executive/csco_chief_security_compliance_officer.md)
+- [Legal Compliance](../../05-business-ops/legal_compliance.md)
+- [Compliance](../../../06-infrastructure/02-security/compliance.md)
+- [Compliance Roadmap](../../../06-infrastructure/02-security/compliance_roadmap.md)
+
+<!-- backlinks-end -->

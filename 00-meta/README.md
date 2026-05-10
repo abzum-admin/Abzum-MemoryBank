@@ -56,3 +56,14 @@ bash    _tools/check_links.sh     # link integrity check
 ```
 
 Run all four after any structural change. See `CONVENTIONS.md` §3 and §8.
+
+---
+
+<!-- backlinks-start -->
+
+## Referenced by
+
+- [Now](../01-identity/now.md)
+- [Plan Of Action](../07-research/hermes-hindsight/plan_of_action.md)
+
+<!-- backlinks-end -->

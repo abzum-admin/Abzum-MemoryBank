@@ -111,3 +111,14 @@ ISO/IEC 42001 is the AI Management System standard — becoming relevant as AI r
 ---
 
 *Source: AI_COMPANY_INFRASTRUCTURE_COMPLIANCE_PLAN.md v1.0*
+
+---
+
+<!-- backlinks-start -->
+
+## Referenced by
+
+- [Compliance Meta](../../02-org/04-platform-orchestration/03-governance/compliance_meta.md)
+- [Plan Of Action](../../07-research/hermes-hindsight/plan_of_action.md)
+
+<!-- backlinks-end -->

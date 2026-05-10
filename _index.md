@@ -2,6 +2,12 @@
 
 # Repository Root
 
+## Documents
+
+| File | Title | Summary |
+|---|---|---|
+| `AGENTS.md` | Agents |  |
+
 ## Subdirectories
 
 - `00-meta/` — see `00-meta/_index.md`

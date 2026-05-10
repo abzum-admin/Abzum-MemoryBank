@@ -113,3 +113,16 @@ Heartbeat polls go to `02-org/01-executive/felix-caio/heartbeat.md`. Default: em
 ## Make It Yours
 
 Update this file as you figure out what works. Add your own conventions. Just keep it consistent with `CONVENTIONS.md`.
+
+---
+
+<!-- backlinks-start -->
+
+## Referenced by
+
+- [Conventions](../../../00-meta/CONVENTIONS.md)
+- [Start Here](../../../00-meta/START_HERE.md)
+- [Now](../../../01-identity/now.md)
+- [Role](role.md)
+
+<!-- backlinks-end -->

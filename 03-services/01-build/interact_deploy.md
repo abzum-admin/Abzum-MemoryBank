@@ -40,3 +40,15 @@ Full pricing model in [`pricing.md`](../pricing.md).
 
 ## Related
 - [`04-products/interact/_index.md`](../../04-products/interact/_index.md) — full product spec
+
+---
+
+<!-- backlinks-start -->
+
+## Referenced by
+
+- [Client Engagement Agent](../../02-org/02-ai-systems/02-project-delivery/client_engagement_agent.md)
+- [Pricing](../pricing.md)
+- [Use Case Team Mapping](../../05-process/use_case_team_mapping.md)
+
+<!-- backlinks-end -->

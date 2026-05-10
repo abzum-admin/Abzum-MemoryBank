@@ -8,4 +8,5 @@
 - `02-security/` — see `02-security/_index.md`
 - `03-services/` — see `03-services/_index.md`
 - `04-procedures/` — see `04-procedures/_index.md`
+- `05-memory-stack/` — see `05-memory-stack/_index.md`
 

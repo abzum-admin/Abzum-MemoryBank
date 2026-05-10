@@ -113,3 +113,30 @@ profiles:
 - [`05-process/persona_hermes_config.md`](../../../05-process/persona_hermes_config.md) — session rollover open question
 - [`04-products/require/_index.md`](../../../04-products/require/_index.md) — the productized capability CEA drives
 - [`02-org/02-ai-systems/02-project-delivery/_legacy_business_analyst.md`](_legacy_business_analyst.md) — archived predecessor
+
+---
+
+<!-- backlinks-start -->
+
+## Referenced by
+
+- [Now](../../../01-identity/now.md)
+- [ Legacy Business Analyst](_legacy_business_analyst.md)
+- [Project Manager](project_manager.md)
+- [Delivery Manager](../../03-human-delivery/delivery_manager.md)
+- [Finance Billing](../../05-business-ops/finance_billing.md)
+- [Crm Build](../../../03-services/01-build/crm_build.md)
+- [Crm Migration](../../../03-services/01-build/crm_migration.md)
+- [Interact Deploy](../../../03-services/01-build/interact_deploy.md)
+- [Require Deploy](../../../03-services/01-build/require_deploy.md)
+- [Saas Internal Tool](../../../03-services/01-build/saas_internal_tool.md)
+- [Website](../../../03-services/01-build/website.md)
+- [Marketing Campaign](../../../03-services/04-creative-content/marketing_campaign.md)
+- [Pitch Deck](../../../03-services/04-creative-content/pitch_deck.md)
+- [Research Document](../../../03-services/05-research-knowledge/research_document.md)
+- [Maintenance On Call](../../../03-services/06-managed-ongoing/maintenance_on_call.md)
+- [Pricing](../../../03-services/pricing.md)
+- [Persona Hermes Config](../../../05-process/persona_hermes_config.md)
+- [Persona Team V013](../../../08-strategy/persona_team_v013.md)
+
+<!-- backlinks-end -->

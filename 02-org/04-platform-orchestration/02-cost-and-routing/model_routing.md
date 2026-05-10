@@ -26,3 +26,15 @@ The Hermes-side runtime that takes a "send to <persona>" request and resolves it
 ## References
 - [`05-process/persona_hermes_config.md`](../../../05-process/persona_hermes_config.md) — ProviderProfile mechanics
 - [`08-strategy/persona_team_v013.md`](../../../08-strategy/persona_team_v013.md) §Fallback Ladder
+
+---
+
+<!-- backlinks-start -->
+
+## Referenced by
+
+- [Cost Optimizer](cost_optimizer.md)
+- [Persona Hermes Config](../../../05-process/persona_hermes_config.md)
+- [Persona Team V013](../../../08-strategy/persona_team_v013.md)
+
+<!-- backlinks-end -->

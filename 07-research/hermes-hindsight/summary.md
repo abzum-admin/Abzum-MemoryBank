@@ -315,3 +315,14 @@ Hermes + Hindsight is **suitable for Centralised BI Memory Architecture** with:
 **Analysis Date:** April 12, 2026  
 **Hermes Version:** 2026.Q2  
 **Status:** Ready for Production Implementation
+
+---
+
+<!-- backlinks-start -->
+
+## Referenced by
+
+- [Now](../../01-identity/now.md)
+- [Plan Of Action](plan_of_action.md)
+
+<!-- backlinks-end -->

@@ -105,3 +105,15 @@ Abzum uses a **hybrid project management model** tailored for AI agent teams. Th
 4. **Retrospectives after each milestone** — logged to BI Taxonomy (A47), not just verbal
 5. **AI agents shift priority instantly** — no sprint ceremony needed to reprioritise
 6. **Task budget tracking** — every task has a token cost estimate, tracked against budget
+
+---
+
+<!-- backlinks-start -->
+
+## Referenced by
+
+- [Planner](../02-org/02-ai-systems/02-project-delivery/planner.md)
+- [Project Manager](../02-org/02-ai-systems/02-project-delivery/project_manager.md)
+- [Plan Of Action](../07-research/hermes-hindsight/plan_of_action.md)
+
+<!-- backlinks-end -->

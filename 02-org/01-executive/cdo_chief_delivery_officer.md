@@ -85,3 +85,19 @@ profiles:
 - [`08-strategy/persona_team_v013.md`](../../08-strategy/persona_team_v013.md) — master persona table (CDO needs to be added)
 - [`02-org/01-executive/felix-caio/role.md`](felix-caio/role.md) — peer exec role
 - [`02-org/03-human-delivery/delivery_manager.md`](../03-human-delivery/delivery_manager.md) — human partner
+
+---
+
+<!-- backlinks-start -->
+
+## Referenced by
+
+- [Csco Chief Security Compliance Officer](csco_chief_security_compliance_officer.md)
+- [Role](felix-caio/role.md)
+- [Vijay Ceo Founder](vijay_ceo_founder.md)
+- [Delivery Manager](../03-human-delivery/delivery_manager.md)
+- [Finance Billing](../05-business-ops/finance_billing.md)
+- [Hr Talent](../05-business-ops/hr_talent.md)
+- [Persona Team V013](../../08-strategy/persona_team_v013.md)
+
+<!-- backlinks-end -->

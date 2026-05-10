@@ -248,3 +248,33 @@ Phase 5: First Project → First Revenue (A36–A40)
 | Understand agent workflow | [05-process/workflow_superpowers.md](../../05-process/workflow_superpowers.md) |
 | Company strategy overview | [08-strategy/master_plan.md](../../08-strategy/master_plan.md) |
 | Full repo map | [_index.md](../../_index.md) |
+
+---
+
+<!-- backlinks-start -->
+
+## Referenced by
+
+- [Readme](../../00-meta/README.md)
+- [Company About](../../01-identity/company_about.md)
+- [Now](../../01-identity/now.md)
+- [Legacy Top5 Priority](../../03-services/legacy_top5_priority.md)
+- [Agent Scripting](../../05-process/agent_scripting.md)
+- [Capabilities](../../05-process/capabilities.md)
+- [Company Framework](../../05-process/company_framework.md)
+- [Handoff](../../05-process/handoff.md)
+- [Kanban And Pm](../../05-process/kanban_and_pm.md)
+- [Skill Matrix](../../05-process/skill_matrix.md)
+- [Tdd](../../05-process/tdd.md)
+- [Workflow Superpowers](../../05-process/workflow_superpowers.md)
+- [Implementation Guide](implementation_guide.md)
+- [Hermes Space Agents](../hermes-space-agents/hermes_space_agents.md)
+- [Agent Kubernetes](../../08-strategy/agent_kubernetes.md)
+- [Ai Native 5 Tier Model](../../08-strategy/ai_native_5_tier_model.md)
+- [Ai Native Org Overview](../../08-strategy/ai_native_org_overview.md)
+- [Crm Delivery](../../08-strategy/crm_delivery.md)
+- [Master Plan](../../08-strategy/master_plan.md)
+- [Two Tier Architecture](../../08-strategy/two_tier_architecture.md)
+- [Phases](../../11-work/plan/phases.md)
+
+<!-- backlinks-end -->

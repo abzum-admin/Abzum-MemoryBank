@@ -8,5 +8,6 @@
 - `hermes-hindsight/` — see `hermes-hindsight/_index.md`
 - `hermes-space-agents/` — see `hermes-space-agents/_index.md`
 - `mcra-ai-security/` — see `mcra-ai-security/_index.md`
+- `memory-architecture/` — see `memory-architecture/_index.md`
 - `product-watchlist/` — see `product-watchlist/_index.md`
 

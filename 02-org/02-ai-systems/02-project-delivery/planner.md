@@ -56,3 +56,19 @@ profiles:
 - [`08-strategy/persona_team_v013.md`](../../../08-strategy/persona_team_v013.md)
 - [`05-process/workflow_superpowers.md`](../../../05-process/workflow_superpowers.md) — gate definitions
 - [`05-process/kanban_and_pm.md`](../../../05-process/kanban_and_pm.md)
+
+---
+
+<!-- backlinks-start -->
+
+## Referenced by
+
+- [Client Engagement Agent](client_engagement_agent.md)
+- [Project Manager](project_manager.md)
+- [Pricing](../../../03-services/pricing.md)
+- [Kanban And Pm](../../../05-process/kanban_and_pm.md)
+- [Workflow Superpowers](../../../05-process/workflow_superpowers.md)
+- [Agent Orchestration](../../../08-strategy/agent_orchestration.md)
+- [Persona Team V013](../../../08-strategy/persona_team_v013.md)
+
+<!-- backlinks-end -->

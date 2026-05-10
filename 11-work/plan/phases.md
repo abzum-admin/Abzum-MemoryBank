@@ -132,3 +132,14 @@ Phase 4 (Go-To-Market)
 Phase 5 (First Project)
        ↓ [First revenue generated]
 ```
+
+---
+
+<!-- backlinks-start -->
+
+## Referenced by
+
+- [Now](../../01-identity/now.md)
+- [Plan Of Action](../../07-research/hermes-hindsight/plan_of_action.md)
+
+<!-- backlinks-end -->

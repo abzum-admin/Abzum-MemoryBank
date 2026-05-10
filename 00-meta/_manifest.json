@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "generated_at": "2026-05-10T01:43:20.000Z",
+  "generated_at": "2026-05-10T01:57:50.000Z",
   "active_context": [
     {
       "id": "now",
@@ -67,6 +67,14 @@
       "title": "Long-Term Memory"
     },
     {
+      "id": "identity-positioning",
+      "path": "01-identity\\positioning.md",
+      "tokens": 1103,
+      "load_priority": 65,
+      "load_lane": "context",
+      "title": "Abzum Positioning"
+    },
+    {
       "id": "co-use-cases",
       "path": "03-services\\legacy_top5_priority.md",
       "tokens": 474,
@@ -105,6 +113,14 @@
       "load_priority": 60,
       "load_lane": "context",
       "title": "CSCO \u2014 Chief Security & Compliance Officer"
+    },
+    {
+      "id": "infra-memory-stack-overview",
+      "path": "06-infrastructure\\05-memory-stack\\overview.md",
+      "tokens": 982,
+      "load_priority": 60,
+      "load_lane": "context",
+      "title": "Memory Stack Overview"
     },
     {
       "id": "strat-orchestration",
@@ -276,9 +292,9 @@
     }
   ],
   "lane_tokens": {
-    "context": 40575,
+    "context": 42660,
     "summary": 1726
   },
-  "total_tokens": 42301,
-  "source_fingerprint": "f2e29023b1445806097766c91a717a2eb1ea7e722833828277574766fd1d3f55"
+  "total_tokens": 44386,
+  "source_fingerprint": "140b16c66d9d60b24ba4c3043f5051ba8ffbb9b0b43ecfbbe3b908e882e9cd67"
 }

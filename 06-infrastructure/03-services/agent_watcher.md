@@ -36,3 +36,15 @@ Relies on method signature tracking to distinguish agent approach changes vs loo
 - **human_escalation_contact**: Watcher reports to Vijay on L4 escalation [team]
 - **monitoring_approach**: Agent Watcher uses event-driven monitoring, not polling-based [preference]
 - **loop_detection_method**: Method signatures track whether agent is changing approach vs looping [project]
+
+---
+
+<!-- backlinks-start -->
+
+## Referenced by
+
+- [Watcher](../../02-org/04-platform-orchestration/01-orchestration/watcher.md)
+- [Sre Team](../../02-org/04-platform-orchestration/06-sre/sre_team.md)
+- [Plan Of Action](../../07-research/hermes-hindsight/plan_of_action.md)
+
+<!-- backlinks-end -->

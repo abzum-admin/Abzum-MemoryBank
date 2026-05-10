@@ -40,3 +40,21 @@ Runs the BI feedback loop documented in `08-strategy/agent_orchestration.md`: we
 ## References
 - [`08-strategy/agent_orchestration.md`](../../../08-strategy/agent_orchestration.md) §BI Feedback Loop
 - A47 BI/WorkIQ Taxonomy
+
+---
+
+<!-- backlinks-start -->
+
+## Referenced by
+
+- [Knowledge Graph Agent](knowledge_graph_agent.md)
+- [Monitoring Audit](../../04-platform-orchestration/01-orchestration/monitoring_audit.md)
+- [Strategy Meta](../../04-platform-orchestration/01-orchestration/strategy_meta.md)
+- [Cost Optimizer](../../04-platform-orchestration/02-cost-and-routing/cost_optimizer.md)
+- [Memory Manager](../../04-platform-orchestration/03-governance/memory_manager.md)
+- [Clickhouse Analytics](../../../06-infrastructure/05-memory-stack/clickhouse_analytics.md)
+- [Llm Wiki](../../../06-infrastructure/05-memory-stack/llm_wiki.md)
+- [Overview](../../../06-infrastructure/05-memory-stack/overview.md)
+- [Agent Orchestration](../../../08-strategy/agent_orchestration.md)
+
+<!-- backlinks-end -->

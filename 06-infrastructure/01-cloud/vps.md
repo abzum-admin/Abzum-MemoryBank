@@ -94,3 +94,13 @@ All containers share a single external Docker network named `proxy`.
 - Paperclip is managed by Hostinger; do not stop it without coordination with Felix
 - New module installations are managed via the setup app UI at `https://setup.abzum.cloud`
 - `deploy-service.sh` is kept as a reference/emergency fallback but is deprecated for managed modules
+
+---
+
+<!-- backlinks-start -->
+
+## Referenced by
+
+- [Vps Team](../../02-org/04-platform-orchestration/04-vps-orchestration/vps_team.md)
+
+<!-- backlinks-end -->

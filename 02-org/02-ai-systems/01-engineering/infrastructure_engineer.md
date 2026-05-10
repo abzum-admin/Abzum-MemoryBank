@@ -60,3 +60,15 @@ profiles:
 ## References
 - [`08-strategy/persona_team_v013.md`](../../../08-strategy/persona_team_v013.md)
 - [`operations/infrastructure/`](../../operations/infrastructure/)
+
+---
+
+<!-- backlinks-start -->
+
+## Referenced by
+
+- [Vps Team](../../04-platform-orchestration/04-vps-orchestration/vps_team.md)
+- [Azure](../../../06-infrastructure/01-cloud/azure.md)
+- [Persona Team V013](../../../08-strategy/persona_team_v013.md)
+
+<!-- backlinks-end -->

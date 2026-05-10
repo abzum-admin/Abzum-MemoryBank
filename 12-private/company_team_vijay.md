@@ -54,3 +54,13 @@ status: active
 
 *Prepared by: Felix Stanley, COO — Abzum New Zealand Limited*
 *CONFIDENTIAL — 2026-04-01*
+
+---
+
+<!-- backlinks-start -->
+
+## Referenced by
+
+- [Company About](../01-identity/company_about.md)
+
+<!-- backlinks-end -->

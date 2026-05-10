@@ -21,3 +21,16 @@ Centralises secrets management via Doppler. Rotates keys per policy, scopes secr
 
 ## References
 - [`06-infrastructure/03-services/doppler.md`](../../../06-infrastructure/03-services/doppler.md)
+
+---
+
+<!-- backlinks-start -->
+
+## Referenced by
+
+- [Csco Chief Security Compliance Officer](../../01-executive/csco_chief_security_compliance_officer.md)
+- [Provisioning](../01-orchestration/provisioning.md)
+- [Rbac](../03-governance/rbac.md)
+- [Doppler](../../../06-infrastructure/03-services/doppler.md)
+
+<!-- backlinks-end -->

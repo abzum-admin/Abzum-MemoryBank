@@ -27,3 +27,15 @@ The human face of Abzum's client relationships. CEA handles drafting + voice; De
 ## References
 - A28 Decide first human hire (in `11-work/registry.json`)
 - A29 Plan Account Manager hiring (in `11-work/registry.json`)
+
+---
+
+<!-- backlinks-start -->
+
+## Referenced by
+
+- [Cdo Chief Delivery Officer](../01-executive/cdo_chief_delivery_officer.md)
+- [Vijay Ceo Founder](../01-executive/vijay_ceo_founder.md)
+- [Client Engagement Agent](../02-ai-systems/02-project-delivery/client_engagement_agent.md)
+
+<!-- backlinks-end -->

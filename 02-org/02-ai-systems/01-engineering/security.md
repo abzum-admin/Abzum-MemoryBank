@@ -58,3 +58,16 @@ profiles:
 - [`08-strategy/persona_team_v013.md`](../../../08-strategy/persona_team_v013.md)
 - [`07-research/mcra-ai-security/mcra_ai_security.md`](../../../07-research/mcra-ai-security/mcra_ai_security.md)
 - [`operations/security/`](../../operations/security/)
+
+---
+
+<!-- backlinks-start -->
+
+## Referenced by
+
+- [Security Lead](../../03-human-delivery/security_lead.md)
+- [Compliance Meta](../../04-platform-orchestration/03-governance/compliance_meta.md)
+- [Mcra Ai Security](../../../07-research/mcra-ai-security/mcra_ai_security.md)
+- [Persona Team V013](../../../08-strategy/persona_team_v013.md)
+
+<!-- backlinks-end -->

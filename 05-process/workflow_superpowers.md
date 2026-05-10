@@ -344,3 +344,16 @@ These rules are never skipped regardless of time pressure:
 
 *Source: superpowers-ai-company-workflow.md v1.0 + agent_workflow.md — consolidated 2026-04-12*
 *Framework: github.com/obra/superpowers (MIT License)*
+
+---
+
+<!-- backlinks-start -->
+
+## Referenced by
+
+- [Architect](../02-org/02-ai-systems/01-engineering/architect.md)
+- [Planner](../02-org/02-ai-systems/02-project-delivery/planner.md)
+- [Plan Of Action](../07-research/hermes-hindsight/plan_of_action.md)
+- [Glossary](../09-knowledge/glossary.md)
+
+<!-- backlinks-end -->

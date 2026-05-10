@@ -213,3 +213,44 @@ Toggle: `hermes profile use best_value` or `hermes profile use best_performance`
 ---
 
 *Owner: Felix Stanley (COO) — 2026-05-10*
+
+---
+
+<!-- backlinks-start -->
+
+## Referenced by
+
+- [Now](../01-identity/now.md)
+- [Cdo Chief Delivery Officer](../02-org/01-executive/cdo_chief_delivery_officer.md)
+- [Csco Chief Security Compliance Officer](../02-org/01-executive/csco_chief_security_compliance_officer.md)
+- [Architect](../02-org/02-ai-systems/01-engineering/architect.md)
+- [Devops](../02-org/02-ai-systems/01-engineering/devops.md)
+- [Infrastructure Engineer](../02-org/02-ai-systems/01-engineering/infrastructure_engineer.md)
+- [Junior Coder](../02-org/02-ai-systems/01-engineering/junior_coder.md)
+- [Security](../02-org/02-ai-systems/01-engineering/security.md)
+- [Senior Coder](../02-org/02-ai-systems/01-engineering/senior_coder.md)
+- [Tester](../02-org/02-ai-systems/01-engineering/tester.md)
+- [ Legacy Business Analyst](../02-org/02-ai-systems/02-project-delivery/_legacy_business_analyst.md)
+- [Client Engagement Agent](../02-org/02-ai-systems/02-project-delivery/client_engagement_agent.md)
+- [Planner](../02-org/02-ai-systems/02-project-delivery/planner.md)
+- [Project Manager](../02-org/02-ai-systems/02-project-delivery/project_manager.md)
+- [Triage Intake](../02-org/02-ai-systems/02-project-delivery/triage_intake.md)
+- [Brand Designer](../02-org/02-ai-systems/03-design/brand_designer.md)
+- [Interface Designer](../02-org/02-ai-systems/03-design/interface_designer.md)
+- [Motion Designer](../02-org/02-ai-systems/03-design/motion_designer.md)
+- [Researcher](../02-org/02-ai-systems/04-knowledge-intelligence/researcher.md)
+- [Tech Writer](../02-org/02-ai-systems/04-knowledge-intelligence/tech_writer.md)
+- [ Personas Readme](../02-org/02-ai-systems/_personas_readme.md)
+- [Orchestrator](../02-org/04-platform-orchestration/01-orchestration/orchestrator.md)
+- [Watcher](../02-org/04-platform-orchestration/01-orchestration/watcher.md)
+- [Cost Optimizer](../02-org/04-platform-orchestration/02-cost-and-routing/cost_optimizer.md)
+- [Model Routing](../02-org/04-platform-orchestration/02-cost-and-routing/model_routing.md)
+- [Pricing](../03-services/pricing.md)
+- [Persona Hermes Config](../05-process/persona_hermes_config.md)
+- [Use Case Team Mapping](../05-process/use_case_team_mapping.md)
+- [Agent Orchestration](agent_orchestration.md)
+- [Master Plan](master_plan.md)
+- [Agent Tooling Inventory](../09-knowledge/agent_tooling_inventory.md)
+- [Agents](../AGENTS.md)
+
+<!-- backlinks-end -->

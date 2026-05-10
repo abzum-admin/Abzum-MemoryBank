@@ -43,3 +43,13 @@ status: active
 
 ## Full Documentation
 See: `memory/abzum-email-setup-brevo-cloudflare-2026-04-03.md`
+
+---
+
+<!-- backlinks-start -->
+
+## Referenced by
+
+- [Plan Of Action](../../07-research/hermes-hindsight/plan_of_action.md)
+
+<!-- backlinks-end -->

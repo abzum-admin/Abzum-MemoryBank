@@ -87,3 +87,19 @@ When building new skills for the agent team:
 ---
 
 *Source: AI_COMPANY_FRAMEWORK.md v1.0*
+
+---
+
+<!-- backlinks-start -->
+
+## Referenced by
+
+- [Architect](../02-org/02-ai-systems/01-engineering/architect.md)
+- [Devops](../02-org/02-ai-systems/01-engineering/devops.md)
+- [Junior Coder](../02-org/02-ai-systems/01-engineering/junior_coder.md)
+- [Senior Coder](../02-org/02-ai-systems/01-engineering/senior_coder.md)
+- [Tester](../02-org/02-ai-systems/01-engineering/tester.md)
+- [Interface Designer](../02-org/02-ai-systems/03-design/interface_designer.md)
+- [Plan Of Action](../07-research/hermes-hindsight/plan_of_action.md)
+
+<!-- backlinks-end -->

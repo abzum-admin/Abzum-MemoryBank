@@ -27,3 +27,18 @@ Enforces access control: which persona can read which repo, write which file, ca
 ## References
 - [`08-strategy/two_tier_architecture.md`](../../../08-strategy/two_tier_architecture.md) §"Security and RBAC"
 - [`07-research/mcra-ai-security/mcra_ai_security.md`](../../../07-research/mcra-ai-security/mcra_ai_security.md)
+
+---
+
+<!-- backlinks-start -->
+
+## Referenced by
+
+- [Csco Chief Security Compliance Officer](../../01-executive/csco_chief_security_compliance_officer.md)
+- [Provisioning](../01-orchestration/provisioning.md)
+- [Compliance Meta](compliance_meta.md)
+- [Secret Team](../05-secret-management/secret_team.md)
+- [Mcra Ai Security](../../../07-research/mcra-ai-security/mcra_ai_security.md)
+- [Two Tier Architecture](../../../08-strategy/two_tier_architecture.md)
+
+<!-- backlinks-end -->

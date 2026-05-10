@@ -161,3 +161,28 @@ The following sections are being designed. This document will be updated as each
 ---
 
 *Owner: Felix Stanley (COO) — updated 2026-04-13*
+
+---
+
+<!-- backlinks-start -->
+
+## Referenced by
+
+- [Planner](../02-org/02-ai-systems/02-project-delivery/planner.md)
+- [Triage Intake](../02-org/02-ai-systems/02-project-delivery/triage_intake.md)
+- [Learning Agent](../02-org/02-ai-systems/04-knowledge-intelligence/learning_agent.md)
+- [ Personas Readme](../02-org/02-ai-systems/_personas_readme.md)
+- [Monitoring Audit](../02-org/04-platform-orchestration/01-orchestration/monitoring_audit.md)
+- [Orchestrator](../02-org/04-platform-orchestration/01-orchestration/orchestrator.md)
+- [Project Allocator](../02-org/04-platform-orchestration/01-orchestration/project_allocator.md)
+- [Router](../02-org/04-platform-orchestration/01-orchestration/router.md)
+- [Strategy Meta](../02-org/04-platform-orchestration/01-orchestration/strategy_meta.md)
+- [Watcher](../02-org/04-platform-orchestration/01-orchestration/watcher.md)
+- [Memory Manager](../02-org/04-platform-orchestration/03-governance/memory_manager.md)
+- [Overview](../06-infrastructure/05-memory-stack/overview.md)
+- [Master Plan](master_plan.md)
+- [Persona Team V013](persona_team_v013.md)
+- [Agent Tooling Inventory](../09-knowledge/agent_tooling_inventory.md)
+- [Glossary](../09-knowledge/glossary.md)
+
+<!-- backlinks-end -->

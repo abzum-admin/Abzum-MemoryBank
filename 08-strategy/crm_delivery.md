@@ -46,3 +46,13 @@ Default recommendation: Twenty CRM on Railway for SMB. Serverless CRM for cost-s
 - **crm_security_agent_data_access**: Agents can NEVER access raw unfiltered customer data by design [project]
 - **crm_default_recommendation**: Default CRM recommendation is Twenty CRM on Railway for SMB customers [project]
 - **crm_decision_tree**: Decision tree: unique workflows → Build from Scratch; cost-sensitive startup → Serverless CRM; need fast with minimal customisation → Twenty CRM [convention]
+
+---
+
+<!-- backlinks-start -->
+
+## Referenced by
+
+- [Plan Of Action](../07-research/hermes-hindsight/plan_of_action.md)
+
+<!-- backlinks-end -->

@@ -23,3 +23,13 @@ Validates AI-generated architecture (from the Architect persona) with clients in
 - Hire timing (probably after first 3 enterprise clients)
 - Compensation model
 - On-call expectation
+
+---
+
+<!-- backlinks-start -->
+
+## Referenced by
+
+- [Vijay Ceo Founder](../01-executive/vijay_ceo_founder.md)
+
+<!-- backlinks-end -->

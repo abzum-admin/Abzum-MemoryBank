@@ -66,3 +66,13 @@ To use Ollama as a model provider in tools/agents:
 ## Documentation
 
 Full setup docs: `memory/ollama-setup-2026-04-03.md`
+
+---
+
+<!-- backlinks-start -->
+
+## Referenced by
+
+- [Plan Of Action](../../07-research/hermes-hindsight/plan_of_action.md)
+
+<!-- backlinks-end -->

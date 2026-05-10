@@ -125,3 +125,18 @@ When adding a new `.md` file:
 4. If it tracks work, add the corresponding entry to `11-work/registry.json`.
 5. Run `_tools/gen_manifest.py` and `_tools/gen_indexes.py` (or wait for the next scheduled regeneration).
 6. Run the link checker (`_tools/check_links.sh`) before committing.
+
+---
+
+<!-- backlinks-start -->
+
+## Referenced by
+
+- [Start Here](START_HERE.md)
+- [Instructions](../02-org/01-executive/felix-caio/instructions.md)
+- [Tech Writer](../02-org/02-ai-systems/04-knowledge-intelligence/tech_writer.md)
+- [Glossary](../09-knowledge/glossary.md)
+- [Id Namespaces](../09-knowledge/id_namespaces.md)
+- [Agents](../AGENTS.md)
+
+<!-- backlinks-end -->

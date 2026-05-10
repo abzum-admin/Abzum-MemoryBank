@@ -39,3 +39,18 @@ The team's answer engine. Given a question (from any persona, including Vijay) a
 
 ## References
 - [`07-research/hermes-hindsight/technical_reference.md`](../../../07-research/hermes-hindsight/technical_reference.md)
+
+---
+
+<!-- backlinks-start -->
+
+## Referenced by
+
+- [Triage Intake](../02-project-delivery/triage_intake.md)
+- [Knowledge Graph Agent](knowledge_graph_agent.md)
+- [Researcher](researcher.md)
+- [Memory Manager](../../04-platform-orchestration/03-governance/memory_manager.md)
+- [Overview](../../../06-infrastructure/05-memory-stack/overview.md)
+- [Technical Reference](../../../07-research/hermes-hindsight/technical_reference.md)
+
+<!-- backlinks-end -->

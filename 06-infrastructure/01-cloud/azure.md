@@ -105,3 +105,15 @@ Azure App Service / Container Apps (Web + APIs)
 ---
 
 *Source: AI_COMPANY_INFRASTRUCTURE_COMPLIANCE_PLAN.md v1.0*
+
+---
+
+<!-- backlinks-start -->
+
+## Referenced by
+
+- [Conventions](../../00-meta/CONVENTIONS.md)
+- [Infrastructure Engineer](../../02-org/02-ai-systems/01-engineering/infrastructure_engineer.md)
+- [Plan Of Action](../../07-research/hermes-hindsight/plan_of_action.md)
+
+<!-- backlinks-end -->

@@ -174,3 +174,35 @@ When the request doesn't match any known UC, Triage routes to BA for full discov
 - [`03-services/legacy_top5_priority.md`](../03-services/legacy_top5_priority.md) — strategic use-case priority (top 5)
 - [`11-work/registry.json`](../11-work/registry.json) — UC namespace
 - [`personas/`](../personas/) — per-persona detail
+
+---
+
+<!-- backlinks-start -->
+
+## Referenced by
+
+- [Now](../01-identity/now.md)
+- [ Personas Readme](../02-org/02-ai-systems/_personas_readme.md)
+- [Project Allocator](../02-org/04-platform-orchestration/01-orchestration/project_allocator.md)
+- [Ai Chatbot](../03-services/01-build/ai_chatbot.md)
+- [Crm Build](../03-services/01-build/crm_build.md)
+- [Crm Migration](../03-services/01-build/crm_migration.md)
+- [Interact Deploy](../03-services/01-build/interact_deploy.md)
+- [Require Deploy](../03-services/01-build/require_deploy.md)
+- [Saas Internal Tool](../03-services/01-build/saas_internal_tool.md)
+- [System Integration](../03-services/01-build/system_integration.md)
+- [Website](../03-services/01-build/website.md)
+- [Business Process Automation](../03-services/02-automation/business_process_automation.md)
+- [Code Security Audit](../03-services/03-audit-advisory/code_security_audit.md)
+- [Explainer Demo Reel](../03-services/04-creative-content/explainer_demo_reel.md)
+- [Marketing Campaign](../03-services/04-creative-content/marketing_campaign.md)
+- [Pitch Deck](../03-services/04-creative-content/pitch_deck.md)
+- [Research Document](../03-services/05-research-knowledge/research_document.md)
+- [Incident Response](../03-services/06-managed-ongoing/incident_response.md)
+- [Maintenance On Call](../03-services/06-managed-ongoing/maintenance_on_call.md)
+- [Legacy Top5 Priority](../03-services/legacy_top5_priority.md)
+- [Pricing](../03-services/pricing.md)
+- [Persona Team V013](../08-strategy/persona_team_v013.md)
+- [Agents](../AGENTS.md)
+
+<!-- backlinks-end -->

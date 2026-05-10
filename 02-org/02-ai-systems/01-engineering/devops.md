@@ -62,3 +62,15 @@ profiles:
 - [`08-strategy/persona_team_v013.md`](../../../08-strategy/persona_team_v013.md)
 - [`05-process/skill_matrix.md`](../../../05-process/skill_matrix.md) — DevOps column (Docker, GitHub Actions, Vercel critical)
 - [`operations/procedures/`](../../operations/procedures/)
+
+---
+
+<!-- backlinks-start -->
+
+## Referenced by
+
+- [Sre Team](../../04-platform-orchestration/06-sre/sre_team.md)
+- [Skill Matrix](../../../05-process/skill_matrix.md)
+- [Persona Team V013](../../../08-strategy/persona_team_v013.md)
+
+<!-- backlinks-end -->

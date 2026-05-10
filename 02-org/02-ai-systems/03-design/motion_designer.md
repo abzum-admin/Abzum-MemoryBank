@@ -60,3 +60,13 @@ profiles:
 ## References
 - [`08-strategy/persona_team_v013.md`](../../../08-strategy/persona_team_v013.md)
 - Hermes v0.13 release notes — `video_analyze` + xAI Custom Voices TTS
+
+---
+
+<!-- backlinks-start -->
+
+## Referenced by
+
+- [Persona Team V013](../../../08-strategy/persona_team_v013.md)
+
+<!-- backlinks-end -->

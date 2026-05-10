@@ -767,3 +767,16 @@ hindsight index rebuild --entity-type Customer --index-name by_segment
 4. Implement Phase 2 (optional but recommended)
 5. Monitor metrics from Part 8 of README.md
 6. Iterate on BI skills based on usage patterns
+
+---
+
+<!-- backlinks-start -->
+
+## Referenced by
+
+- [Now](../../01-identity/now.md)
+- [Github Backup](../../06-infrastructure/05-memory-stack/github_backup.md)
+- [Hindsight](../../06-infrastructure/05-memory-stack/hindsight.md)
+- [Plan Of Action](plan_of_action.md)
+
+<!-- backlinks-end -->

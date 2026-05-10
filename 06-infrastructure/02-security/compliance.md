@@ -171,3 +171,15 @@ Azure App Service / Container Apps (Web + APIs)
 ---
 
 *Source: AI_COMPANY_INFRASTRUCTURE_COMPLIANCE_PLAN.md v1.0 — Felix Stanley, COO*
+
+---
+
+<!-- backlinks-start -->
+
+## Referenced by
+
+- [Compliance Meta](../../02-org/04-platform-orchestration/03-governance/compliance_meta.md)
+- [Legal Compliance](../../02-org/05-business-ops/legal_compliance.md)
+- [Plan Of Action](../../07-research/hermes-hindsight/plan_of_action.md)
+
+<!-- backlinks-end -->

@@ -41,3 +41,15 @@ Rule 3: Must be testable/rule-based for automation use cases
 - **use_case_chatbot**: AI Chatbot/Assistant (UC-20) is visible/demoable, lower cost entry, shows AI-first differentiation [project]
 - **positioning**: Abzum positioning: 3-5x faster, 60-80% cheaper than traditional IT [project]
 - **target_market**: Target market: NZ/AU SMB (5-50 staff) and startups [project]
+
+---
+
+<!-- backlinks-start -->
+
+## Referenced by
+
+- [Company About](../01-identity/company_about.md)
+- [Use Case Team Mapping](../05-process/use_case_team_mapping.md)
+- [Plan Of Action](../07-research/hermes-hindsight/plan_of_action.md)
+
+<!-- backlinks-end -->

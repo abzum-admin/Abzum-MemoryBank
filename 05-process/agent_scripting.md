@@ -30,3 +30,13 @@ Golden rule: if you've done this task 3 times, write the script.
 
 ### Examples
 Example: File processing task repeated 3 times → Bash script in scripts/shared/file_processor.sh registered in registry.json
+
+---
+
+<!-- backlinks-start -->
+
+## Referenced by
+
+- [Plan Of Action](../07-research/hermes-hindsight/plan_of_action.md)
+
+<!-- backlinks-end -->

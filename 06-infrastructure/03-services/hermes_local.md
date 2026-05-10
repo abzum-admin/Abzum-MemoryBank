@@ -126,3 +126,13 @@ Hermes acts as the **build and test agent** in the GitHub Actions runner chain.
 ## Action Reference
 
 - **Action A66:** Set Up Hermes Local Development & Testing Environment
+
+---
+
+<!-- backlinks-start -->
+
+## Referenced by
+
+- [Plan Of Action](../../07-research/hermes-hindsight/plan_of_action.md)
+
+<!-- backlinks-end -->

@@ -274,3 +274,14 @@ The Hostinger Docker Manager UI (`hPanel → VPS → Docker Manager`) **must not
 - `06-infrastructure/01-cloud/docker.md` — container inventory and update runbook
 - `06-infrastructure/01-cloud/vps.md` — VPS SSH access and layout
 - Doppler official Docker Compose docs: https://docs.doppler.com/docs/docker-compose
+
+---
+
+<!-- backlinks-start -->
+
+## Referenced by
+
+- [Provisioning](../../02-org/04-platform-orchestration/01-orchestration/provisioning.md)
+- [Secret Team](../../02-org/04-platform-orchestration/05-secret-management/secret_team.md)
+
+<!-- backlinks-end -->

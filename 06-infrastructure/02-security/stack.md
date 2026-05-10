@@ -145,3 +145,13 @@ Layer 5: Monitoring & Response
 ---
 
 *Source: AI_COMPANY_INFRASTRUCTURE_COMPLIANCE_PLAN.md + AI_COMPANY_SECURITY_OPERATIONS_FRAMEWORK.md v2.0*
+
+---
+
+<!-- backlinks-start -->
+
+## Referenced by
+
+- [Plan Of Action](../../07-research/hermes-hindsight/plan_of_action.md)
+
+<!-- backlinks-end -->

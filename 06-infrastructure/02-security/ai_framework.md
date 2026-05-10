@@ -288,3 +288,13 @@ Layer 5: Monitoring & Response
 ---
 
 *Source: AI_COMPANY_SECURITY_OPERATIONS_FRAMEWORK.md v2.0 — Felix Stanley, COO*
+
+---
+
+<!-- backlinks-start -->
+
+## Referenced by
+
+- [Plan Of Action](../../07-research/hermes-hindsight/plan_of_action.md)
+
+<!-- backlinks-end -->

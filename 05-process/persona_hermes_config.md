@@ -177,3 +177,24 @@ The Watcher stays the same across profiles (not on the critical path; runs on lo
 - [`09-knowledge/agent_tooling_inventory.md`](../09-knowledge/agent_tooling_inventory.md) — local tool inventory (Whisper, Ollama, etc.)
 - [Hermes Agent v0.13 release notes](https://github.com/NousResearch/hermes-agent/releases/tag/v2026.5.7)
 - [Hermes Kanban docs](https://hermes-agent.nousresearch.com/docs/user-guide/features/kanban)
+
+---
+
+<!-- backlinks-start -->
+
+## Referenced by
+
+- [Now](../01-identity/now.md)
+- [Junior Coder](../02-org/02-ai-systems/01-engineering/junior_coder.md)
+- [Senior Coder](../02-org/02-ai-systems/01-engineering/senior_coder.md)
+- [ Legacy Business Analyst](../02-org/02-ai-systems/02-project-delivery/_legacy_business_analyst.md)
+- [Client Engagement Agent](../02-org/02-ai-systems/02-project-delivery/client_engagement_agent.md)
+- [ Personas Readme](../02-org/02-ai-systems/_personas_readme.md)
+- [Orchestrator](../02-org/04-platform-orchestration/01-orchestration/orchestrator.md)
+- [Cost Optimizer](../02-org/04-platform-orchestration/02-cost-and-routing/cost_optimizer.md)
+- [Model Routing](../02-org/04-platform-orchestration/02-cost-and-routing/model_routing.md)
+- [Persona Team V013](../08-strategy/persona_team_v013.md)
+- [Agent Tooling Inventory](../09-knowledge/agent_tooling_inventory.md)
+- [Agents](../AGENTS.md)
+
+<!-- backlinks-end -->

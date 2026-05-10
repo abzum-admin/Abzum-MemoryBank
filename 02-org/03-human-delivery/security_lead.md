@@ -22,3 +22,14 @@ Approves security-sensitive actions exceeding CSCO authority: production secrets
 ## TBD
 - Hire timing (likely tied to SOC 2 Type I — D10)
 - Whether contractor or FTE
+
+---
+
+<!-- backlinks-start -->
+
+## Referenced by
+
+- [Csco Chief Security Compliance Officer](../01-executive/csco_chief_security_compliance_officer.md)
+- [Vijay Ceo Founder](../01-executive/vijay_ceo_founder.md)
+
+<!-- backlinks-end -->

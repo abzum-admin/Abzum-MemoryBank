@@ -50,3 +50,13 @@ _(empty — Felix tracks key relationships and preferences here)_
 - Restructure 2026-05-09 — flattened operations/ split, centralized work registry, replaced `_index.md` LLM artifacts with generated indexes.
 - ByteRover context tree adopted as canonical memory (D05/D10).
 - All work IDs (A##/B##/D##/P##/UC-##/O##) live in `11-work/registry.json`.
+
+---
+
+<!-- backlinks-start -->
+
+## Referenced by
+
+- [Start Here](../00-meta/START_HERE.md)
+
+<!-- backlinks-end -->

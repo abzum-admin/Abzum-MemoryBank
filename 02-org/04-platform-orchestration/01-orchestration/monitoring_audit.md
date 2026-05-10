@@ -27,3 +27,18 @@ Owns centralized logging for every agent action across every project container. 
 ## References
 - [`05-process/memory_protocol.md`](../../../05-process/memory_protocol.md) §ClickHouse capture moments
 - [`08-strategy/agent_orchestration.md`](../../../08-strategy/agent_orchestration.md)
+
+---
+
+<!-- backlinks-start -->
+
+## Referenced by
+
+- [Csco Chief Security Compliance Officer](../../01-executive/csco_chief_security_compliance_officer.md)
+- [Learning Agent](../../02-ai-systems/04-knowledge-intelligence/learning_agent.md)
+- [Sre Team](../06-sre/sre_team.md)
+- [Memory Protocol](../../../05-process/memory_protocol.md)
+- [Clickhouse Analytics](../../../06-infrastructure/05-memory-stack/clickhouse_analytics.md)
+- [Agent Orchestration](../../../08-strategy/agent_orchestration.md)
+
+<!-- backlinks-end -->

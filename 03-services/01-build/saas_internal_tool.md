@@ -22,3 +22,15 @@ Per [`pricing.md`](../pricing.md) — hourly + per-project estimate. Indicative 
 ## Related
 - [`05-process/use_case_team_mapping.md`](../../05-process/use_case_team_mapping.md) — full persona-team detail
 - [`11-work/registry.json`](../../11-work/registry.json) — UC-23 entry
+
+---
+
+<!-- backlinks-start -->
+
+## Referenced by
+
+- [Client Engagement Agent](../../02-org/02-ai-systems/02-project-delivery/client_engagement_agent.md)
+- [Pricing](../pricing.md)
+- [Use Case Team Mapping](../../05-process/use_case_team_mapping.md)
+
+<!-- backlinks-end -->

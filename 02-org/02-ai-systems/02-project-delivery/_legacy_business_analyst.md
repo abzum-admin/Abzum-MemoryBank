@@ -100,3 +100,15 @@ profiles:
 - Gemini 3.1 Flash Live: <https://blog.google/innovation-and-ai/technology/developers-tools/build-with-gemini-3-1-flash-live/>
 - Grok Voice Agent API: <https://x.ai/news/grok-voice-agent-api>
 - Recall.ai: <https://www.recall.ai/>
+
+---
+
+<!-- backlinks-start -->
+
+## Referenced by
+
+- [Client Engagement Agent](client_engagement_agent.md)
+- [Persona Hermes Config](../../../05-process/persona_hermes_config.md)
+- [Persona Team V013](../../../08-strategy/persona_team_v013.md)
+
+<!-- backlinks-end -->

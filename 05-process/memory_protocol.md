@@ -1303,3 +1303,15 @@ These rules are non-negotiable for all agents, at all times.
 *Owner: Felix Stanley (COO)*
 *Version 2.0 — 2026-04-13 — full rewrite: Hermes + Hindsight + LLM Wiki + ClickHouse + BI feedback loop*
 *Supersedes: v1.x ByteRover-only stack (deprecated)*
+
+---
+
+<!-- backlinks-start -->
+
+## Referenced by
+
+- [Monitoring Audit](../02-org/04-platform-orchestration/01-orchestration/monitoring_audit.md)
+- [Overview](../06-infrastructure/05-memory-stack/overview.md)
+- [Master Plan](../08-strategy/master_plan.md)
+
+<!-- backlinks-end -->

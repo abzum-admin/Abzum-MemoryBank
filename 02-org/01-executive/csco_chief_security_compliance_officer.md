@@ -84,3 +84,23 @@ profiles:
 - [`06-infrastructure/02-security/`](../../06-infrastructure/02-security/) — security stack docs
 - [`08-strategy/persona_team_v013.md`](../../08-strategy/persona_team_v013.md) — master persona table (needs CSCO added)
 - [`07-research/mcra-ai-security/mcra_ai_security.md`](../../07-research/mcra-ai-security/mcra_ai_security.md) — MCRA framework
+
+---
+
+<!-- backlinks-start -->
+
+## Referenced by
+
+- [Cdo Chief Delivery Officer](cdo_chief_delivery_officer.md)
+- [Role](felix-caio/role.md)
+- [Vijay Ceo Founder](vijay_ceo_founder.md)
+- [Security Lead](../03-human-delivery/security_lead.md)
+- [Monitoring Audit](../04-platform-orchestration/01-orchestration/monitoring_audit.md)
+- [Compliance Meta](../04-platform-orchestration/03-governance/compliance_meta.md)
+- [Rbac](../04-platform-orchestration/03-governance/rbac.md)
+- [Secret Team](../04-platform-orchestration/05-secret-management/secret_team.md)
+- [Legal Compliance](../05-business-ops/legal_compliance.md)
+- [Mcra Ai Security](../../07-research/mcra-ai-security/mcra_ai_security.md)
+- [Persona Team V013](../../08-strategy/persona_team_v013.md)
+
+<!-- backlinks-end -->

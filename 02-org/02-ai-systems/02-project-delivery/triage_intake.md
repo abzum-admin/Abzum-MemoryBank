@@ -56,3 +56,19 @@ profiles:
 - [`08-strategy/agent_orchestration.md`](../../../08-strategy/agent_orchestration.md) — Layer 0 intake context
 - [`08-strategy/persona_team_v013.md`](../../../08-strategy/persona_team_v013.md)
 - [`09-knowledge/agent_tooling_inventory.md`](../../../09-knowledge/agent_tooling_inventory.md) — Whisper + Telegram setup
+
+---
+
+<!-- backlinks-start -->
+
+## Referenced by
+
+- [Client Engagement Agent](client_engagement_agent.md)
+- [Search Retrieval Agent](../04-knowledge-intelligence/search_retrieval_agent.md)
+- [Router](../../04-platform-orchestration/01-orchestration/router.md)
+- [Agent Orchestration](../../../08-strategy/agent_orchestration.md)
+- [Persona Team V013](../../../08-strategy/persona_team_v013.md)
+- [Agent Tooling Inventory](../../../09-knowledge/agent_tooling_inventory.md)
+- [Glossary](../../../09-knowledge/glossary.md)
+
+<!-- backlinks-end -->

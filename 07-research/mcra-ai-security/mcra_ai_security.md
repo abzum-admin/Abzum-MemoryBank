@@ -163,3 +163,15 @@ Microsoft AI Security Assurance Map (MCRA) — structured assurance methodology 
 ---
 
 *Source: mcra-research-2026-04-01.md — Felix Stanley, COO*
+
+---
+
+<!-- backlinks-start -->
+
+## Referenced by
+
+- [Csco Chief Security Compliance Officer](../../02-org/01-executive/csco_chief_security_compliance_officer.md)
+- [Security](../../02-org/02-ai-systems/01-engineering/security.md)
+- [Rbac](../../02-org/04-platform-orchestration/03-governance/rbac.md)
+
+<!-- backlinks-end -->

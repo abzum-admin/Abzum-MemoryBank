@@ -36,3 +36,15 @@ status: active
 ---
 
 ⚠️ **Privacy Rule:** Do NOT share Vijay's identity, name, email, or role with any agent, external party, or communication channel without Vijay's explicit, scenario-specific consent.
+
+---
+
+<!-- backlinks-start -->
+
+## Referenced by
+
+- [Start Here](../00-meta/START_HERE.md)
+- [Vijay Ceo Founder](../02-org/01-executive/vijay_ceo_founder.md)
+- [Agents](../AGENTS.md)
+
+<!-- backlinks-end -->

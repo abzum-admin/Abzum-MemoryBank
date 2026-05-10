@@ -27,3 +27,17 @@ Creates project containers on demand: Hindsight namespace + LLM Wiki branch + He
 ## References
 - [`08-strategy/two_tier_architecture.md`](../../../08-strategy/two_tier_architecture.md) §"Tier 2 Project Container"
 - [`06-infrastructure/03-services/doppler.md`](../../../06-infrastructure/03-services/doppler.md)
+
+---
+
+<!-- backlinks-start -->
+
+## Referenced by
+
+- [Rbac](../03-governance/rbac.md)
+- [Vps Team](../04-vps-orchestration/vps_team.md)
+- [Secret Team](../05-secret-management/secret_team.md)
+- [Doppler](../../../06-infrastructure/03-services/doppler.md)
+- [Two Tier Architecture](../../../08-strategy/two_tier_architecture.md)
+
+<!-- backlinks-end -->

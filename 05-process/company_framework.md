@@ -205,3 +205,13 @@ Is this task:
 ---
 
 *Source: AI_COMPANY_FRAMEWORK.md v1.0 — Felix Stanley, COO*
+
+---
+
+<!-- backlinks-start -->
+
+## Referenced by
+
+- [Plan Of Action](../07-research/hermes-hindsight/plan_of_action.md)
+
+<!-- backlinks-end -->

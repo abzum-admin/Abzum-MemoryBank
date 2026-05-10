@@ -61,3 +61,15 @@ profiles:
 ## References
 - [`08-strategy/persona_team_v013.md`](../../../08-strategy/persona_team_v013.md)
 - [`CONVENTIONS.md`](../../../00-meta/CONVENTIONS.md) — frontmatter doc-rot defence
+
+---
+
+<!-- backlinks-start -->
+
+## Referenced by
+
+- [Conventions](../../../00-meta/CONVENTIONS.md)
+- [Client Engagement Agent](../02-project-delivery/client_engagement_agent.md)
+- [Persona Team V013](../../../08-strategy/persona_team_v013.md)
+
+<!-- backlinks-end -->

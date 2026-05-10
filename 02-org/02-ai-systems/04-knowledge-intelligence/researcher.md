@@ -62,3 +62,14 @@ profiles:
 ## References
 - [`08-strategy/persona_team_v013.md`](../../../08-strategy/persona_team_v013.md)
 - [`research/`](../../research/) — research output home
+
+---
+
+<!-- backlinks-start -->
+
+## Referenced by
+
+- [Search Retrieval Agent](search_retrieval_agent.md)
+- [Persona Team V013](../../../08-strategy/persona_team_v013.md)
+
+<!-- backlinks-end -->

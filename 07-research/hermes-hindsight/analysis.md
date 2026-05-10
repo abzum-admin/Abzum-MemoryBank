@@ -771,3 +771,13 @@ class BIMemoryManager:
 ---
 
 *This analysis provides guidance for deploying Hermes agents with Hindsight memory in Business Intelligence environments. For production deployment, additional security and performance testing is recommended.*
+
+---
+
+<!-- backlinks-start -->
+
+## Referenced by
+
+- [Hermes Space Agents](../hermes-space-agents/hermes_space_agents.md)
+
+<!-- backlinks-end -->

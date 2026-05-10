@@ -61,3 +61,15 @@ profiles:
 ## References
 - [`08-strategy/persona_team_v013.md`](../../../08-strategy/persona_team_v013.md)
 - [`05-process/skill_matrix.md`](../../../05-process/skill_matrix.md) — Tailwind, React rows
+
+---
+
+<!-- backlinks-start -->
+
+## Referenced by
+
+- [Client Engagement Agent](../02-project-delivery/client_engagement_agent.md)
+- [Skill Matrix](../../../05-process/skill_matrix.md)
+- [Persona Team V013](../../../08-strategy/persona_team_v013.md)
+
+<!-- backlinks-end -->

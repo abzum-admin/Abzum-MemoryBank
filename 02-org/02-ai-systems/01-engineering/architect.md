@@ -62,3 +62,16 @@ profiles:
 - [`08-strategy/persona_team_v013.md`](../../../08-strategy/persona_team_v013.md)
 - [`05-process/skill_matrix.md`](../../../05-process/skill_matrix.md) — Architect column
 - [`05-process/workflow_superpowers.md`](../../../05-process/workflow_superpowers.md)
+
+---
+
+<!-- backlinks-start -->
+
+## Referenced by
+
+- [Solution Architect](../../03-human-delivery/solution_architect.md)
+- [Skill Matrix](../../../05-process/skill_matrix.md)
+- [Workflow Superpowers](../../../05-process/workflow_superpowers.md)
+- [Persona Team V013](../../../08-strategy/persona_team_v013.md)
+
+<!-- backlinks-end -->

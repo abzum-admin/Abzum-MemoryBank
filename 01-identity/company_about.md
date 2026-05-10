@@ -81,3 +81,17 @@ AI-First CRM/ERP Platform.
 2. **TDD is more important for AI than humans** — prevents confident hallucinations
 3. **Context persistence is infrastructure** — agents start fresh; memory must be external
 4. **Two-stage review prevents wasted work** — spec compliance gates quality review
+
+---
+
+<!-- backlinks-start -->
+
+## Referenced by
+
+- [Start Here](../00-meta/START_HERE.md)
+- [Positioning](positioning.md)
+- [Identity](../02-org/01-executive/felix-caio/identity.md)
+- [Soul](../02-org/01-executive/felix-caio/soul.md)
+- [Plan Of Action](../07-research/hermes-hindsight/plan_of_action.md)
+
+<!-- backlinks-end -->

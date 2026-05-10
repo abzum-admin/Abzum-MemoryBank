@@ -162,3 +162,13 @@ Any agent can be re-invoked with full context at any time from this structure.
 ---
 
 *Source: superpowers-ai-company-workflow.md v1.0*
+
+---
+
+<!-- backlinks-start -->
+
+## Referenced by
+
+- [Plan Of Action](../07-research/hermes-hindsight/plan_of_action.md)
+
+<!-- backlinks-end -->

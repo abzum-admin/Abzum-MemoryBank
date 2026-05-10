@@ -70,3 +70,15 @@ See: `work/actions/A57` — Define Enterprise Org Structure for Abzum
 - Full reference: `memory/ai-native-org-structure-2026-04-02.md`
 - Abzum Master Plan: `08-strategy/master_plan.md`
 - Abzum Team Framework: `strategy/ai_company_framework.md`
+
+---
+
+<!-- backlinks-start -->
+
+## Referenced by
+
+- [Plan Of Action](../07-research/hermes-hindsight/plan_of_action.md)
+- [Agent Kubernetes](agent_kubernetes.md)
+- [Ai Native 5 Tier Model](ai_native_5_tier_model.md)
+
+<!-- backlinks-end -->

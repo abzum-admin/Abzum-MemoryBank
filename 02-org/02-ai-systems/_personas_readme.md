@@ -44,3 +44,17 @@ The Best Value ($40/mo) and Best Performance ($50/mo) stacks, the BA voice runti
 ## Use-Case Mapping
 
 Which personas join which Abzum project use cases is in [`05-process/use_case_team_mapping.md`](../../05-process/use_case_team_mapping.md).
+
+---
+
+<!-- backlinks-start -->
+
+## Referenced by
+
+- [Persona Hermes Config](../../05-process/persona_hermes_config.md)
+- [Use Case Team Mapping](../../05-process/use_case_team_mapping.md)
+- [Agent Orchestration](../../08-strategy/agent_orchestration.md)
+- [Persona Team V013](../../08-strategy/persona_team_v013.md)
+- [Two Tier Architecture](../../08-strategy/two_tier_architecture.md)
+
+<!-- backlinks-end -->

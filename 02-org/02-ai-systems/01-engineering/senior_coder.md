@@ -61,3 +61,17 @@ profiles:
 - [`05-process/skill_matrix.md`](../../../05-process/skill_matrix.md) — Coder + Reviewer columns
 - [`05-process/tdd.md`](../../../05-process/tdd.md)
 - [`05-process/persona_hermes_config.md`](../../../05-process/persona_hermes_config.md) — Pattern B cowork
+
+---
+
+<!-- backlinks-start -->
+
+## Referenced by
+
+- [Principal Engineer](../../03-human-delivery/principal_engineer.md)
+- [Persona Hermes Config](../../../05-process/persona_hermes_config.md)
+- [Skill Matrix](../../../05-process/skill_matrix.md)
+- [Tdd](../../../05-process/tdd.md)
+- [Persona Team V013](../../../08-strategy/persona_team_v013.md)
+
+<!-- backlinks-end -->

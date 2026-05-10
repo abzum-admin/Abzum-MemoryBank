@@ -119,3 +119,19 @@ The agent runtime ships these features that the persona team relies on. Master c
 **ProviderProfile ABC** (`plugins/model-providers/`): pluggable inference providers. Subclass declares `auth_path`, `base_url`, `model_catalog`, `caching_headers`. Each plugin's `__init__.py` calls `providers.register_provider(...)`. Lets us define BV / BP profile bundles per [`exec-persona-hermes-config`](../05-process/persona_hermes_config.md).
 
 **Checkpoints v2**: durable mid-run snapshots — relied on by long-running Researcher investigations.
+
+---
+
+<!-- backlinks-start -->
+
+## Referenced by
+
+- [Now](../01-identity/now.md)
+- [Triage Intake](../02-org/02-ai-systems/02-project-delivery/triage_intake.md)
+- [Persona Hermes Config](../05-process/persona_hermes_config.md)
+- [Legacy Byterover](../06-infrastructure/05-memory-stack/legacy_byterover.md)
+- [Overview](../06-infrastructure/05-memory-stack/overview.md)
+- [Agent Orchestration](../08-strategy/agent_orchestration.md)
+- [Persona Team V013](../08-strategy/persona_team_v013.md)
+
+<!-- backlinks-end -->

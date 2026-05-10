@@ -35,3 +35,17 @@ related: [agent-soul, co-about, persona-vijay-ceo]
 - Spin up and assign AI Agents to roles and tasks as needed
 - Manage agent skills and capabilities
 - Ensure work flows efficiently across the team
+
+---
+
+<!-- backlinks-start -->
+
+## Referenced by
+
+- [Start Here](../../../00-meta/START_HERE.md)
+- [Company About](../../../01-identity/company_about.md)
+- [Role](role.md)
+- [Soul](soul.md)
+- [Vijay Ceo Founder](../vijay_ceo_founder.md)
+
+<!-- backlinks-end -->

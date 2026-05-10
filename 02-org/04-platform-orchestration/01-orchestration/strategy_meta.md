@@ -26,3 +26,13 @@ Long-term thinker at the platform layer — recommends agent-architecture change
 
 ## References
 - [`08-strategy/agent_orchestration.md`](../../../08-strategy/agent_orchestration.md)
+
+---
+
+<!-- backlinks-start -->
+
+## Referenced by
+
+- [Agent Orchestration](../../../08-strategy/agent_orchestration.md)
+
+<!-- backlinks-end -->

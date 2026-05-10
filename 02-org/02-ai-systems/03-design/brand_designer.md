@@ -61,3 +61,13 @@ profiles:
 ## References
 - [`08-strategy/persona_team_v013.md`](../../../08-strategy/persona_team_v013.md)
 - [`assets/`](../../assets/) — existing brand assets (logos, etc.)
+
+---
+
+<!-- backlinks-start -->
+
+## Referenced by
+
+- [Persona Team V013](../../../08-strategy/persona_team_v013.md)
+
+<!-- backlinks-end -->

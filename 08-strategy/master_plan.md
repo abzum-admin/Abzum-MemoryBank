@@ -185,3 +185,35 @@ Vijay (Product Owner)
 ---
 
 *Source: AI_COMPANY_MASTER_PLAN.md v1.0 — Felix Stanley, COO*
+
+---
+
+<!-- backlinks-start -->
+
+## Referenced by
+
+- [Positioning](../01-identity/positioning.md)
+- [Vijay Ceo Founder](../02-org/01-executive/vijay_ceo_founder.md)
+- [Pricing](../03-services/pricing.md)
+- [Architecture](../04-products/interact/architecture.md)
+- [Data Model](../04-products/interact/data_model.md)
+- [Deploy And Onboard](../04-products/interact/deploy_and_onboard.md)
+- [Dynamic Ui](../04-products/interact/dynamic_ui.md)
+- [Go To Market](../04-products/interact/go_to_market.md)
+- [Multi Tenancy](../04-products/interact/multi_tenancy.md)
+- [Product Spec](../04-products/interact/product_spec.md)
+- [Roadmap](../04-products/interact/roadmap.md)
+- [Voice Stack](../04-products/interact/voice_stack.md)
+- [Architecture](../04-products/require/architecture.md)
+- [Deploy Modes](../04-products/require/deploy_modes.md)
+- [Interplay With Cea](../04-products/require/interplay_with_cea.md)
+- [Mockup Pipeline](../04-products/require/mockup_pipeline.md)
+- [Output Schema](../04-products/require/output_schema.md)
+- [Product Spec](../04-products/require/product_spec.md)
+- [Roadmap](../04-products/require/roadmap.md)
+- [Voice Stack](../04-products/require/voice_stack.md)
+- [Memory Protocol](../05-process/memory_protocol.md)
+- [Plan Of Action](../07-research/hermes-hindsight/plan_of_action.md)
+- [Agent Orchestration](agent_orchestration.md)
+
+<!-- backlinks-end -->

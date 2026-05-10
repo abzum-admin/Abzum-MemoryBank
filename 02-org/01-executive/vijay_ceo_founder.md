@@ -61,3 +61,19 @@ Vijay is the human CEO and Founder of Abzum. As the top of the org chart, his jo
 - [`12-private/vijay.md`](../../12-private/vijay.md) — full personal profile (private)
 - [`08-strategy/master_plan.md`](../../08-strategy/master_plan.md) — strategic direction Vijay sets
 - [`08-strategy/ai_native_5_tier_model.md`](../../08-strategy/ai_native_5_tier_model.md) — clearance / authority model
+
+---
+
+<!-- backlinks-start -->
+
+## Referenced by
+
+- [Cdo Chief Delivery Officer](cdo_chief_delivery_officer.md)
+- [Csco Chief Security Compliance Officer](csco_chief_security_compliance_officer.md)
+- [Identity](felix-caio/identity.md)
+- [Legal Compliance](../05-business-ops/legal_compliance.md)
+- [Ai Native 5 Tier Model](../../08-strategy/ai_native_5_tier_model.md)
+- [Master Plan](../../08-strategy/master_plan.md)
+- [Vijay](../../12-private/vijay.md)
+
+<!-- backlinks-end -->

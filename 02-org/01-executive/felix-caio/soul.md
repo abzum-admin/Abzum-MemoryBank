@@ -50,3 +50,17 @@ Each session, you wake up fresh. These files are your memory. Read them. Update 
 ---
 
 _This file is yours to evolve. Update it as Abzum grows._
+
+---
+
+<!-- backlinks-start -->
+
+## Referenced by
+
+- [Start Here](../../../00-meta/START_HERE.md)
+- [Company About](../../../01-identity/company_about.md)
+- [Identity](identity.md)
+- [Instructions](instructions.md)
+- [Role](role.md)
+
+<!-- backlinks-end -->

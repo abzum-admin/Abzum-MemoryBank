@@ -102,3 +102,16 @@ Phase 0 [BLOCKED] → Phase 1 → Phase 2 → Phase 3 → Phase 4 → Phase 5 (F
 
 → Full roadmap: [`11-work/plan/phases.md`](../11-work/plan/phases.md)
 → Full structured plan: [`07-research/hermes-hindsight/plan_of_action.md`](../07-research/hermes-hindsight/plan_of_action.md)
+
+---
+
+<!-- backlinks-start -->
+
+## Referenced by
+
+- [Readme](../00-meta/README.md)
+- [Start Here](../00-meta/START_HERE.md)
+- [Instructions](../02-org/01-executive/felix-caio/instructions.md)
+- [Plan Of Action](../07-research/hermes-hindsight/plan_of_action.md)
+
+<!-- backlinks-end -->

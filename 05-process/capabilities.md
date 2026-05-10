@@ -226,3 +226,13 @@ The ability to think about one's own thinking.
 ---
 
 *Source: AI_AGENT_CAPABILITIES_FRAMEWORK.md v1.0 — Felix Stanley, COO*
+
+---
+
+<!-- backlinks-start -->
+
+## Referenced by
+
+- [Plan Of Action](../07-research/hermes-hindsight/plan_of_action.md)
+
+<!-- backlinks-end -->

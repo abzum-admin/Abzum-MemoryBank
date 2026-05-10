@@ -890,3 +890,16 @@ hermes.config.entity_extraction.confidence_threshold = 0.75
 - [PostgreSQL Vector Search (pgvector)](https://github.com/pgvector/pgvector)
 - [Full-Text Search in PostgreSQL](https://www.postgresql.org/docs/current/textsearch.html)
 - [Karpathy LLM Wiki Pattern](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f)
+
+---
+
+<!-- backlinks-start -->
+
+## Referenced by
+
+- [Now](../../01-identity/now.md)
+- [Search Retrieval Agent](../../02-org/02-ai-systems/04-knowledge-intelligence/search_retrieval_agent.md)
+- [Clickhouse Analytics](../../06-infrastructure/05-memory-stack/clickhouse_analytics.md)
+- [Plan Of Action](plan_of_action.md)
+
+<!-- backlinks-end -->

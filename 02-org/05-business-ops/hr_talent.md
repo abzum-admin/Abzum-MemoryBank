@@ -35,3 +35,13 @@ related: [persona-felix-caio-role, persona-cdo]
 - A47 BI/WorkIQ taxonomy (performance signals)
 - A28 First human hire
 - A29 Plan Account Manager hiring
+
+---
+
+<!-- backlinks-start -->
+
+## Referenced by
+
+- [Cdo Chief Delivery Officer](../01-executive/cdo_chief_delivery_officer.md)
+
+<!-- backlinks-end -->

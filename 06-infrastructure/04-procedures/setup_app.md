@@ -328,3 +328,14 @@ docker exec abzum-setup-app printenv CF_AUTH_DOMAIN
 | Status | `hermes.service` systemctl | Docker container health |
 
 `deploy-service.sh` is kept as a reference/fallback. It is deprecated for any service managed by the setup app.
+
+---
+
+<!-- backlinks-start -->
+
+## Referenced by
+
+- [Docker](../01-cloud/docker.md)
+- [Vps](../01-cloud/vps.md)
+
+<!-- backlinks-end -->

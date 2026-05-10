@@ -78,3 +78,14 @@ Abzum-MemoryBank-BusinessIntelligence/
 - **Scripts:** `init-repo.sh`, `auto-sync.sh`, `restore-vps.sh` (in deployment guide)
 - **GitHub Action:** `ai-merge-orchestrator.yml` (in deployment guide)
 - **Backup strategy:** `memory/backup-restore-strategy-2026-04-01.md`
+
+---
+
+<!-- backlinks-start -->
+
+## Referenced by
+
+- [Github Backup](../05-memory-stack/github_backup.md)
+- [Plan Of Action](../../07-research/hermes-hindsight/plan_of_action.md)
+
+<!-- backlinks-end -->

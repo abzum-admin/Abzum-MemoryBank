@@ -39,3 +39,15 @@ Design principle: Humans exist only to direct agents (set objectives), govern ag
 
 ### Highlights
 Tier 2 concentration risk: if this team fails, 95% of operations halt. 26 traditional departments dissolved. 9 autonomous agent pools handle all execution work. Key human-only functions: legal accountability, fiduciary duty, relationship equity, regulatory standing.
+
+---
+
+<!-- backlinks-start -->
+
+## Referenced by
+
+- [Vijay Ceo Founder](../02-org/01-executive/vijay_ceo_founder.md)
+- [Plan Of Action](../07-research/hermes-hindsight/plan_of_action.md)
+- [Ai Native Org Overview](ai_native_org_overview.md)
+
+<!-- backlinks-end -->

@@ -160,3 +160,16 @@ git commit -m "feat(auth): add GitHub OAuth login"
 ---
 
 *Source: superpowers-ai-company-workflow.md v1.0*
+
+---
+
+<!-- backlinks-start -->
+
+## Referenced by
+
+- [Junior Coder](../02-org/02-ai-systems/01-engineering/junior_coder.md)
+- [Senior Coder](../02-org/02-ai-systems/01-engineering/senior_coder.md)
+- [Tester](../02-org/02-ai-systems/01-engineering/tester.md)
+- [Plan Of Action](../07-research/hermes-hindsight/plan_of_action.md)
+
+<!-- backlinks-end -->

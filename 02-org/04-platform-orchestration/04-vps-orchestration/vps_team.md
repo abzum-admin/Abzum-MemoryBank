@@ -22,3 +22,15 @@ Owns the substrate Abzum runs on: Hostinger VPS cluster (currently abzum.cloud K
 ## References
 - [`06-infrastructure/01-cloud/vps.md`](../../../06-infrastructure/01-cloud/vps.md)
 - [`08-strategy/two_tier_architecture.md`](../../../08-strategy/two_tier_architecture.md) §"Infrastructure Mapping"
+
+---
+
+<!-- backlinks-start -->
+
+## Referenced by
+
+- [Provisioning](../01-orchestration/provisioning.md)
+- [Vps](../../../06-infrastructure/01-cloud/vps.md)
+- [Two Tier Architecture](../../../08-strategy/two_tier_architecture.md)
+
+<!-- backlinks-end -->

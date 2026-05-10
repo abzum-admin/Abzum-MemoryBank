@@ -35,3 +35,14 @@ Automated invoicing per closed engagement, payment chase-up, usage tracking agai
 - A54 Token usage tracking
 - A55 Customer project estimation
 - [`02-org/04-platform-orchestration/02-cost-and-routing/cost_optimizer.md`](../04-platform-orchestration/02-cost-and-routing/cost_optimizer.md)
+
+---
+
+<!-- backlinks-start -->
+
+## Referenced by
+
+- [Cdo Chief Delivery Officer](../01-executive/cdo_chief_delivery_officer.md)
+- [Pricing](../../03-services/pricing.md)
+
+<!-- backlinks-end -->

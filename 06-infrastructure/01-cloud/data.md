@@ -87,3 +87,13 @@ status: active
 ---
 
 *Source: AI_COMPANY_INFRASTRUCTURE_COMPLIANCE_PLAN.md v1.0*
+
+---
+
+<!-- backlinks-start -->
+
+## Referenced by
+
+- [Plan Of Action](../../07-research/hermes-hindsight/plan_of_action.md)
+
+<!-- backlinks-end -->

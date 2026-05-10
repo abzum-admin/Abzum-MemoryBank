@@ -27,3 +27,16 @@ Sets memory policy across all project containers: which projects share memory na
 ## References
 - [`06-infrastructure/05-memory-stack/`](../../../../06-infrastructure/05-memory-stack/) (to be created)
 - [`08-strategy/agent_orchestration.md`](../../../08-strategy/agent_orchestration.md) §Memory Stack
+
+---
+
+<!-- backlinks-start -->
+
+## Referenced by
+
+- [Knowledge Graph Agent](../../02-ai-systems/04-knowledge-intelligence/knowledge_graph_agent.md)
+- [Search Retrieval Agent](../../02-ai-systems/04-knowledge-intelligence/search_retrieval_agent.md)
+- [Overview](../../../06-infrastructure/05-memory-stack/overview.md)
+- [Agent Orchestration](../../../08-strategy/agent_orchestration.md)
+
+<!-- backlinks-end -->

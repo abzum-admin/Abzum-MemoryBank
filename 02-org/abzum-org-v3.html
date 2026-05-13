@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Abzum Org — AI-Native 30-Role Structure</title>
+<style>
+:root {
+  --bg: #f5f6fa;
+  --card: #ffffff;
+  --border: #e2e6ed;
+  --text: #1a1a2e;
+  --muted: #6b7280;
+  --accent-h: #1a1a2e;
+
+  /* tier colours */
+  --l0-bg: #fff3cd; --l0-bd: #d4a017; --l0-text: #7a5500;
+  --l1-bg: #cfe2ff; --l1-bd: #3b7dd8; --l1-text: #0a3678;
+  --l2-bg: #d1ecf1; --l2-bd: #117a8b; --l2-text: #0c5460;
+  --l3-bg: #d4edda; --l3-bd: #28a745; --l3-text: #155724;
+  --l4-bg: #e8f5e9; --l4-bd: #66bb6a; --l4-text: #2e7d32;
+
+  --cdo-accent: #6366f1;
+  --cfo-accent: #f59e0b;
+  --coo-accent: #3b82f6;
+  --csco-accent: #ef4444;
+}
+
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
+
+/* ── HEADER ── */
+header{
+  background:linear-gradient(135deg,#1a1a2e 0%,#16213e 60%,#0f3460 100%);
+  color:#fff;padding:28px 32px 22px;
+  display:flex;align-items:flex-end;gap:16px;flex-wrap:wrap;
+}
+header h1{font-size:1.55rem;font-weight:800;letter-spacing:-0.5px;}
+header p{font-size:0.82rem;opacity:0.6;margin-top:4px;}
+.hbadge{background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.25);border-radius:20px;padding:4px 14px;font-size:0.73rem;font-weight:700;letter-spacing:.5px;white-space:nowrap;}
+
+/* ── STATS ── */
+.stats{display:flex;gap:10px;padding:20px 32px 0;flex-wrap:wrap;}
+.stat{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px 18px;min-width:115px;flex:1;}
+.stat .n{font-size:1.75rem;font-weight:900;line-height:1;}
+.stat .l{font-size:0.68rem;color:var(--muted);margin-top:3px;text-transform:uppercase;letter-spacing:.6px;}
+.stat.s0 .n{color:var(--l0-text);}
+.stat.s1 .n{color:var(--l1-text);}
+.stat.s2 .n{color:var(--l2-text);}
+.stat.s3 .n{color:var(--l3-text);}
+.stat.s4 .n{color:var(--l4-text);}
+.stat.st .n{color:var(--text);}
+
+/* ── SECTION WRAPPER ── */
+.section{background:var(--card);border:1px solid var(--border);border-radius:12px;margin:20px 32px 0;overflow:hidden;}
+.section-head{padding:14px 20px 12px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;}
+.section-head h2{font-size:0.82rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;}
+
+/* ── TIER LEGEND ── */
+.tier-legend{display:flex;gap:8px;padding:14px 20px;flex-wrap:wrap;}
+.tl-item{display:flex;align-items:center;gap:6px;font-size:0.76rem;border:1px solid var(--border);border-radius:20px;padding:3px 10px;background:var(--card);}
+.tl-dot{width:9px;height:9px;border-radius:50%;}
+
+/* ── ORG GRID ── */
+.org-wrap{padding:0 20px 24px;}
+
+.row-label{font-size:0.68rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;margin:18px 0 8px;}
+
+/* Tier rows */
+.tier-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:4px;}
+
+/* Role card */
+.role{border-radius:8px;padding:10px 14px;font-size:0.78rem;border:1px solid;cursor:default;position:relative;transition:box-shadow .15s;}
+.role:hover{box-shadow:0 2px 12px rgba(0,0,0,.1);}
+.role .rtag{font-size:0.62rem;font-weight:700;border-radius:10px;padding:1px 7px;display:inline-block;margin-bottom:4px;}
+.role .rname{font-weight:700;font-size:0.82rem;line-height:1.2;}
+.role .rsub{font-size:0.68rem;color:var(--muted);margin-top:3px;}
+.role .rbv{font-size:0.64rem;margin-top:5px;color:#444;border-top:1px solid rgba(0,0,0,.07);padding-top:4px;}
+.role .rbv span{font-weight:600;}
+
+.role.l0{background:var(--l0-bg);border-color:var(--l0-bd);color:var(--l0-text);}
+.role.l1{background:var(--l1-bg);border-color:var(--l1-bd);color:var(--l1-text);}
+.role.l2{background:var(--l2-bg);border-color:var(--l2-bd);color:var(--l2-text);}
+.role.l3{background:var(--l3-bg);border-color:var(--l3-bd);color:var(--l3-text);}
+.role.l4{background:var(--l4-bg);border-color:var(--l4-bd);color:var(--l4-text);}
+
+/* Department sub-sections */
+.dept{border:1px solid var(--border);border-radius:10px;margin:12px 0 0;overflow:hidden;}
+.dept-head{padding:8px 14px;font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:#fff;display:flex;align-items:center;gap:8px;}
+.dept-head .dept-label{opacity:.85;font-weight:600;}
+.dept-body{padding:12px 14px;display:flex;gap:10px;flex-wrap:wrap;}
+
+.dept.cdo .dept-head{background:var(--cdo-accent);}
+.dept.cfo .dept-head{background:var(--cfo-accent);}
+.dept.coo .dept-head{background:var(--coo-accent);}
+.dept.csco .dept-head{background:var(--csco-accent);}
+
+/* ── ACCORDION TABLE ── */
+details{border-bottom:1px solid var(--border);}
+details:last-child{border-bottom:none;}
+summary{padding:12px 20px;cursor:pointer;font-size:0.82rem;font-weight:600;list-style:none;display:flex;align-items:center;gap:8px;user-select:none;}
+summary::-webkit-details-marker{display:none;}
+summary::before{content:"▶";font-size:0.65rem;transition:transform .2s;color:var(--muted);}
+details[open] summary::before{transform:rotate(90deg);}
+.detail-body{padding:4px 20px 16px;}
+table{width:100%;border-collapse:collapse;font-size:0.8rem;}
+th{background:#f4f6f8;font-size:0.68rem;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);font-weight:700;padding:8px 12px;text-align:left;}
+td{padding:9px 12px;border-top:1px solid #f0f2f5;vertical-align:top;}
+.chip{display:inline-block;border-radius:10px;padding:2px 8px;font-size:0.67rem;font-weight:700;letter-spacing:.3px;border:1px solid;}
+.chip.l0{background:var(--l0-bg);border-color:var(--l0-bd);color:var(--l0-text);}
+.chip.l1{background:var(--l1-bg);border-color:var(--l1-bd);color:var(--l1-text);}
+.chip.l2{background:var(--l2-bg);border-color:var(--l2-bd);color:var(--l2-text);}
+.chip.l3{background:var(--l3-bg);border-color:var(--l3-bd);color:var(--l3-text);}
+.chip.l4{background:var(--l4-bg);border-color:var(--l4-bd);color:var(--l4-text);}
+.model-bv{color:#1a56db;font-weight:600;}
+.model-bp{color:#7e3af2;font-weight:600;}
+
+/* ── SOD TABLE ── */
+.sod-table{padding:0 20px 20px;}
+.sod-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-top:10px;font-size:0.78rem;}
+.sod-row > div{padding:10px 14px;border-right:1px solid var(--border);}
+.sod-row > div:last-child{border-right:none;}
+.sod-head{background:#f4f6f8;font-weight:700;font-size:0.7rem;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);}
+
+/* ── SELF-IMPROVEMENT LOOP ── */
+.loop-box{margin:16px 20px;background:linear-gradient(135deg,#f0f4ff,#f5f3ff);border:1px solid #c7d2fe;border-radius:10px;padding:16px 20px;}
+.loop-box h3{font-size:0.8rem;font-weight:700;color:#4338ca;margin-bottom:10px;text-transform:uppercase;letter-spacing:.5px;}
+.loop-steps{display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
+.loop-step{background:#fff;border:1px solid #c7d2fe;border-radius:6px;padding:5px 10px;font-size:0.72rem;font-weight:600;color:#4338ca;white-space:nowrap;}
+.loop-arrow{color:#a5b4fc;font-size:0.9rem;font-weight:700;}
+
+footer{text-align:center;font-size:0.7rem;color:#b0b8c8;margin-top:28px;padding:0 32px 32px;}
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <h1>Abzum Org — AI-Native 30-Role Structure</h1>
+    <p>Paperclip 5-Tier Model · L0 Board → L1 CEO → L2 C-Suite → L3/L4 Agents · Last updated 2026-05-13</p>
+  </div>
+  <span class="hbadge">30 Roles</span>
+  <span class="hbadge">SoD-Compliant</span>
+</header>
+
+<!-- Stats -->
+<div class="stats">
+  <div class="stat s0"><div class="n">1</div><div class="l">L0 Human Board</div></div>
+  <div class="stat s1"><div class="n">1</div><div class="l">L1 AI CEO</div></div>
+  <div class="stat s2"><div class="n">4</div><div class="l">L2 AI C-Suite</div></div>
+  <div class="stat s3"><div class="n">15</div><div class="l">L3 Dept Leads</div></div>
+  <div class="stat s4"><div class="n">9</div><div class="l">L4 Operational</div></div>
+  <div class="stat st"><div class="n">30</div><div class="l">Total Roles</div></div>
+</div>
+
+<!-- Tier legend -->
+<div class="section">
+  <div class="section-head"><h2>Tier Legend</h2></div>
+  <div class="tier-legend">
+    <div class="tl-item"><div class="tl-dot" style="background:var(--l0-bd)"></div> L0 — Human Board</div>
+    <div class="tl-item"><div class="tl-dot" style="background:var(--l1-bd)"></div> L1 — AI CEO</div>
+    <div class="tl-item"><div class="tl-dot" style="background:var(--l2-bd)"></div> L2 — AI C-Suite</div>
+    <div class="tl-item"><div class="tl-dot" style="background:var(--l3-bd)"></div> L3 — Dept Lead AI</div>
+    <div class="tl-item"><div class="tl-dot" style="background:var(--l4-bd)"></div> L4 — Operational AI</div>
+    <div class="tl-item" style="margin-left:auto;border:none;padding:0;font-size:0.72rem;color:var(--muted);">
+      <span class="model-bv">■ BV</span> = Best Value stack &nbsp;|&nbsp; <span class="model-bp">■ BP</span> = Best Performance stack
+    </div>
+  </div>
+</div>
+
+<!-- Org visual -->
+<div class="section">
+  <div class="section-head"><h2>Organisation Structure</h2></div>
+  <div class="org-wrap">
+
+    <!-- L0 + L1 -->
+    <div class="row-label">L0 · Board &amp; L1 · CEO</div>
+    <div class="tier-row">
+      <div class="role l0" style="min-width:200px;">
+        <div class="rtag" style="background:var(--l0-bd);color:#fff;">L0 Human</div>
+        <div class="rname">Vijay Tilak</div>
+        <div class="rsub">Founding Board Member</div>
+        <div class="rbv">Vision · Governance · Final approvals</div>
+      </div>
+      <div class="role l1" style="min-width:200px;">
+        <div class="rtag" style="background:var(--l1-bd);color:#fff;">L1 CEO</div>
+        <div class="rname">Felix Stanley</div>
+        <div class="rsub">Chief Executive Officer (AI)</div>
+        <div class="rbv"><span>BV</span> GLM-5.1 OpenCode · <span>BP</span> Gemini 3.1 Pro Vertex</div>
+      </div>
+    </div>
+
+    <!-- L2 C-Suite -->
+    <div class="row-label">L2 · AI C-Suite</div>
+    <div class="tier-row">
+      <div class="role l2" style="min-width:160px;">
+        <div class="rtag" style="background:var(--cdo-accent);color:#fff;">CDO</div>
+        <div class="rname">Chief Delivery Officer</div>
+        <div class="rsub">Engineering · UX · K&amp;I · Delivery</div>
+        <div class="rbv"><span>BV</span> GLM-5.1 · <span>BP</span> Gemini 3.1 Pro</div>
+      </div>
+      <div class="role l2" style="min-width:160px;">
+        <div class="rtag" style="background:var(--cfo-accent);color:#fff;">CFO</div>
+        <div class="rname">Chief Financial Officer</div>
+        <div class="rsub">Finance · Legal · Procurement</div>
+        <div class="rbv"><span>BV</span> GLM-5.1 · <span>BP</span> Sonnet 4.6</div>
+      </div>
+      <div class="role l2" style="min-width:160px;">
+        <div class="rtag" style="background:var(--coo-accent);color:#fff;">COO</div>
+        <div class="rname">Chief Operating Officer</div>
+        <div class="rsub">Platform · Observability · Service Ops</div>
+        <div class="rbv"><span>BV</span> GLM-5.1 · <span>BP</span> Opus 4.7</div>
+      </div>
+      <div class="role l2" style="min-width:160px;">
+        <div class="rtag" style="background:var(--csco-accent);color:#fff;">CSCO</div>
+        <div class="rname">Chief Security &amp; Compliance</div>
+        <div class="rsub">SOC · Policy</div>
+        <div class="rbv"><span>BV</span> GLM-5.1 Z.ai · <span>BP</span> Opus 4.7</div>
+      </div>
+    </div>
+
+    <!-- CDO Teams -->
+    <div class="dept cdo">
+      <div class="dept-head">
+        <span>CDO Domain</span>
+        <span class="dept-label">— 14 agents across 4 teams</span>
+      </div>
+      <div class="dept-body">
+
+        <!-- Engineering -->
+        <div style="flex:1;min-width:280px;">
+          <div style="font-size:0.68rem;font-weight:700;color:var(--cdo-accent);text-transform:uppercase;letter-spacing:.6px;margin-bottom:6px;">Engineering</div>
+          <div class="role l3" style="margin-bottom:6px;">
+            <div class="rtag" style="background:var(--l3-bd);color:#fff;">L3</div>
+            <div class="rname">Architect</div>
+            <div class="rbv"><span>BV</span> GLM-5.1 OpenCode · <span>BP</span> Opus 4.7</div>
+          </div>
+          <div class="role l3" style="margin-bottom:6px;">
+            <div class="rtag" style="background:var(--l3-bd);color:#fff;">L3</div>
+            <div class="rname">Senior Coder</div>
+            <div class="rbv"><span>BV</span> Grok 4.3 OpenRouter · <span>BP</span> Opus 4.7</div>
+          </div>
+          <div class="role l4" style="margin-bottom:6px;">
+            <div class="rtag" style="background:var(--l4-bd);color:#fff;">L4</div>
+            <div class="rname">Junior Coder</div>
+            <div class="rbv"><span>BV</span> GLM-5.1/Kimi K2.5 · <span>BP</span> GPT-5.5 Codex</div>
+          </div>
+          <div class="role l4" style="margin-bottom:6px;">
+            <div class="rtag" style="background:var(--l4-bd);color:#fff;">L4</div>
+            <div class="rname">DevOps / Release Eng.</div>
+            <div class="rbv"><span>BV</span> GLM-5.1 OpenCode · <span>BP</span> GPT-5.5 Codex</div>
+          </div>
+          <div class="role l4" style="margin-bottom:6px;">
+            <div class="rtag" style="background:var(--l4-bd);color:#fff;">L4</div>
+            <div class="rname">QA / Test</div>
+            <div class="rbv"><span>BV</span> Kimi K2.6 + Playwright · <span>BP</span> Sonnet 4.6 + Playwright</div>
+          </div>
+          <div class="role l4">
+            <div class="rtag" style="background:var(--l4-bd);color:#fff;">L4</div>
+            <div class="rname">Security Agent (DevSec)</div>
+            <div class="rbv"><span>BV</span> GLM-5.1 Z.ai · <span>BP</span> Opus 4.7</div>
+          </div>
+        </div>
+
+        <!-- UX -->
+        <div style="min-width:200px;">
+          <div style="font-size:0.68rem;font-weight:700;color:var(--cdo-accent);text-transform:uppercase;letter-spacing:.6px;margin-bottom:6px;">UX Design</div>
+          <div class="role l3" style="margin-bottom:6px;">
+            <div class="rtag" style="background:var(--l3-bd);color:#fff;">L3</div>
+            <div class="rname">UI Designer</div>
+            <div class="rbv"><span>BV</span> GLM-5.1 Artifacts · <span>BP</span> Sonnet 4.6 + v0</div>
+          </div>
+          <div class="role l4">
+            <div class="rtag" style="background:var(--l4-bd);color:#fff;">L4</div>
+            <div class="rname">Visual &amp; Brand Designer</div>
+            <div class="rsub">Brand + Motion merged</div>
+            <div class="rbv"><span>BV</span> GLM-5.1 + OSS · <span>BP</span> Gemini 3.1 Pro</div>
+          </div>
+        </div>
+
+        <!-- K&I -->
+        <div style="min-width:200px;">
+          <div style="font-size:0.68rem;font-weight:700;color:var(--cdo-accent);text-transform:uppercase;letter-spacing:.6px;margin-bottom:6px;">Knowledge &amp; Intelligence</div>
+          <div class="role l3" style="margin-bottom:6px;">
+            <div class="rtag" style="background:var(--l3-bd);color:#fff;">L3</div>
+            <div class="rname">Knowledge Graph</div>
+            <div class="rbv"><span>BV</span> GLM-5.1 · <span>BP</span> Gemini 3.1 Pro</div>
+          </div>
+          <div class="role l3" style="margin-bottom:6px;">
+            <div class="rtag" style="background:var(--l3-bd);color:#fff;">L3</div>
+            <div class="rname">Learning &amp; Improvement</div>
+            <div class="rbv"><span>BV</span> GLM-5.1 · <span>BP</span> Sonnet 4.6</div>
+          </div>
+          <div class="role l4">
+            <div class="rtag" style="background:var(--l4-bd);color:#fff;">L4</div>
+            <div class="rname">Watcher</div>
+            <div class="rsub">Always-on · Zero cost</div>
+            <div class="rbv"><span>BV</span> Gemma 4 E4B (local $0) · <span>BP</span> Phi-4-mini (local $0)</div>
+          </div>
+        </div>
+
+        <!-- Delivery -->
+        <div style="min-width:200px;">
+          <div style="font-size:0.68rem;font-weight:700;color:var(--cdo-accent);text-transform:uppercase;letter-spacing:.6px;margin-bottom:6px;">Project Delivery</div>
+          <div class="role l3" style="margin-bottom:6px;">
+            <div class="rtag" style="background:var(--l3-bd);color:#fff;">L3</div>
+            <div class="rname">PM / Planner</div>
+            <div class="rbv"><span>BV</span> Qwen 3.5 Plus (thinking) · <span>BP</span> GPT-5.5 Codex</div>
+          </div>
+          <div class="role l3" style="margin-bottom:6px;">
+            <div class="rtag" style="background:var(--l3-bd);color:#fff;">L3</div>
+            <div class="rname">Client Engagement</div>
+            <div class="rsub">Voice-first · Pipecat runtime</div>
+            <div class="rbv"><span>BV</span> Gemini 3.1 Flash Live · <span>BP</span> Grok voice-think-fast</div>
+          </div>
+          <div class="role l4">
+            <div class="rtag" style="background:var(--l4-bd);color:#fff;">L4</div>
+            <div class="rname">Technical Writer</div>
+            <div class="rbv"><span>BV</span> GLM-5.1 · <span>BP</span> Sonnet 4.6</div>
+          </div>
+        </div>
+      </div>
+    </div><!-- /CDO -->
+
+    <!-- CFO Teams -->
+    <div class="dept cfo" style="margin-top:10px;">
+      <div class="dept-head">
+        <span>CFO Domain</span>
+        <span class="dept-label">— 3 agents</span>
+      </div>
+      <div class="dept-body">
+        <div class="role l3">
+          <div class="rtag" style="background:var(--l3-bd);color:#fff;">L3</div>
+          <div class="rname">Finance &amp; Billing</div>
+          <div class="rbv"><span>BV</span> GLM-5.1 · <span>BP</span> Sonnet 4.6</div>
+        </div>
+        <div class="role l3">
+          <div class="rtag" style="background:var(--l3-bd);color:#fff;">L3</div>
+          <div class="rname">Legal &amp; Compliance</div>
+          <div class="rsub">Contractual scope only</div>
+          <div class="rbv"><span>BV</span> GLM-5.1 · <span>BP</span> Opus 4.7</div>
+        </div>
+        <div class="role l4">
+          <div class="rtag" style="background:var(--l4-bd);color:#fff;">L4</div>
+          <div class="rname">Procurement</div>
+          <div class="rbv"><span>BV</span> GLM-5.1 · <span>BP</span> Sonnet 4.6</div>
+        </div>
+      </div>
+    </div><!-- /CFO -->
+
+    <!-- COO Teams -->
+    <div class="dept coo" style="margin-top:10px;">
+      <div class="dept-head">
+        <span>COO Domain</span>
+        <span class="dept-label">— 7 agents across 4 teams</span>
+      </div>
+      <div class="dept-body" style="flex-wrap:wrap;gap:16px;">
+
+        <div style="min-width:220px;">
+          <div style="font-size:0.68rem;font-weight:700;color:var(--coo-accent);text-transform:uppercase;letter-spacing:.6px;margin-bottom:6px;">Platform &amp; Access</div>
+          <div class="role l3" style="margin-bottom:6px;">
+            <div class="rtag" style="background:var(--l3-bd);color:#fff;">L3</div>
+            <div class="rname">Cloud Platforms Admin</div>
+            <div class="rsub">AWS · GCP · Supabase · Hostinger</div>
+            <div class="rbv"><span>BV</span> GLM-5.1 · <span>BP</span> Opus 4.7</div>
+          </div>
+          <div class="role l3" style="margin-bottom:6px;">
+            <div class="rtag" style="background:var(--l3-bd);color:#fff;">L3</div>
+            <div class="rname">IAM Agent</div>
+            <div class="rsub">Identity · RBAC · Access Reviews</div>
+            <div class="rbv"><span>BV</span> GLM-5.1 · <span>BP</span> Opus 4.7</div>
+          </div>
+          <div class="role l4">
+            <div class="rtag" style="background:var(--l4-bd);color:#fff;">L4</div>
+            <div class="rname">Dev Platform Admin</div>
+            <div class="rsub">GitHub + Doppler merged</div>
+            <div class="rbv"><span>BV</span> GLM-5.1 · <span>BP</span> Sonnet 4.6</div>
+          </div>
+        </div>
+
+        <div style="min-width:200px;">
+          <div style="font-size:0.68rem;font-weight:700;color:var(--coo-accent);text-transform:uppercase;letter-spacing:.6px;margin-bottom:6px;">Observability</div>
+          <div class="role l3" style="margin-bottom:6px;">
+            <div class="rtag" style="background:var(--l3-bd);color:#fff;">L3</div>
+            <div class="rname">Platform Operations</div>
+            <div class="rsub">Observability + Incident + Sec Monitoring</div>
+            <div class="rbv"><span>BV</span> GLM-5.1 · <span>BP</span> Sonnet 4.6</div>
+          </div>
+          <div style="font-size:0.68rem;font-weight:700;color:var(--coo-accent);text-transform:uppercase;letter-spacing:.6px;margin:10px 0 6px;">Foundation</div>
+          <div class="role l3">
+            <div class="rtag" style="background:var(--l3-bd);color:#fff;">L3</div>
+            <div class="rname">Network &amp; Edge</div>
+            <div class="rsub">Cloudflare + DNS + Domain merged</div>
+            <div class="rbv"><span>BV</span> GLM-5.1 · <span>BP</span> Opus 4.7</div>
+          </div>
+        </div>
+
+        <div style="min-width:200px;">
+          <div style="font-size:0.68rem;font-weight:700;color:var(--coo-accent);text-transform:uppercase;letter-spacing:.6px;margin-bottom:6px;">Service Ops</div>
+          <div class="role l3" style="margin-bottom:6px;">
+            <div class="rtag" style="background:var(--l3-bd);color:#fff;">L3</div>
+            <div class="rname">Service Desk</div>
+            <div class="rsub">Merged 4 former support roles</div>
+            <div class="rbv"><span>BV</span> GLM-5.1 · <span>BP</span> Sonnet 4.6</div>
+          </div>
+          <div class="role l4">
+            <div class="rtag" style="background:var(--l4-bd);color:#fff;">L4</div>
+            <div class="rname">Knowledge Capture</div>
+            <div class="rsub">COO → CDO ingestion pipeline</div>
+            <div class="rbv"><span>BV</span> GLM-5.1 · <span>BP</span> Sonnet 4.6</div>
+          </div>
+        </div>
+      </div>
+    </div><!-- /COO -->
+
+    <!-- CSCO Teams -->
+    <div class="dept csco" style="margin-top:10px;">
+      <div class="dept-head">
+        <span>CSCO Domain</span>
+        <span class="dept-label">— 4 agents across 2 teams</span>
+      </div>
+      <div class="dept-body">
+        <div style="min-width:220px;">
+          <div style="font-size:0.68rem;font-weight:700;color:var(--csco-accent);text-transform:uppercase;letter-spacing:.6px;margin-bottom:6px;">SOC</div>
+          <div class="role l3" style="margin-bottom:6px;">
+            <div class="rtag" style="background:var(--l3-bd);color:#fff;">L3</div>
+            <div class="rname">Threat Intel &amp; Detection</div>
+            <div class="rsub">Merged Threat Intel + Detection</div>
+            <div class="rbv"><span>BV</span> GLM-5.1 Z.ai · <span>BP</span> Opus 4.7</div>
+          </div>
+          <div class="role l3" style="margin-bottom:6px;">
+            <div class="rtag" style="background:var(--l3-bd);color:#fff;">L3</div>
+            <div class="rname">Incident Response</div>
+            <div class="rbv"><span>BV</span> GLM-5.1 · <span>BP</span> Opus 4.7</div>
+          </div>
+          <div class="role l4">
+            <div class="rtag" style="background:var(--l4-bd);color:#fff;">L4</div>
+            <div class="rname">Compliance &amp; Risk</div>
+            <div class="rsub">Evidence + Risk Assurance merged</div>
+            <div class="rbv"><span>BV</span> GLM-5.1 · <span>BP</span> Sonnet 4.6</div>
+          </div>
+        </div>
+        <div style="min-width:180px;">
+          <div style="font-size:0.68rem;font-weight:700;color:var(--csco-accent);text-transform:uppercase;letter-spacing:.6px;margin-bottom:6px;">Policy</div>
+          <div class="role l3">
+            <div class="rtag" style="background:var(--l3-bd);color:#fff;">L3</div>
+            <div class="rname">Security Policy Agent</div>
+            <div class="rbv"><span>BV</span> GLM-5.1 Z.ai · <span>BP</span> Opus 4.7</div>
+          </div>
+        </div>
+      </div>
+    </div><!-- /CSCO -->
+
+  </div><!-- /org-wrap -->
+</div><!-- /org section -->
+
+<!-- Self-improvement loop -->
+<div class="section">
+  <div class="section-head"><h2>Self-Improvement Loop</h2></div>
+  <div class="loop-box">
+    <h3>How Abzum's AI agents get better over time</h3>
+    <div class="loop-steps">
+      <div class="loop-step">Agent acts</div>
+      <div class="loop-arrow">→</div>
+      <div class="loop-step">Watcher logs<br><small>Gemma 4 E4B / Phi-4-mini</small></div>
+      <div class="loop-arrow">→</div>
+      <div class="loop-step">Knowledge Graph<br><small>aggregates patterns</small></div>
+      <div class="loop-arrow">→</div>
+      <div class="loop-step">L&amp;I analyses gaps</div>
+      <div class="loop-arrow">→</div>
+      <div class="loop-step">Skills / context updated</div>
+      <div class="loop-arrow">→</div>
+      <div class="loop-step">Agent improves<br><small>on next spawn</small></div>
+    </div>
+  </div>
+</div>
+
+<!-- Agent reference table -->
+<div class="section">
+  <div class="section-head"><h2>Full Agent Reference</h2></div>
+
+  <details open>
+    <summary>CDO · Engineering (6 agents)</summary>
+    <div class="detail-body">
+    <table>
+      <thead><tr><th>Agent</th><th>Tier</th><th>Best Value Model</th><th>Best Performance Model</th><th>Key Tools</th></tr></thead>
+      <tbody>
+        <tr><td>Architect</td><td><span class="chip l3">L3</span></td><td class="model-bv">GLM-5.1 via OpenCode Go</td><td class="model-bp">Claude Opus 4.7 (Claude Pro)</td><td>excalidraw, mermaid, context7, microsoft_docs_search</td></tr>
+        <tr><td>Senior Coder</td><td><span class="chip l3">L3</span></td><td class="model-bv">Grok 4.3 via OpenRouter</td><td class="model-bp">Claude Opus 4.7 (Claude Code)</td><td>github MCP, context7, doppler (read)</td></tr>
+        <tr><td>Junior Coder</td><td><span class="chip l4">L4</span></td><td class="model-bv">GLM-5.1 / Kimi K2.5 (OpenCode Go)</td><td class="model-bp">GPT-5.5 via Codex CLI</td><td>github MCP, context7</td></tr>
+        <tr><td>DevOps / Release Eng.</td><td><span class="chip l4">L4</span></td><td class="model-bv">GLM-5.1 via OpenCode Go</td><td class="model-bp">GPT-5.5 via Codex CLI</td><td>github Actions, doppler, cloudflare (via Network&amp;Edge)</td></tr>
+        <tr><td>QA / Test</td><td><span class="chip l4">L4</span></td><td class="model-bv">Kimi K2.6 + Playwright MCP</td><td class="model-bp">Claude Sonnet 4.6 + Playwright MCP</td><td>playwright MCP, github MCP</td></tr>
+        <tr><td>Security Agent (DevSec)</td><td><span class="chip l4">L4</span></td><td class="model-bv">GLM-5.1 via Z.ai endpoint</td><td class="model-bp">Claude Opus 4.7 (Claude Pro)</td><td>Z.ai web-search MCP, github MCP, context7 (OWASP)</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </details>
+
+  <details>
+    <summary>CDO · UX Design (2 agents)</summary>
+    <div class="detail-body">
+    <table>
+      <thead><tr><th>Agent</th><th>Tier</th><th>Best Value Model</th><th>Best Performance Model</th><th>Key Tools</th></tr></thead>
+      <tbody>
+        <tr><td>UI Designer</td><td><span class="chip l3">L3</span></td><td class="model-bv">GLM-5.1 (Claude Artifacts surface)</td><td class="model-bp">Claude Sonnet 4.6 + v0 API</td><td>Claude Artifacts, excalidraw MCP</td></tr>
+        <tr><td>Visual &amp; Brand Designer</td><td><span class="chip l4">L4</span></td><td class="model-bv">GLM-5.1 + OSS pipeline (Remotion/FFmpeg)</td><td class="model-bp">Gemini 3.1 Pro via Gemini CLI</td><td>Remotion, FFmpeg, Gemini CLI</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </details>
+
+  <details>
+    <summary>CDO · Knowledge &amp; Intelligence (3 agents)</summary>
+    <div class="detail-body">
+    <table>
+      <thead><tr><th>Agent</th><th>Tier</th><th>Best Value Model</th><th>Best Performance Model</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>Knowledge Graph</td><td><span class="chip l3">L3</span></td><td class="model-bv">GLM-5.1 via OpenCode Go</td><td class="model-bp">Gemini 3.1 Pro via Gemini CLI</td><td>Ingestion endpoint for COO Knowledge Capture</td></tr>
+        <tr><td>Learning &amp; Improvement</td><td><span class="chip l3">L3</span></td><td class="model-bv">GLM-5.1 via OpenCode Go</td><td class="model-bp">Claude Sonnet 4.6</td><td>Drives the self-improvement loop; deploys Watchers</td></tr>
+        <tr><td>Watcher</td><td><span class="chip l4">L4</span></td><td class="model-bv">Gemma 4 E4B (local, $0)</td><td class="model-bp">Phi-4-mini (local, $0)</td><td>Always-on, zero-cost cross-cutting observer</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </details>
+
+  <details>
+    <summary>CDO · Project Delivery (3 agents)</summary>
+    <div class="detail-body">
+    <table>
+      <thead><tr><th>Agent</th><th>Tier</th><th>Best Value Model</th><th>Best Performance Model</th><th>Key Tools</th></tr></thead>
+      <tbody>
+        <tr><td>PM / Planner</td><td><span class="chip l3">L3</span></td><td class="model-bv">Qwen 3.5 Plus (thinking) via OpenCode Go</td><td class="model-bp">GPT-5.5 via Codex CLI</td><td>Hermes Kanban MCP, calendar MCP, /goal command</td></tr>
+        <tr><td>Client Engagement</td><td><span class="chip l3">L3</span></td><td class="model-bv">Gemini 3.1 Flash Live ($0.018/min)</td><td class="model-bp">Grok voice-think-fast-1.0 ($0.05/min)</td><td>Recall.ai Meet bot, Pipecat/LiveKit runtime, Claude Artifacts (mockups)</td></tr>
+        <tr><td>Technical Writer</td><td><span class="chip l4">L4</span></td><td class="model-bv">GLM-5.1 via OpenCode Go</td><td class="model-bp">Claude Sonnet 4.6</td><td>Cowork file tools, github MCP</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </details>
+
+  <details>
+    <summary>CFO · Finance Ops (3 agents)</summary>
+    <div class="detail-body">
+    <table>
+      <thead><tr><th>Agent</th><th>Tier</th><th>Best Value Model</th><th>Best Performance Model</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>Finance &amp; Billing</td><td><span class="chip l3">L3</span></td><td class="model-bv">GLM-5.1 via OpenCode Go</td><td class="model-bp">Claude Sonnet 4.6</td><td>P&amp;L assembly, client invoicing, subscription tracking</td></tr>
+        <tr><td>Legal &amp; Compliance</td><td><span class="chip l3">L3</span></td><td class="model-bv">GLM-5.1 via OpenCode Go</td><td class="model-bp">Claude Opus 4.7</td><td>Contracts, NDAs, ToS — <em>contractual scope only</em></td></tr>
+        <tr><td>Procurement</td><td><span class="chip l4">L4</span></td><td class="model-bv">GLM-5.1 via OpenCode Go</td><td class="model-bp">Claude Sonnet 4.6</td><td>Vendor onboarding, POs, subscription renewals</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </details>
+
+  <details>
+    <summary>COO · Platform, Observability, Service Ops &amp; Foundation (7 agents)</summary>
+    <div class="detail-body">
+    <table>
+      <thead><tr><th>Agent</th><th>Tier</th><th>Team</th><th>Best Value Model</th><th>Best Performance Model</th></tr></thead>
+      <tbody>
+        <tr><td>Cloud Platforms Admin</td><td><span class="chip l3">L3</span></td><td>Platform</td><td class="model-bv">GLM-5.1 via OpenCode Go</td><td class="model-bp">Claude Opus 4.7</td></tr>
+        <tr><td>IAM Agent</td><td><span class="chip l3">L3</span></td><td>Platform</td><td class="model-bv">GLM-5.1 via OpenCode Go</td><td class="model-bp">Claude Opus 4.7</td></tr>
+        <tr><td>Dev Platform Admin</td><td><span class="chip l4">L4</span></td><td>Platform</td><td class="model-bv">GLM-5.1 via OpenCode Go</td><td class="model-bp">Claude Sonnet 4.6</td></tr>
+        <tr><td>Platform Operations</td><td><span class="chip l3">L3</span></td><td>Observability</td><td class="model-bv">GLM-5.1 via OpenCode Go</td><td class="model-bp">Claude Sonnet 4.6</td></tr>
+        <tr><td>Network &amp; Edge</td><td><span class="chip l3">L3</span></td><td>Foundation</td><td class="model-bv">GLM-5.1 via OpenCode Go</td><td class="model-bp">Claude Opus 4.7</td></tr>
+        <tr><td>Service Desk</td><td><span class="chip l3">L3</span></td><td>Service Ops</td><td class="model-bv">GLM-5.1 via OpenCode Go</td><td class="model-bp">Claude Sonnet 4.6</td></tr>
+        <tr><td>Knowledge Capture</td><td><span class="chip l4">L4</span></td><td>Service Ops</td><td class="model-bv">GLM-5.1 via OpenCode Go</td><td class="model-bp">Claude Sonnet 4.6</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </details>
+
+  <details>
+    <summary>CSCO · SOC &amp; Policy (4 agents)</summary>
+    <div class="detail-body">
+    <table>
+      <thead><tr><th>Agent</th><th>Tier</th><th>Team</th><th>Best Value Model</th><th>Best Performance Model</th></tr></thead>
+      <tbody>
+        <tr><td>Threat Intel &amp; Detection</td><td><span class="chip l3">L3</span></td><td>SOC</td><td class="model-bv">GLM-5.1 via Z.ai (web-search MCP)</td><td class="model-bp">Claude Opus 4.7</td></tr>
+        <tr><td>Incident Response</td><td><span class="chip l3">L3</span></td><td>SOC</td><td class="model-bv">GLM-5.1 via OpenCode Go</td><td class="model-bp">Claude Opus 4.7</td></tr>
+        <tr><td>Compliance &amp; Risk</td><td><span class="chip l4">L4</span></td><td>SOC</td><td class="model-bv">GLM-5.1 via OpenCode Go</td><td class="model-bp">Claude Sonnet 4.6</td></tr>
+        <tr><td>Security Policy Agent</td><td><span class="chip l3">L3</span></td><td>Policy</td><td class="model-bv">GLM-5.1 via Z.ai</td><td class="model-bp">Claude Opus 4.7</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </details>
+</div>
+
+<!-- SoD section -->
+<div class="section">
+  <div class="section-head"><h2>Separation of Duties (SoD) Boundaries</h2></div>
+  <div class="sod-table">
+    <div class="sod-row">
+      <div class="sod-head">Boundary</div>
+      <div class="sod-head">Agents Separated</div>
+      <div class="sod-head">Why</div>
+    </div>
+    <div class="sod-row"><div>Build vs. Run</div><div>DevOps ≠ Cloud Platforms Admin</div><div>One agent can't control what is deployed AND where it runs</div></div>
+    <div class="sod-row"><div>DevSec vs. SOC</div><div>Security Agent (CDO) ≠ CSCO Threat Intel / IR</div><div>Shift-left DevSec vs. operational security are separate threat models</div></div>
+    <div class="sod-row"><div>Access Provisioning</div><div>IAM Agent (COO) is sole choke point</div><div>No other agent can grant access; CSCO reviews policy only</div></div>
+    <div class="sod-row"><div>Spend Approval</div><div>Finance &amp; Billing ≠ Procurement</div><div>Prevents self-approval of vendor purchases</div></div>
+    <div class="sod-row"><div>Compliance Lanes</div><div>Legal &amp; Compliance (CFO) ≠ Compliance &amp; Risk (CSCO)</div><div>Contractual compliance vs. infosec compliance are distinct domains</div></div>
+    <div class="sod-row"><div>Policy vs. Execution</div><div>CSCO reviews RBAC; COO/IAM provisions</div><div>Policy authority separated from provisioning execution</div></div>
+    <div class="sod-row"><div>Build vs. Platform Config</div><div>DevOps writes pipelines; Dev Platform Admin owns tooling config</div><div>Pipeline author ≠ secrets/repo config owner</div></div>
+  </div>
+</div>
+
+<footer>
+  Abzum MemoryBank · 02-org · 30 roles · Hermes v0.13 · BV $40/mo | BP $50/mo · 2026-05-13
+</footer>
+
+</body>
+</html>
